@@ -237,6 +237,21 @@ const searchIndex = [
   // README
   { title: 'Full Documentation', keywords: 'readme documentation full guide reference', url: 'readme.html', section: 'README' },
   { title: 'Table of Contents', keywords: 'table of contents toc navigation', url: 'readme.html#table-of-contents', section: 'README' },
+  
+  // Resources
+  { title: 'Resources & Tools', keywords: 'resources links tools external', url: 'resources.html', section: 'Resources' },
+  { title: 'SDXL Model', keywords: 'sdxl stable diffusion xl base model huggingface', url: 'resources.html', section: 'Resources' },
+  { title: 'Flux Models', keywords: 'flux flow matching black forest labs schnell dev', url: 'resources.html', section: 'Resources' },
+  { title: 'ComfyUI', keywords: 'comfyui nodes workflow graph interface', url: 'resources.html', section: 'Resources' },
+  { title: 'Automatic1111', keywords: 'automatic1111 a1111 webui gradio interface', url: 'resources.html', section: 'Resources' },
+  { title: 'OneTrainer', keywords: 'onetrainer lora training gui software', url: 'resources.html', section: 'Resources' },
+  { title: 'Kohya', keywords: 'kohya ss sd-scripts training lora dreambooth', url: 'resources.html', section: 'Resources' },
+  { title: 'CivitAI', keywords: 'civitai community models lora checkpoints download', url: 'resources.html', section: 'Resources' },
+  { title: 'Hugging Face', keywords: 'huggingface hub models datasets diffusers', url: 'resources.html', section: 'Resources' },
+  { title: 'Cloud Providers', keywords: 'runpod lambda vast paperspace cloud gpu rental', url: 'resources.html', section: 'Resources' },
+  { title: 'SaaS Platforms', keywords: 'fal astria scenario replicate modal together saas', url: 'resources.html', section: 'Resources' },
+  { title: 'Blender', keywords: 'blender 3d modeling rendering free open source', url: 'resources.html', section: 'Resources' },
+  { title: 'ZBrush', keywords: 'zbrush sculpting organic anatomy 3d', url: 'resources.html', section: 'Resources' },
 ];
 
 let searchOpen = false;
@@ -370,7 +385,8 @@ function getSectionColor(section) {
     'Hardware': 'bg-blue-100 text-blue-700',
     'Cloud': 'bg-indigo-100 text-indigo-700',
     'Legal': 'bg-amber-100 text-amber-700',
-    'README': 'bg-slate-100 text-slate-700'
+    'README': 'bg-slate-100 text-slate-700',
+    'Resources': 'bg-cyan-100 text-cyan-700'
   };
   return colors[section] || 'bg-slate-100 text-slate-700';
 }
