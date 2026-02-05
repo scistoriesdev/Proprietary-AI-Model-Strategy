@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-02-05
+
+### Added
+
+- **Training Art Guide** - Comprehensive guidance on creating different art styles for LoRA training:
+  - Style categories: Flat Vector, Isometric 3D, Realistic Render, Cross-Section, SEM/Microscopy, Watercolor/Sketch
+  - The 80/20 Rule for training dataset consistency
+  - Technical requirements by style (resolution, backgrounds, export formats)
+  - 3D blockout workflow for generating consistent training data
+  - Hand-drawn guidelines with common mistakes to avoid
+- **Public Domain Sources** - Curated list of legally safe training data sources:
+  - Public domain medical art (Gray's Anatomy, Biodiversity Heritage Library, Wellcome Collection)
+  - Open scientific databases (IDR, Cell Image Library, Protein Data Bank, OpenStax)
+  - Creative Commons resources (Wikimedia, NASA, USDA)
+  - License compatibility matrix for commercial training
+  - Regularization dataset guidance
+
+### Changed
+
+- **README Sections 5.3 & 5.4** - Added detailed documentation for creating training art and public domain sources
+- **training.html** - Added two new sections with interactive UI for training art styles and public domain links
+
+---
+
 ## [1.4.0] - 2026-02-05
 
 ### Added

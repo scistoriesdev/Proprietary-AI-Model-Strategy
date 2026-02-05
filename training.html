@@ -73,6 +73,8 @@
                 <a href="#controlnet" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">ControlNet</a>
                 <a href="#software" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Software</a>
                 <a href="#where-to-train" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Where to Train</a>
+                <a href="#training-art" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Training Art</a>
+                <a href="#public-domain" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Public Domain</a>
             </div>
         </section>
 
@@ -456,6 +458,217 @@
 
             <div class="mt-6 text-center">
                 <a href="cloud.html" class="text-teal-600 hover:text-teal-700 font-semibold text-sm">See full Cloud Strategy guide →</a>
+            </div>
+        </section>
+
+        <!-- Creating Training Art -->
+        <section id="training-art" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Creating Training Art: Styles & Techniques</h3>
+            <p class="text-slate-600 mb-8">For effective LoRA training, your dataset must be consistent in style while varied in subject matter.</p>
+
+            <!-- Style Categories -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600 mb-3">🎨</div>
+                    <h4 class="font-bold text-slate-800 mb-1">Flat Vector</h4>
+                    <p class="text-xs text-slate-500 mb-2">Clean lines, solid fills, minimal gradients</p>
+                    <div class="text-xs"><span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">20-30 images</span></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mb-3">📐</div>
+                    <h4 class="font-bold text-slate-800 mb-1">Isometric 3D</h4>
+                    <p class="text-xs text-slate-500 mb-2">30° angle projection, geometric precision</p>
+                    <div class="text-xs"><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded">Consistent angle required</span></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 mb-3">🔬</div>
+                    <h4 class="font-bold text-slate-800 mb-1">Realistic Render</h4>
+                    <p class="text-xs text-slate-500 mb-2">Photorealistic textures, lighting, shadows</p>
+                    <div class="text-xs"><span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded">50-100+ images</span></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600 mb-3">✂️</div>
+                    <h4 class="font-bold text-slate-800 mb-1">Cross-Section</h4>
+                    <p class="text-xs text-slate-500 mb-2">Cutaway views revealing internal structure</p>
+                    <div class="text-xs"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded">Include exterior + interior</span></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-slate-200 rounded-lg flex items-center justify-center text-slate-600 mb-3">🔍</div>
+                    <h4 class="font-bold text-slate-800 mb-1">SEM/Microscopy</h4>
+                    <p class="text-xs text-slate-500 mb-2">Grayscale, high contrast, surface texture</p>
+                    <div class="text-xs"><span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Train with noise patterns</span></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center text-rose-600 mb-3">🖌️</div>
+                    <h4 class="font-bold text-slate-800 mb-1">Watercolor/Sketch</h4>
+                    <p class="text-xs text-slate-500 mb-2">Organic lines, soft edges, artistic feel</p>
+                    <div class="text-xs"><span class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded">Allow line weight variation</span></div>
+                </div>
+            </div>
+
+            <!-- 80/20 Rule -->
+            <div class="bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+                <h4 class="font-bold text-teal-800 mb-3">The 80/20 Rule for Training Art</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg border border-teal-100">
+                        <span class="text-teal-600 font-bold text-2xl">80%</span>
+                        <span class="text-teal-800 font-semibold ml-2">Consistency</span>
+                        <p class="text-xs text-slate-600 mt-2">Same style, color palette, perspective, line weight, background treatment</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-teal-100">
+                        <span class="text-teal-600 font-bold text-2xl">20%</span>
+                        <span class="text-teal-800 font-semibold ml-2">Variation</span>
+                        <p class="text-xs text-slate-600 mt-2">Different subjects, compositions, scales, orientations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Requirements -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-8">
+                <div class="bg-slate-100 px-4 py-3 font-semibold text-slate-700">Technical Requirements by Style</div>
+                <div class="p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="bg-emerald-50 p-3 rounded-lg">
+                            <h5 class="font-bold text-emerald-800 mb-2">Flat Vector Icons</h5>
+                            <ul class="text-emerald-700 space-y-1">
+                                <li>• Resolution: 1024×1024 min</li>
+                                <li>• Background: Solid (#FFFFFF)</li>
+                                <li>• Line weight: 2-4px consistent</li>
+                                <li>• Colors: 3-5 max</li>
+                                <li>• Export: PNG (NOT transparent)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <h5 class="font-bold text-purple-800 mb-2">Realistic Renders</h5>
+                            <ul class="text-purple-700 space-y-1">
+                                <li>• Resolution: 1024×1024+</li>
+                                <li>• Lighting: Consistent direction</li>
+                                <li>• Background: Gradient/context</li>
+                                <li>• Detail: Textures visible at 100%</li>
+                                <li>• Export: High-quality JPEG/PNG</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <h5 class="font-bold text-blue-800 mb-2">Isometric Diagrams</h5>
+                            <ul class="text-blue-700 space-y-1">
+                                <li>• Resolution: 1024×1024</li>
+                                <li>• Angle: True 30° isometric</li>
+                                <li>• Grid: Use isometric grid</li>
+                                <li>• Shadows: Same direction</li>
+                                <li>• Export: PNG solid background</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Mistakes -->
+            <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                <h4 class="font-bold text-red-800 mb-3">⚠️ Common Mistakes to Avoid</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-red-700">
+                    <div class="flex items-start gap-2"><span>✗</span><span>Mixing different art styles in one dataset</span></div>
+                    <div class="flex items-start gap-2"><span>✗</span><span>Inconsistent lighting direction</span></div>
+                    <div class="flex items-start gap-2"><span>✗</span><span>Variable line weights without intention</span></div>
+                    <div class="flex items-start gap-2"><span>✗</span><span>Including unfinished or sketch-quality images</span></div>
+                    <div class="flex items-start gap-2"><span>✗</span><span>Mixing resolutions (especially below 512px)</span></div>
+                    <div class="flex items-start gap-2"><span>✗</span><span>Using transparent PNGs (causes artifacts)</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Public Domain Sources -->
+        <section id="public-domain" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Public Domain & Open-License Sources</h3>
+                <p class="text-slate-600 mb-8">Legally safe sources for supplementing proprietary datasets or building regularization sets.</p>
+
+                <!-- Public Domain Medical Art -->
+                <div class="mb-8">
+                    <h4 class="font-bold text-slate-700 mb-4">📚 Public Domain Medical Art</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <a href="https://archive.org/details/anatomyofhumanbod1918gray" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Gray's Anatomy (1918)</h5>
+                            <p class="text-xs text-slate-500">Classic anatomical illustrations - fully public domain</p>
+                        </a>
+                        <a href="https://www.biodiversitylibrary.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Biodiversity Heritage Library</h5>
+                            <p class="text-xs text-slate-500">Millions of historical scientific illustrations</p>
+                        </a>
+                        <a href="https://wellcomecollection.org/images" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Wellcome Collection</h5>
+                            <p class="text-xs text-slate-500">Medical history images - many CC0 licensed</p>
+                        </a>
+                        <a href="https://digitalcollections.nypl.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">NYPL Digital Collections</h5>
+                            <p class="text-xs text-slate-500">Historical medical texts - public domain filter</p>
+                        </a>
+                        <a href="https://archive.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Internet Archive</h5>
+                            <p class="text-xs text-slate-500">Scanned pre-1928 medical textbooks</p>
+                        </a>
+                        <a href="https://www.rawpixel.com/public-domain" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Rawpixel Public Domain</h5>
+                            <p class="text-xs text-slate-500">High-resolution vintage illustration scans</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Open Scientific Databases -->
+                <div class="mb-8">
+                    <h4 class="font-bold text-slate-700 mb-4">🔬 Open Scientific Image Databases</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <a href="https://idr.openmicroscopy.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Image Data Resource (IDR)</h5>
+                            <p class="text-xs text-slate-500">High-quality microscopy - CC-BY/Open</p>
+                        </a>
+                        <a href="https://www.cellimagelibrary.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Cell Image Library</h5>
+                            <p class="text-xs text-slate-500">Peer-reviewed cell images - CC licenses</p>
+                        </a>
+                        <a href="https://www.rcsb.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Protein Data Bank</h5>
+                            <p class="text-xs text-slate-500">Molecular structures - public domain</p>
+                        </a>
+                        <a href="https://openstax.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">OpenStax</h5>
+                            <p class="text-xs text-slate-500">Textbook illustrations - CC-BY</p>
+                        </a>
+                        <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">Wikimedia Commons</h5>
+                            <p class="text-xs text-slate-500">Diverse scientific diagrams - CC-BY-SA/CC0</p>
+                        </a>
+                        <a href="https://images.nasa.gov/" target="_blank" rel="noopener" class="bg-white p-4 rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-md transition">
+                            <h5 class="font-semibold text-slate-800">NASA Image Gallery</h5>
+                            <p class="text-xs text-slate-500">Space/science imagery - public domain (US Gov)</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- License Matrix -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-100 px-4 py-3 font-semibold text-slate-700">License Compatibility for Training</div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50"><tr>
+                                <th class="px-4 py-2 text-left font-semibold text-slate-700">License</th>
+                                <th class="px-4 py-2 text-center font-semibold text-slate-700">Commercial Training</th>
+                                <th class="px-4 py-2 text-center font-semibold text-slate-700">LoRA Redistribution</th>
+                                <th class="px-4 py-2 text-center font-semibold text-slate-700">Attribution</th>
+                            </tr></thead>
+                            <tbody class="divide-y divide-slate-100 text-xs">
+                                <tr><td class="px-4 py-2 font-medium">Public Domain / CC0</td><td class="px-4 py-2 text-center text-green-600">✅ Yes</td><td class="px-4 py-2 text-center text-green-600">✅ Yes</td><td class="px-4 py-2 text-center text-slate-400">Not required</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CC-BY</td><td class="px-4 py-2 text-center text-green-600">✅ Yes</td><td class="px-4 py-2 text-center text-green-600">✅ Yes</td><td class="px-4 py-2 text-center text-amber-600">⚠️ Document</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CC-BY-SA</td><td class="px-4 py-2 text-center text-green-600">✅ Yes</td><td class="px-4 py-2 text-center text-amber-600">⚠️ May inherit SA</td><td class="px-4 py-2 text-center text-amber-600">⚠️ Document</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CC-BY-NC</td><td class="px-4 py-2 text-center text-red-600">❌ No</td><td class="px-4 py-2 text-center text-red-600">❌ No</td><td class="px-4 py-2 text-center text-slate-400">N/A</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">All Rights Reserved</td><td class="px-4 py-2 text-center text-red-600">❌ No</td><td class="px-4 py-2 text-center text-red-600">❌ No</td><td class="px-4 py-2 text-center text-slate-400">N/A</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-teal-100 border border-teal-300 rounded-lg p-4 text-sm text-teal-800">
+                    <strong>Best Practice:</strong> Prefer <strong>CC0</strong> and <strong>Public Domain</strong> sources for maximum legal safety. Keep a manifest documenting all external sources used in training.
+                </div>
             </div>
         </section>
 

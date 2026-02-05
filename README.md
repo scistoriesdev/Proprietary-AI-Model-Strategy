@@ -22,6 +22,8 @@
 - [5. Data Engineering for Biological Fidelity](#5-data-engineering-for-biological-fidelity)
   - [5.1 Dataset Sourcing and Curation](#51-dataset-sourcing-and-curation)
   - [5.2 The Scientific Captioning Pipeline](#52-the-scientific-captioning-pipeline)
+  - [5.3 Creating Training Art: Styles and Techniques](#53-creating-training-art-styles-and-techniques)
+  - [5.4 Public Domain and Open-License Sources](#54-public-domain-and-open-license-sources)
 - [6. Legal Frameworks and Intellectual Property Sovereignty](#6-legal-frameworks-and-intellectual-property-sovereignty)
   - [6.1 Ownership of Model Weights (The LoRA)](#61-ownership-of-model-weights-the-lora)
   - [6.2 Copyright of AI-Assisted Outputs](#62-copyright-of-ai-assisted-outputs)
@@ -855,6 +857,165 @@ To achieve granular control via prompting, the tagging schema must be hierarchic
 - **Style Tags**: `vector icon`, `flat design`, `isometric`, `cross-section`, `SEM render`.
 - **View/Composition Tags**: `close-up`, `macro`, `cutaway`, `diagrammatic`.
 - **Negative Tags**: Explicitly tag unwanted features in the training data (e.g., `text labels`, `scale bars`, `pointer lines`). By tagging them, you can remove them during generation by putting these tags in the Negative Prompt.
+
+### 5.3 Creating Training Art: Styles and Techniques
+
+For effective LoRA training, the dataset must be consistent in style while varied in subject matter. This section provides guidance on creating original training art across different visual styles.
+
+#### 5.3.1 Style Categories for Medical Illustration
+
+| Style | Description | Training Considerations | Use Cases |
+|-------|-------------|------------------------|-----------|
+| **Flat Vector** | Clean lines, solid fills, minimal gradients | Easiest to train; 20-30 images sufficient | Icons, infographics, web assets |
+| **Isometric 3D** | 30° angle projection, geometric precision | Requires consistent angle across all images | Diagrams, explainers, apps |
+| **Realistic Render** | Photorealistic textures, lighting, shadows | Needs 50-100+ images; high resolution critical | Textbooks, publications |
+| **Cross-Section** | Cutaway views revealing internal structure | Include both exterior and interior views | Anatomy, organelle details |
+| **SEM/Microscopy Style** | Grayscale, high contrast, surface texture | Train with noise patterns; avoid smooth gradients | Scientific papers, research |
+| **Watercolor/Sketch** | Organic lines, soft edges, artistic feel | Allow variation in line weight and saturation | Patient education, editorial |
+
+#### 5.3.2 Creating Consistent Training Datasets
+
+**The 80/20 Rule for Training Art:**
+- **80% Consistency**: Same style, color palette, perspective approach, line weight, background treatment
+- **20% Variation**: Different subjects, compositions, scales, orientations
+
+**Technical Requirements by Style:**
+
+```
+Flat Vector Icons:
+├── Resolution: 1024x1024 (minimum 512x512)
+├── Background: Solid color (#FFFFFF or #F5F5F5)
+├── Line weight: Consistent (2-4px at 1024px)
+├── Color palette: 3-5 colors maximum
+└── Export: PNG with solid background (NOT transparent)
+
+Realistic Renders:
+├── Resolution: 1024x1024 or higher
+├── Lighting: Consistent direction (top-left recommended)
+├── Background: Gradient or contextual environment
+├── Detail level: High (textures visible at 100% zoom)
+└── Export: High-quality JPEG or PNG
+
+Isometric Diagrams:
+├── Resolution: 1024x1024
+├── Angle: True isometric (30°) or custom (maintain across set)
+├── Grid: Use isometric grid for consistency
+├── Shadows: Consistent direction and opacity
+└── Export: PNG with solid background
+```
+
+#### 5.3.3 3D Blockout Workflow for Training Data
+
+Creating training data from 3D renders ensures perfect consistency:
+
+**Step 1: Model in Blender/ZBrush**
+- Create base anatomical meshes (cell, organelles, structures)
+- Focus on silhouette accuracy over surface detail
+
+**Step 2: Material Assignment**
+- Apply consistent materials across all renders
+- Use your target color palette
+
+**Step 3: Render Variations**
+- Same model, different angles (8-16 views per subject)
+- Consistent lighting rig
+- Consistent camera settings (FOV, distance)
+
+**Step 4: Post-Processing**
+- Apply consistent filters/adjustments in batch
+- Add style-specific effects (outlines, halftones, etc.)
+
+**Output**: 50-100 perfectly consistent images from 5-10 3D models
+
+#### 5.3.4 Hand-Drawn Training Art Guidelines
+
+For traditional or digital illustration:
+
+| Aspect | Recommendation |
+|--------|----------------|
+| **Canvas Size** | Work at 2048px+, export at 1024px |
+| **Brushes** | Use same brush set across all images |
+| **Color Picker** | Create fixed palette; sample from it exclusively |
+| **Line Art** | Consistent weight, closure, and stroke direction |
+| **Shading** | Same shading style (cel-shaded, gradient, crosshatch) |
+| **Backgrounds** | Identical or categorically similar |
+
+**Common Mistakes to Avoid:**
+- Mixing different art styles in one dataset
+- Inconsistent lighting direction
+- Variable line weights without intention
+- Including unfinished or sketch-quality images
+- Mixing resolutions (especially below 512px)
+
+### 5.4 Public Domain and Open-License Sources
+
+When supplementing proprietary datasets or building regularization sets, these sources provide legally safe training material.
+
+#### 5.4.1 Public Domain Medical Art
+
+| Source | Content | URL | Notes |
+|--------|---------|-----|-------|
+| **Gray's Anatomy (1918)** | Classic anatomical illustrations | archive.org/details/anatomyofhumanbod1918gray | Pre-1928, fully public domain |
+| **Anatomia Humani Corporis (1685)** | Historical anatomical plates | biodiversitylibrary.org | Stunning baroque medical art |
+| **Biodiversity Heritage Library** | Historical scientific illustrations | biodiversitylibrary.org | Millions of botanical/zoological images |
+| **Wellcome Collection** | Medical history images | wellcomecollection.org/images | Many CC0 licensed |
+| **NYPL Digital Collections** | Historical medical texts | digitalcollections.nypl.org | Public domain filter available |
+| **Internet Archive** | Scanned medical textbooks | archive.org | Pre-1928 books are public domain |
+| **Rawpixel Public Domain** | Curated vintage illustrations | rawpixel.com/public-domain | High-resolution scans |
+
+#### 5.4.2 Open Scientific Image Databases
+
+| Source | Content | License | URL |
+|--------|---------|---------|-----|
+| **Image Data Resource (IDR)** | High-quality microscopy | CC-BY / Open | idr.openmicroscopy.org |
+| **BioImage Archive** | Biological imaging data | Varies (check each) | bioimage.io |
+| **Cell Image Library** | Peer-reviewed cell images | CC licenses | cellimagelibrary.org |
+| **Allen Cell Explorer** | 3D cell visualization | CC-BY-NC (check use) | allencell.org |
+| **Protein Data Bank** | Molecular structures | Public domain | rcsb.org |
+| **EMDB** | Electron microscopy maps | CC0 mostly | ebi.ac.uk/emdb |
+| **OpenStax** | Textbook illustrations | CC-BY | openstax.org |
+
+#### 5.4.3 Creative Commons Resources
+
+| Source | Content | License | Best For |
+|--------|---------|---------|----------|
+| **Wikimedia Commons** | Diverse scientific diagrams | CC-BY-SA / CC0 | General references |
+| **Unsplash** | Photography (limited medical) | Unsplash License (AI training OK) | Backgrounds, textures |
+| **Pexels** | Stock photography | Pexels License | Environmental contexts |
+| **Flickr Commons** | Museum/library collections | No known copyright | Historical references |
+| **NASA Image Gallery** | Space/science imagery | Public domain (US Gov) | Backgrounds, inspiration |
+| **USDA Image Gallery** | Agricultural/biological | Public domain (US Gov) | Plant biology references |
+
+#### 5.4.4 License Compatibility Matrix
+
+| License | Commercial Training | Redistribution of LoRA | Attribution Required |
+|---------|--------------------|-----------------------|---------------------|
+| **Public Domain / CC0** | ✅ Yes | ✅ Yes | ❌ No |
+| **CC-BY** | ✅ Yes | ✅ Yes | ⚠️ Document sources |
+| **CC-BY-SA** | ✅ Yes | ⚠️ LoRA may inherit SA | ⚠️ Document sources |
+| **CC-BY-NC** | ❌ No (commercial) | ❌ No | N/A |
+| **CC-BY-ND** | ⚠️ Disputed | ⚠️ Disputed | N/A |
+| **All Rights Reserved** | ❌ No | ❌ No | N/A |
+
+> **Best Practice**: For maximum legal safety, prefer **CC0** and **Public Domain** sources. Keep a manifest documenting all external sources used in training.
+
+#### 5.4.5 Building a Regularization Dataset
+
+Regularization images prevent overfitting by teaching the model "what a general cell/organ/structure looks like" separate from your specific style.
+
+**Recommended Regularization Sources:**
+1. **Wikipedia Commons**: Search for anatomical diagrams with CC0/CC-BY
+2. **OpenStax Biology Textbook**: CC-BY licensed diagrams
+3. **NIH/NCI Visuals Online**: US Government = Public Domain
+4. **Cell Image Library**: Peer-reviewed microscopy
+
+**Regularization Ratio:**
+- **Style LoRA**: 1:1 (equal regularization to training images)
+- **Subject LoRA**: 1:2 to 1:5 (more regularization to preserve generalization)
+
+**Tagging Strategy:**
+- Training images: `[trigger], anatomical illustration, medical diagram, [subject]`
+- Regularization: `anatomical illustration, medical diagram, [subject]` (NO trigger word)
 
 ## 6. Legal Frameworks and Intellectual Property Sovereignty
 
