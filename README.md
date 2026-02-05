@@ -955,7 +955,7 @@ When supplementing proprietary datasets or building regularization sets, these s
 
 | Source | Content | URL | Notes |
 |--------|---------|-----|-------|
-| **Gray's Anatomy (1918)** | Classic anatomical illustrations | archive.org/details/anatomyofhumanbod1918gray | Pre-1928, fully public domain |
+| **Gray's Anatomy (1918)** | Classic anatomical illustrations | archive.org/details/anatomyofhumanbo1918gray | Pre-1928, fully public domain |
 | **Anatomia Humani Corporis (1685)** | Historical anatomical plates | biodiversitylibrary.org | Stunning baroque medical art |
 | **Biodiversity Heritage Library** | Historical scientific illustrations | biodiversitylibrary.org | Millions of botanical/zoological images |
 | **Wellcome Collection** | Medical history images | wellcomecollection.org/images | Many CC0 licensed |
