@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Frameworks - AI Model Training Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Proprietary Model Strategy</h1>
+            </a>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="training.html" class="hover:text-teal-600 transition">Training</a>
+                <a href="scientific.html" class="hover:text-teal-600 transition">Scientific Foundation</a>
+                <a href="hardware.html" class="hover:text-teal-600 transition">Hardware</a>
+                <a href="cloud.html" class="hover:text-teal-600 transition">Cloud Strategy</a>
+                <a href="legal.html" class="text-teal-600 font-semibold">Legal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Page Header -->
+        <section class="bg-slate-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-wider">IP Sovereignty</span>
+                <h2 class="text-3xl font-bold mt-2">Legal Frameworks</h2>
+                <p class="text-slate-400 mt-2 max-w-2xl">Navigating copyright, licensing, and regulatory requirements for AI-assisted medical illustration.</p>
+            </div>
+        </section>
+
+        <!-- Legal Content -->
+        <section class="py-16 max-w-6xl mx-auto px-4">
+            
+            <!-- Legal Tabs -->
+            <div class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+                <div class="flex border-b border-slate-200 overflow-x-auto bg-white">
+                    <button onclick="switchLegalTab('ownership')" id="legal-tab-ownership" class="flex-1 min-w-[140px] py-4 text-center text-sm font-semibold text-amber-700 border-b-2 border-amber-500 bg-amber-50/50 transition-colors">Ownership</button>
+                    <button onclick="switchLegalTab('training')" id="legal-tab-training" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Training Data</button>
+                    <button onclick="switchLegalTab('international')" id="legal-tab-international" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Jurisdiction</button>
+                    <button onclick="switchLegalTab('commercial')" id="legal-tab-commercial" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Commercial</button>
+                    <button onclick="switchLegalTab('medical')" id="legal-tab-medical" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Medical Regs</button>
+                </div>
+
+                <div class="p-8 min-h-[500px]">
+                    
+                    <!-- Ownership Content -->
+                    <div id="legal-content-ownership" class="block animate-fade-in">
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">Model Weights & Copyright Ownership</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h5 class="font-bold text-slate-700 mb-3 flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs">1</span>
+                                    LoRA Ownership
+                                </h5>
+                                <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+                                    <p class="text-sm text-slate-600">A LoRA file (<code class="bg-slate-100 px-1 rounded">.safetensors</code>) contains numerical weights derived from your training data.</p>
+                                    <ul class="text-sm text-slate-600 space-y-2">
+                                        <li class="flex items-start gap-2"><span class="text-amber-500">•</span><strong>Trade Secret:</strong> Can be protected under the Defend Trade Secrets Act (DTSA).</li>
+                                        <li class="flex items-start gap-2"><span class="text-amber-500">•</span><strong>IaaS Providers:</strong> RunPod/Lambda claim no IP rights—you own 100%.</li>
+                                        <li class="flex items-start gap-2"><span class="text-amber-500">•</span><strong>Consumer Apps:</strong> Midjourney/Leonardo often retain licenses. <span class="text-red-500 font-bold">Avoid.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 class="font-bold text-slate-700 mb-3 flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs">2</span>
+                                    AI Output Copyright
+                                </h5>
+                                <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+                                    <p class="text-sm text-slate-600">The USCO ruled AI-only works are <strong>not copyrightable</strong>. You need "sufficient human authorship."</p>
+                                    <div class="bg-teal-50 p-3 rounded-lg border border-teal-100">
+                                        <h6 class="text-xs font-bold text-teal-800 mb-2">Human-in-the-Loop Strategy:</h6>
+                                        <ul class="text-xs text-teal-700 space-y-1">
+                                            <li>✓ Use ControlNet with <strong>hand-drawn sketches</strong></li>
+                                            <li>✓ Train LoRA on <strong>your own portfolio</strong></li>
+                                            <li>✓ Apply <strong>Regional Prompting</strong> (compilation)</li>
+                                            <li>✓ Significant <strong>post-processing</strong> in Photoshop</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 border-l-4 border-amber-500 bg-amber-50 p-4 rounded-r-lg">
+                            <h5 class="text-amber-800 font-bold text-sm">Documentation Requirement</h5>
+                            <p class="text-xs text-amber-700 mt-1">Save sketches, prompts, seeds, and intermediate steps to prove human authorship if challenged.</p>
+                        </div>
+                    </div>
+
+                    <!-- Training Data Content -->
+                    <div id="legal-content-training" class="hidden animate-fade-in">
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">Training Data: Fair Use & Licensing</h4>
+                        
+                        <div class="mb-8">
+                            <h5 class="font-bold text-slate-700 mb-4">Data Source Risk Matrix</h5>
+                            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-slate-100">
+                                        <tr>
+                                            <th class="px-4 py-3 text-left font-semibold text-slate-700">Source Type</th>
+                                            <th class="px-4 py-3 text-left font-semibold text-slate-700">Legal Status</th>
+                                            <th class="px-4 py-3 text-left font-semibold text-slate-700">Recommendation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100">
+                                        <tr class="bg-teal-50">
+                                            <td class="px-4 py-3 font-medium text-slate-800">Your Own Work</td>
+                                            <td class="px-4 py-3 text-teal-700">✓ Safe</td>
+                                            <td class="px-4 py-3 text-slate-600">Ideal. Full ownership.</td>
+                                        </tr>
+                                        <tr class="bg-teal-50/50">
+                                            <td class="px-4 py-3 font-medium text-slate-800">Public Domain (Gray's Anatomy)</td>
+                                            <td class="px-4 py-3 text-teal-700">✓ Safe</td>
+                                            <td class="px-4 py-3 text-slate-600">Excellent for regularization.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 font-medium text-slate-800">Creative Commons (CC0, CC-BY)</td>
+                                            <td class="px-4 py-3 text-amber-600">⚠ Check Terms</td>
+                                            <td class="px-4 py-3 text-slate-600">CC0 safest. CC-BY may need attribution.</td>
+                                        </tr>
+                                        <tr class="bg-red-50">
+                                            <td class="px-4 py-3 font-medium text-slate-800">Stock Photos (Getty, Shutterstock)</td>
+                                            <td class="px-4 py-3 text-red-600">✗ Prohibited</td>
+                                            <td class="px-4 py-3 text-slate-600">ToS forbids AI training. High litigation risk.</td>
+                                        </tr>
+                                        <tr class="bg-red-50">
+                                            <td class="px-4 py-3 font-medium text-slate-800">Scraped Web Images</td>
+                                            <td class="px-4 py-3 text-red-600">✗ High Risk</td>
+                                            <td class="px-4 py-3 text-slate-600">Pending litigation (Getty v. Stability AI).</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                <h5 class="font-bold text-slate-800 mb-2">Style vs. Subject Distinction</h5>
+                                <p class="text-sm text-slate-600 mb-3">US courts hold that <strong>style cannot be copyrighted</strong>—only specific expressions.</p>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li><strong class="text-teal-700">Style LoRA:</strong> Learning color palette, line weight, shading is likely permissible.</li>
+                                    <li><strong class="text-red-700">Subject LoRA:</strong> Reproducing specific copyrighted characters/compositions = infringement risk.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-amber-50 p-5 rounded-xl border border-amber-200">
+                                <h5 class="font-bold text-amber-800 mb-2">Best Practice</h5>
+                                <p class="text-sm text-amber-700">Train Style LoRAs on diverse, non-copyrighted references. Train Subject LoRAs <strong>exclusively</strong> on your own original work or public domain anatomical references.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- International Content -->
+                    <div id="legal-content-international" class="hidden animate-fade-in">
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">International Jurisdiction & Data Sovereignty</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-2xl">🇺🇸</span>
+                                    <h5 class="font-bold text-slate-800">United States</h5>
+                                </div>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li><strong>Fair Use:</strong> Flexible doctrine (17 U.S.C. § 107). AI training <em>may</em> qualify—actively litigated.</li>
+                                    <li><strong>USCO Registration:</strong> Required to sue for statutory damages.</li>
+                                    <li><strong>No AI Authorship:</strong> Human contribution mandatory for copyright.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-2xl">🇪🇺</span>
+                                    <h5 class="font-bold text-slate-800">European Union</h5>
+                                </div>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li><strong>TDM Exception:</strong> Permits data mining for research, but rights holders can <strong>opt out</strong> for commercial use.</li>
+                                    <li><strong>EU AI Act:</strong> Requires disclosure of training data sources.</li>
+                                    <li><strong>Moral Rights:</strong> Stronger and inalienable.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-2xl">🇬🇧</span>
+                                    <h5 class="font-bold text-slate-800">United Kingdom</h5>
+                                </div>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li><strong>Divergence:</strong> Considering more permissive TDM exception than EU.</li>
+                                    <li><strong>Unique:</strong> CDPA 1988 provides copyright for "computer-generated works"—favors AI workflows.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800 text-white p-6 rounded-xl">
+                            <h5 class="font-bold mb-4">Data Residency Considerations</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="text-teal-400 font-bold block mb-1">GDPR</span>
+                                    <span class="text-slate-300 text-xs">If training data contains EU personal data, ensure cloud provider is GDPR-compliant.</span>
+                                </div>
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="text-teal-400 font-bold block mb-1">HIPAA</span>
+                                    <span class="text-slate-300 text-xs">Patient medical images require BAA-signed providers (AWS GovCloud, Azure Healthcare).</span>
+                                </div>
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="text-red-400 font-bold block mb-1">China</span>
+                                    <span class="text-slate-300 text-xs">Avoid training on China-based servers—data localization laws may grant government access.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commercial Content -->
+                    <div id="legal-content-commercial" class="hidden animate-fade-in">
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">Commercial Licensing & Client Deliverables</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h5 class="font-bold text-slate-700 mb-4">Disclosure Obligations</h5>
+                                <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+                                    <p class="text-sm text-slate-600"><strong>No universal legal requirement</strong> to disclose AI assistance (as of 2026).</p>
+                                    <ul class="text-sm text-slate-600 space-y-2">
+                                        <li class="flex items-start gap-2"><span class="text-amber-500">⚠</span>Many client contracts specify "original work" or prohibit AI content.</li>
+                                        <li class="flex items-start gap-2"><span class="text-amber-500">⚠</span>Publishers (Nature, Science) now require disclosure in figures.</li>
+                                    </ul>
+                                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 mt-4">
+                                        <span class="text-xs font-bold text-slate-500 block mb-1">RECOMMENDED DISCLOSURE:</span>
+                                        <p class="text-xs text-slate-600 italic">"This illustration was created using a proprietary AI model trained exclusively on the artist's original work, with significant human direction, refinement, and post-processing."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 class="font-bold text-slate-700 mb-4">License Types</h5>
+                                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                    <table class="w-full text-xs">
+                                        <tbody class="divide-y divide-slate-100">
+                                            <tr>
+                                                <td class="px-4 py-3 font-medium text-slate-800">Work-for-Hire</td>
+                                                <td class="px-4 py-3 text-slate-600">Ensure contract doesn't transfer the LoRA—only output.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-medium text-slate-800">Exclusive License</td>
+                                                <td class="px-4 py-3 text-slate-600">Standard for medical illustration. Unaffected by AI.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-medium text-slate-800">Non-Exclusive / RF</td>
+                                                <td class="px-4 py-3 text-slate-600">AI efficiency makes this more viable at scale.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+                            <h5 class="font-bold text-red-800 mb-3">🛡️ Protecting Your LoRA from Client Claims</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-white p-3 rounded-lg border border-red-100">
+                                    <span class="text-red-700 font-bold text-xs block mb-1">1. Contract Language</span>
+                                    <p class="text-xs text-slate-600">"All AI models and tools remain exclusive property of [Artist]."</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-red-100">
+                                    <span class="text-red-700 font-bold text-xs block mb-1">2. Separate Deliverables</span>
+                                    <p class="text-xs text-slate-600">Never include <code>.safetensors</code> unless explicitly contracted.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-red-100">
+                                    <span class="text-red-700 font-bold text-xs block mb-1">3. Pre-Existing IP Clause</span>
+                                    <p class="text-xs text-slate-600">State LoRA is "pre-existing IP" developed independently.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical Regulations Content -->
+                    <div id="legal-content-medical" class="hidden animate-fade-in">
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">Medical & Regulatory Considerations</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h5 class="font-bold text-slate-700 mb-4">Accuracy Liability</h5>
+                                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                    <p class="text-sm text-slate-600 mb-4">Medical illustrations carry inherent accuracy obligations. AI introduces new risk vectors.</p>
+                                    <div class="space-y-3">
+                                        <div class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                            <span class="text-red-800 font-bold text-xs">Hallucination Risk</span>
+                                            <p class="text-xs text-red-700 mt-1">Incorrect anatomy in patient education or clinical training = liability.</p>
+                                        </div>
+                                        <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                                            <span class="text-amber-800 font-bold text-xs">Standard of Care</span>
+                                            <p class="text-xs text-amber-700 mt-1">Courts may establish that "reasonable illustrators" must verify AI outputs.</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-4 border-t border-slate-200">
+                                        <span class="text-xs font-bold text-slate-500">MITIGATION:</span>
+                                        <ul class="text-xs text-slate-600 mt-2 space-y-1">
+                                            <li>✓ Mandatory human review for anatomical accuracy</li>
+                                            <li>✓ Verification checklist signed before delivery</li>
+                                            <li>✓ Limitation of liability clauses in contracts</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 class="font-bold text-slate-700 mb-4">FDA & Regulatory Bodies</h5>
+                                <div class="space-y-3">
+                                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-slate-800 text-sm">Medical Device Labeling</span>
+                                        <p class="text-xs text-slate-600 mt-1">FDA requires accuracy. AI diagrams must meet same standards as traditional.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-slate-800 text-sm">Pharmaceutical Marketing</span>
+                                        <p class="text-xs text-slate-600 mt-1">OPDP reviews materials. Ensure AI doesn't misrepresent drug mechanisms.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-slate-800 text-sm">CME / ACCME</span>
+                                        <p class="text-xs text-slate-600 mt-1">Accredited programs may have specific AI content policies. Verify first.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800 text-white p-6 rounded-xl">
+                            <h5 class="font-bold mb-4">Journal Publication Policies (2026)</h5>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="font-bold text-teal-400 block">Nature</span>
+                                    <span class="text-xs text-slate-300">Disclosure required</span>
+                                </div>
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="font-bold text-teal-400 block">Elsevier</span>
+                                    <span class="text-xs text-slate-300">Methods section</span>
+                                </div>
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="font-bold text-teal-400 block">JAMA</span>
+                                    <span class="text-xs text-slate-300">Documented + accountable</span>
+                                </div>
+                                <div class="bg-slate-700/50 p-3 rounded-lg">
+                                    <span class="font-bold text-teal-400 block">NEJM</span>
+                                    <span class="text-xs text-slate-300">Case-by-case</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-teal-50 p-5 rounded-xl border border-teal-200">
+                            <h5 class="font-bold text-teal-800 mb-3">📋 Documentation Checklist</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                                <div>
+                                    <span class="font-bold text-teal-700 block mb-2">Training Docs</span>
+                                    <ul class="text-teal-600 space-y-1">
+                                        <li>☐ Image inventory with provenance</li>
+                                        <li>☐ License copies for third-party data</li>
+                                        <li>☐ Training configs & checkpoints</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-teal-700 block mb-2">Generation Docs</span>
+                                    <ul class="text-teal-600 space-y-1">
+                                        <li>☐ Original sketches (timestamped)</li>
+                                        <li>☐ Prompt logs & seeds</li>
+                                        <li>☐ Before/after post-processing</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-teal-700 block mb-2">Delivery Docs</span>
+                                    <ul class="text-teal-600 space-y-1">
+                                        <li>☐ Signed contracts with AI clauses</li>
+                                        <li>☐ Accuracy verification checklist</li>
+                                        <li>☐ Client approval records</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="text-xs text-teal-700 mt-4"><strong>Retention:</strong> Maintain for 6+ years (statute of limitations).</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-12 flex justify-between">
+                <a href="cloud.html" class="text-slate-500 hover:text-slate-700 transition">← Cloud Strategy</a>
+                <a href="index.html" class="text-teal-600 hover:text-teal-700 font-semibold transition">Back to Overview →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
+        <p>&copy; 2024 Research Synthesis. Generated for Educational Purposes.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

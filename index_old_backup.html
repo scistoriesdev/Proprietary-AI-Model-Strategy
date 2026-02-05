@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Model Training Strategy: Medical Illustration & Assets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Clinical Precision (Slate/Teal/White) -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #334155; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; height: 300px; max-height: 400px; }
+        .active-tab { border-bottom: 2px solid #0f766e; color: #0f766e; font-weight: 600; }
+        .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Proprietary Model Strategy</h1>
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <button onclick="scrollToSection('tech-matrix')" class="hover:text-teal-600 transition">Training</button>
+                <button onclick="scrollToSection('scientific-foundation')" class="hover:text-teal-600 transition">Scientific Foundation</button>
+                <button onclick="scrollToSection('infra-calc')" class="hover:text-teal-600 transition">Hardware</button>
+                <button onclick="scrollToSection('cloud-strategy')" class="hover:text-teal-600 transition">Cloud Strategy</button>
+                <button onclick="scrollToSection('legal-frameworks')" class="hover:text-teal-600 transition">Legal</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="bg-slate-900 text-white py-20 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-400 via-slate-900 to-slate-900"></div>
+            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                <span class="inline-block py-1 px-3 rounded-full bg-teal-900/50 border border-teal-500/30 text-teal-300 text-xs font-semibold mb-4">Research Report</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Achieving Stabilized Control in<br>Generative Medical Illustration</h2>
+                <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                    A technical guide to training proprietary LoRAs on your own intellectual property using local RTX hardware or private cloud clusters.
+                </p>
+            </div>
+        </section>
+
+        <!-- Technology Matrix -->
+        <section id="tech-matrix" class="py-16 max-w-6xl mx-auto px-4">
+            <div class="mb-10">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Technological Methodology</h3>
+                <p class="text-slate-600 max-w-3xl">To achieve "stabilized granular control", you need a specific stack. Tabs below detail the core components.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="flex border-b border-slate-200 overflow-x-auto">
+                    <button onclick="switchTab('lora')" id="tab-lora" class="flex-1 min-w-[120px] py-4 text-center text-sm font-semibold text-teal-700 border-b-2 border-teal-600 bg-teal-50/50 transition-colors">1. LoRA (Style)</button>
+                    <button onclick="switchTab('controlnet')" id="tab-controlnet" class="flex-1 min-w-[120px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">2. ControlNet (Shape)</button>
+                    <button onclick="switchTab('software')" id="tab-software" class="flex-1 min-w-[120px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">3. Software Stack</button>
+                </div>
+
+                <div class="p-8 min-h-[400px]">
+                    <!-- LoRA Content -->
+                    <div id="content-lora" class="block animate-fade-in">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="md:w-2/3">
+                                <h4 class="text-xl font-bold text-slate-800 mb-4">Low-Rank Adaptation (LoRA)</h4>
+                                <p class="text-slate-600 mb-4 leading-relaxed">
+                                    <strong>LoRA</strong> is the most efficient training method for proprietary assets. It injects small, trainable rank decomposition matrices into the model.
+                                </p>
+                                <ul class="space-y-3 mb-6">
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-teal-500 mt-1">✓</span>
+                                        <span class="text-sm text-slate-700"><strong>Proprietary:</strong> You own the `.safetensors` file. It contains *only* your trained style.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                             <div class="md:w-1/3 bg-slate-50 rounded-xl p-6 border border-slate-200">
+                                <h5 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Training Specs (SDXL)</h5>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-slate-600">VRAM Required</span>
+                                            <span class="font-mono font-bold text-slate-800">12GB - 24GB</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-2">
+                                            <div class="bg-teal-500 h-2 rounded-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ControlNet Content -->
+                    <div id="content-controlnet" class="hidden animate-fade-in">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="md:w-2/3">
+                                <h4 class="text-xl font-bold text-slate-800 mb-4">ControlNet (The Stabilizer)</h4>
+                                <p class="text-slate-600 mb-4 leading-relaxed">
+                                    Training a model isn't enough for anatomical accuracy. You need <strong>ControlNet</strong> during generation. This forces the AI to respect exact boundaries defined by a sketch or 3D blockout.
+                                </p>
+                            </div>
+                            <div class="md:w-1/3 flex flex-col justify-center bg-teal-50 rounded-xl p-6 border border-teal-100 text-center">
+                                <div class="text-4xl mb-2">🎨 + 🤖</div>
+                                <h5 class="font-bold text-teal-800 mb-2">The Winning Combo</h5>
+                                <p class="text-sm text-teal-700">Custom LoRA (Texture) + ControlNet (Shape)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Software Stack Content -->
+                    <div id="content-software" class="hidden animate-fade-in">
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">Software Selection: Training Core</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="border border-teal-200 bg-teal-50/50 p-5 rounded-lg relative">
+                                <div class="absolute -top-3 left-4 bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">Recommended for Icons/Laptop</div>
+                                <h5 class="font-bold text-lg text-slate-800 mb-2">OneTrainer</h5>
+                                <p class="text-sm text-slate-600 mb-3">Superior for constrained hardware (8GB VRAM).</p>
+                                <ul class="text-xs text-slate-700 space-y-2">
+                                    <li class="flex items-start gap-2"><span>✅</span> <strong>Memory Efficient:</strong> Handles memory allocation better than Kohya.</li>
+                                    <li class="flex items-start gap-2"><span>✅</span> <strong>Masked Training:</strong> Critical for <strong>Web Icons</strong>. Trains ONLY the pixels of the cell/icon, ignoring the background.</li>
+                                </ul>
+                            </div>
+                            <div class="border border-slate-200 bg-white p-5 rounded-lg">
+                                <h5 class="font-bold text-lg text-slate-800 mb-2">Kohya_ss</h5>
+                                <p class="text-sm text-slate-600 mb-3">The industry standard. Versatile but resource-heavy.</p>
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Production Utilities</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <h5 class="font-bold text-sm text-slate-800">ComfyUI</h5>
+                                <p class="text-xs text-slate-500 mt-1">Node-based Inference. Required for XY Plots.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <h5 class="font-bold text-sm text-slate-800">Booru Tagger</h5>
+                                <p class="text-xs text-slate-500 mt-1">Data Prep. Auto-captions medical concepts.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <h5 class="font-bold text-sm text-slate-800">Inkscape</h5>
+                                <p class="text-xs text-slate-500 mt-1">Vectorization for scalable web assets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCIENTIFIC FOUNDATION SECTION (RESTORED) -->
+        <section id="scientific-foundation" class="py-16 bg-white border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-teal-600 font-bold text-xs uppercase tracking-wider">Fidelity Assurance</span>
+                    <h3 class="text-3xl font-bold text-slate-800 mt-2">Scientific Foundation</h3>
+                    <p class="text-slate-600 max-w-2xl mx-auto mt-2">Medical illustration requires a higher standard than generic art. This pipeline ensures anatomical correctness through three distinct layers.</p>
+                </div>
+
+                <!-- 1. Base Model Comparison -->
+                <div class="mb-16">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs">1</span>
+                        Base Model Selection
+                    </h4>
+                    <p class="text-slate-600 mb-6 text-sm">A LoRA is just a filter. It must be applied to a capable Base Checkpoint. Avoid "General Purpose" models in favor of these specialists:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Pony V6 -->
+                        <div class="group relative bg-slate-50 border border-slate-200 p-6 rounded-xl hover:border-teal-500 transition-all">
+                            <div class="absolute top-0 right-0 bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">Structure Specialist</div>
+                            <h5 class="font-bold text-lg text-slate-800 mb-2">Pony Diffusion V6 (XL)</h5>
+                            <p class="text-sm text-slate-600 mb-4">Originally trained on anime/fan-art, this model has arguably the best <strong>prompt adherence</strong> in the open source world. It understands complex spatial instructions that realistic models ignore.</p>
+                            <div class="bg-white p-3 rounded border border-slate-200 text-xs text-slate-700">
+                                <strong>Use Case:</strong> Medical diagrams, exploded views, clean line art, and icons where distinct shapes are prioritized over texture.
+                            </div>
+                        </div>
+
+                        <!-- Juggernaut XL -->
+                        <div class="group relative bg-slate-50 border border-slate-200 p-6 rounded-xl hover:border-teal-500 transition-all">
+                            <div class="absolute top-0 right-0 bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">Texture Specialist</div>
+                            <h5 class="font-bold text-lg text-slate-800 mb-2">Juggernaut XL / RealVis</h5>
+                            <p class="text-sm text-slate-600 mb-4">Fine-tuned on high-quality photography. It excels at lighting, subsurface scattering, and organic textures.</p>
+                            <div class="bg-white p-3 rounded border border-slate-200 text-xs text-slate-700">
+                                <strong>Use Case:</strong> Microscopy, tissue close-ups, surgical photography, and photorealistic organ rendering.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. The 3D Blockout Workflow -->
+                <div class="mb-16">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs">2</span>
+                        The "3D Blockout" Technique
+                    </h4>
+                    <p class="text-sm text-slate-600 mb-6 max-w-3xl">For complex molecules, <strong>prompting alone is insufficient.</strong> You cannot prompt "mitochondria to the left of the nucleus" reliably. The professional workflow uses a "crude" 3D shape to guarantee composition.</p>
+
+                    <div class="relative bg-slate-900 rounded-xl overflow-hidden p-8 text-white">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <!-- Step A -->
+                            <div class="flex flex-col items-center text-center w-full md:w-1/4">
+                                <div class="w-20 h-20 bg-slate-700 rounded-lg border border-slate-500 flex items-center justify-center text-xs text-slate-400 mb-3 shadow-lg">
+                                    Grey<br>Spheres
+                                </div>
+                                <span class="text-sm font-bold text-white">1. Blender (Low Poly)</span>
+                                <span class="text-xs text-slate-400 mt-1">Set camera angle & scale.</span>
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="hidden md:block text-teal-500 text-2xl font-bold">→</div>
+
+                            <!-- Step B -->
+                            <div class="flex flex-col items-center text-center w-full md:w-1/4">
+                                <div class="w-20 h-20 bg-slate-800 rounded-lg border-2 border-teal-500 flex items-center justify-center text-xs text-teal-400 mb-3 shadow-[0_0_15px_rgba(20,184,166,0.3)]">
+                                    ControlNet<br>(Depth)
+                                </div>
+                                <span class="text-sm font-bold text-white">2. ControlNet Guide</span>
+                                <span class="text-xs text-slate-400 mt-1">AI reads the depth map.</span>
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="hidden md:block text-teal-500 text-2xl font-bold">→</div>
+
+                            <!-- Step C -->
+                            <div class="flex flex-col items-center text-center w-full md:w-1/4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg flex items-center justify-center text-xs font-bold mb-3 shadow-xl">
+                                    Final<br>Render
+                                </div>
+                                <span class="text-sm font-bold text-emerald-400">3. SDXL Output</span>
+                                <span class="text-xs text-slate-400 mt-1">AI paints texture on 3D.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Validation Matrix -->
+                <div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs">3</span>
+                        Scientific Validation: The XY Plot
+                    </h4>
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="md:w-1/2">
+                            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                                You train a model that evolves over "Epochs" (time). To scientifically choose the best file, you run an <strong>XY Plot Script</strong> in ComfyUI.
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                    <span class="text-red-800 font-bold text-xs block mb-1">Underfit (Early Epochs)</span>
+                                    <span class="text-xs text-red-700">The model hasn't learned the biology yet. Cells look like generic circles.</span>
+                                </li>
+                                <li class="bg-teal-50 p-3 rounded-lg border border-teal-100">
+                                    <span class="text-teal-800 font-bold text-xs block mb-1">Sweet Spot</span>
+                                    <span class="text-xs text-teal-700">Anatomy is crisp. Style is consistent. <strong>This is the file you keep.</strong></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/2 bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                            <h5 class="text-sm font-bold text-slate-800 mb-4 text-center">Visualizing the XY Plot</h5>
+                            <div class="grid grid-cols-4 gap-2 text-[10px] text-center mb-2">
+                                <div></div>
+                                <div class="font-bold text-slate-500">LoRA 0.6</div>
+                                <div class="font-bold text-slate-500">LoRA 0.8</div>
+                                <div class="font-bold text-slate-500">LoRA 1.0</div>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 text-[10px] text-center items-center">
+                                <div class="font-bold text-slate-500 -rotate-90">Epoch 10</div>
+                                <div class="bg-slate-200 h-12 rounded flex items-center justify-center text-slate-400">Good</div>
+                                <div class="bg-teal-100 border-2 border-teal-500 h-12 rounded flex items-center justify-center text-teal-700 font-bold">BEST</div>
+                                <div class="bg-orange-100 h-12 rounded flex items-center justify-center text-orange-600">Rigid</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Hardware Calculator -->
+        <section id="infra-calc" class="bg-slate-50 py-16 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Hardware Viability</h3>
+                        <p class="text-slate-600 mb-8">Can your laptop handle it?</p>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Your GPU VRAM (GB)</label>
+                                <div class="flex gap-2">
+                                    <button onclick="updateCalc(6)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition" data-val="6">6GB</button>
+                                    <button onclick="updateCalc(8)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition" data-val="8">8GB</button>
+                                    <button onclick="updateCalc(12)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition active-vram bg-slate-800 text-white" data-val="12">12GB</button>
+                                    <button onclick="updateCalc(16)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition" data-val="16">16GB+</button>
+                                </div>
+                            </div>
+                            <div id="calc-result" class="p-4 rounded-lg bg-teal-50 border border-teal-200 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Optimization Protocols -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Optimization (8GB Cards)</h3>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                            <table class="w-full text-sm text-left">
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr>
+                                        <td class="px-4 py-3 font-medium text-slate-800">FP8 Quantization</td>
+                                        <td class="px-4 py-3 text-slate-600 text-xs">Reduces VRAM by 40%.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 font-medium text-slate-800">Gradient Checkpointing</td>
+                                        <td class="px-4 py-3 text-slate-600 text-xs"><strong>Critical.</strong> Saves GBs of VRAM but slows training.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 font-medium text-slate-800">Adafactor</td>
+                                        <td class="px-4 py-3 text-slate-600 text-xs">Low-memory optimizer.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-6 border-l-4 border-red-500 bg-red-50 p-4 rounded-r-lg">
+                            <h4 class="text-red-800 font-bold text-sm">Thermal Warning</h4>
+                            <p class="text-xs text-red-700 mt-1">Laptops are thermally constrained. Prolonged training (6hr+) can lead to throttling.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOUD STRATEGY (RESTORED & EXPANDED) -->
+        <section id="cloud-strategy" class="py-16 max-w-6xl mx-auto px-4 border-t border-slate-200">
+            <div class="mb-10 text-center">
+                <h3 class="text-2xl font-bold text-slate-800">Cloud Infrastructure Strategy</h3>
+                <p class="text-slate-600 max-w-2xl mx-auto">For professional workflows with confidential medical IP, you must choose between "Secure Compute" (IaaS) and "Export-Friendly" SaaS.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- 1. Private Cloud (IaaS) -->
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                        Private Cloud (Rent the GPU)
+                    </h4>
+                    <p class="text-xs text-slate-500 mb-4">Best for: 100% Control, Data Encryption, Cheapest Rate.</p>
+                    
+                    <div class="space-y-4">
+                        <!-- RunPod -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-teal-500 card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">RunPod (Secure Cloud)</h5>
+                                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded">Recommended</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2"><strong>SOC 2 Type II Compliant.</strong> You get a root-access container. Data is isolated. No long-term residency.</p>
+                            <div class="mt-3 text-xs text-slate-500 flex justify-between font-mono bg-slate-50 p-2 rounded">
+                                <span>RTX 4090</span>
+                                <span>~$0.70/hr</span>
+                            </div>
+                        </div>
+
+                        <!-- Vast.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-red-500 opacity-90 card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Vast.ai (P2P Market)</h5>
+                                <span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded">Avoid</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Critical Security Risk.</strong> You are renting from individuals (crypto miners). The host has physical access to your drive. Unsuitable for medical IP.</p>
+                        </div>
+
+                         <!-- Lambda -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-slate-400 card-hover">
+                            <h5 class="font-bold text-slate-800">Lambda Labs</h5>
+                            <p class="text-sm text-slate-600 mt-2">High enterprise standards, but availability is low. Often forces expensive H100 rentals ($2.00+/hr) which is overkill for LoRA.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Managed SaaS -->
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        Managed Services (Web UI)
+                    </h4>
+                    <p class="text-xs text-slate-500 mb-4">Best for: Ease of Use. <span class="text-red-500 font-bold">Critical: Must allow Weight Export.</span></p>
+                    
+                    <div class="space-y-4">
+                        <!-- Fal.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Fal.ai</h5>
+                                <span class="text-green-600 text-xs font-bold">✓ Exports Allowed</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2">Specializes in fast training for Flux/SDXL. Provides direct download URLs for weights immediately upon completion.</p>
+                        </div>
+
+                        <!-- Astria.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Astria.ai</h5>
+                                <span class="text-green-600 text-xs font-bold">✓ Exports Allowed</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2">Excellent for "Concept" training. Offers secure, time-limited download links (10 mins) for B2B security.</p>
+                        </div>
+
+                        <!-- Leonardo -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm opacity-75">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-500">Leonardo.ai</h5>
+                                <span class="text-red-500 text-xs font-bold">✗ Restricted</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Extracting raw `.safetensors` is often blocked to keep you in their ecosystem. Free tiers grant them a license to your art. <strong>Avoid.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEGAL FRAMEWORKS SECTION -->
+        <section id="legal-frameworks" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-amber-600 font-bold text-xs uppercase tracking-wider">IP Sovereignty</span>
+                    <h3 class="text-3xl font-bold text-slate-800 mt-2">Legal Frameworks</h3>
+                    <p class="text-slate-600 max-w-2xl mx-auto mt-2">Navigating copyright, licensing, and regulatory requirements for AI-assisted medical illustration.</p>
+                </div>
+
+                <!-- Legal Tabs -->
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+                    <div class="flex border-b border-slate-200 overflow-x-auto bg-white">
+                        <button onclick="switchLegalTab('ownership')" id="legal-tab-ownership" class="flex-1 min-w-[140px] py-4 text-center text-sm font-semibold text-amber-700 border-b-2 border-amber-500 bg-amber-50/50 transition-colors">Ownership</button>
+                        <button onclick="switchLegalTab('training')" id="legal-tab-training" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Training Data</button>
+                        <button onclick="switchLegalTab('international')" id="legal-tab-international" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Jurisdiction</button>
+                        <button onclick="switchLegalTab('commercial')" id="legal-tab-commercial" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Commercial</button>
+                        <button onclick="switchLegalTab('medical')" id="legal-tab-medical" class="flex-1 min-w-[140px] py-4 text-center text-sm font-medium text-slate-500 hover:bg-slate-50 transition-colors">Medical Regs</button>
+                    </div>
+
+                    <div class="p-8 min-h-[500px]">
+                        
+                        <!-- Ownership Content -->
+                        <div id="legal-content-ownership" class="block animate-fade-in">
+                            <h4 class="text-xl font-bold text-slate-800 mb-6">Model Weights & Copyright Ownership</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h5 class="font-bold text-slate-700 mb-3 flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs">1</span>
+                                        LoRA Ownership
+                                    </h5>
+                                    <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+                                        <p class="text-sm text-slate-600">A LoRA file (<code class="bg-slate-100 px-1 rounded">.safetensors</code>) contains numerical weights derived from your training data.</p>
+                                        <ul class="text-sm text-slate-600 space-y-2">
+                                            <li class="flex items-start gap-2"><span class="text-amber-500">•</span><strong>Trade Secret:</strong> Can be protected under the Defend Trade Secrets Act (DTSA).</li>
+                                            <li class="flex items-start gap-2"><span class="text-amber-500">•</span><strong>IaaS Providers:</strong> RunPod/Lambda claim no IP rights—you own 100%.</li>
+                                            <li class="flex items-start gap-2"><span class="text-amber-500">•</span><strong>Consumer Apps:</strong> Midjourney/Leonardo often retain licenses. <span class="text-red-500 font-bold">Avoid.</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-bold text-slate-700 mb-3 flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs">2</span>
+                                        AI Output Copyright
+                                    </h5>
+                                    <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+                                        <p class="text-sm text-slate-600">The USCO ruled AI-only works are <strong>not copyrightable</strong>. You need "sufficient human authorship."</p>
+                                        <div class="bg-teal-50 p-3 rounded-lg border border-teal-100">
+                                            <h6 class="text-xs font-bold text-teal-800 mb-2">Human-in-the-Loop Strategy:</h6>
+                                            <ul class="text-xs text-teal-700 space-y-1">
+                                                <li>✓ Use ControlNet with <strong>hand-drawn sketches</strong></li>
+                                                <li>✓ Train LoRA on <strong>your own portfolio</strong></li>
+                                                <li>✓ Apply <strong>Regional Prompting</strong> (compilation)</li>
+                                                <li>✓ Significant <strong>post-processing</strong> in Photoshop</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 border-l-4 border-amber-500 bg-amber-50 p-4 rounded-r-lg">
+                                <h5 class="text-amber-800 font-bold text-sm">Documentation Requirement</h5>
+                                <p class="text-xs text-amber-700 mt-1">Save sketches, prompts, seeds, and intermediate steps to prove human authorship if challenged.</p>
+                            </div>
+                        </div>
+
+                        <!-- Training Data Content -->
+                        <div id="legal-content-training" class="hidden animate-fade-in">
+                            <h4 class="text-xl font-bold text-slate-800 mb-6">Training Data: Fair Use & Licensing</h4>
+                            
+                            <div class="mb-8">
+                                <h5 class="font-bold text-slate-700 mb-4">Data Source Risk Matrix</h5>
+                                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                    <table class="w-full text-sm">
+                                        <thead class="bg-slate-100">
+                                            <tr>
+                                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Source Type</th>
+                                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Legal Status</th>
+                                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Recommendation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100">
+                                            <tr class="bg-teal-50">
+                                                <td class="px-4 py-3 font-medium text-slate-800">Your Own Work</td>
+                                                <td class="px-4 py-3 text-teal-700">✓ Safe</td>
+                                                <td class="px-4 py-3 text-slate-600">Ideal. Full ownership.</td>
+                                            </tr>
+                                            <tr class="bg-teal-50/50">
+                                                <td class="px-4 py-3 font-medium text-slate-800">Public Domain (Gray's Anatomy)</td>
+                                                <td class="px-4 py-3 text-teal-700">✓ Safe</td>
+                                                <td class="px-4 py-3 text-slate-600">Excellent for regularization.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-medium text-slate-800">Creative Commons (CC0, CC-BY)</td>
+                                                <td class="px-4 py-3 text-amber-600">⚠ Check Terms</td>
+                                                <td class="px-4 py-3 text-slate-600">CC0 safest. CC-BY may need attribution.</td>
+                                            </tr>
+                                            <tr class="bg-red-50">
+                                                <td class="px-4 py-3 font-medium text-slate-800">Stock Photos (Getty, Shutterstock)</td>
+                                                <td class="px-4 py-3 text-red-600">✗ Prohibited</td>
+                                                <td class="px-4 py-3 text-slate-600">ToS forbids AI training. High litigation risk.</td>
+                                            </tr>
+                                            <tr class="bg-red-50">
+                                                <td class="px-4 py-3 font-medium text-slate-800">Scraped Web Images</td>
+                                                <td class="px-4 py-3 text-red-600">✗ High Risk</td>
+                                                <td class="px-4 py-3 text-slate-600">Pending litigation (Getty v. Stability AI).</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                    <h5 class="font-bold text-slate-800 mb-2">Style vs. Subject Distinction</h5>
+                                    <p class="text-sm text-slate-600 mb-3">US courts hold that <strong>style cannot be copyrighted</strong>—only specific expressions.</p>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li><strong class="text-teal-700">Style LoRA:</strong> Learning color palette, line weight, shading is likely permissible.</li>
+                                        <li><strong class="text-red-700">Subject LoRA:</strong> Reproducing specific copyrighted characters/compositions = infringement risk.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-amber-50 p-5 rounded-xl border border-amber-200">
+                                    <h5 class="font-bold text-amber-800 mb-2">Best Practice</h5>
+                                    <p class="text-sm text-amber-700">Train Style LoRAs on diverse, non-copyrighted references. Train Subject LoRAs <strong>exclusively</strong> on your own original work or public domain anatomical references.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- International Content -->
+                        <div id="legal-content-international" class="hidden animate-fade-in">
+                            <h4 class="text-xl font-bold text-slate-800 mb-6">International Jurisdiction & Data Sovereignty</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-2xl">🇺🇸</span>
+                                        <h5 class="font-bold text-slate-800">United States</h5>
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li><strong>Fair Use:</strong> Flexible doctrine (17 U.S.C. § 107). AI training <em>may</em> qualify—actively litigated.</li>
+                                        <li><strong>USCO Registration:</strong> Required to sue for statutory damages.</li>
+                                        <li><strong>No AI Authorship:</strong> Human contribution mandatory for copyright.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-2xl">🇪🇺</span>
+                                        <h5 class="font-bold text-slate-800">European Union</h5>
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li><strong>TDM Exception:</strong> Permits data mining for research, but rights holders can <strong>opt out</strong> for commercial use.</li>
+                                        <li><strong>EU AI Act:</strong> Requires disclosure of training data sources.</li>
+                                        <li><strong>Moral Rights:</strong> Stronger and inalienable.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-2xl">🇬🇧</span>
+                                        <h5 class="font-bold text-slate-800">United Kingdom</h5>
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-2">
+                                        <li><strong>Divergence:</strong> Considering more permissive TDM exception than EU.</li>
+                                        <li><strong>Unique:</strong> CDPA 1988 provides copyright for "computer-generated works"—favors AI workflows.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800 text-white p-6 rounded-xl">
+                                <h5 class="font-bold mb-4">Data Residency Considerations</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="text-teal-400 font-bold block mb-1">GDPR</span>
+                                        <span class="text-slate-300 text-xs">If training data contains EU personal data, ensure cloud provider is GDPR-compliant.</span>
+                                    </div>
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="text-teal-400 font-bold block mb-1">HIPAA</span>
+                                        <span class="text-slate-300 text-xs">Patient medical images require BAA-signed providers (AWS GovCloud, Azure Healthcare).</span>
+                                    </div>
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="text-red-400 font-bold block mb-1">China</span>
+                                        <span class="text-slate-300 text-xs">Avoid training on China-based servers—data localization laws may grant government access.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commercial Content -->
+                        <div id="legal-content-commercial" class="hidden animate-fade-in">
+                            <h4 class="text-xl font-bold text-slate-800 mb-6">Commercial Licensing & Client Deliverables</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                <div>
+                                    <h5 class="font-bold text-slate-700 mb-4">Disclosure Obligations</h5>
+                                    <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+                                        <p class="text-sm text-slate-600"><strong>No universal legal requirement</strong> to disclose AI assistance (as of 2026).</p>
+                                        <ul class="text-sm text-slate-600 space-y-2">
+                                            <li class="flex items-start gap-2"><span class="text-amber-500">⚠</span>Many client contracts specify "original work" or prohibit AI content.</li>
+                                            <li class="flex items-start gap-2"><span class="text-amber-500">⚠</span>Publishers (Nature, Science) now require disclosure in figures.</li>
+                                        </ul>
+                                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 mt-4">
+                                            <span class="text-xs font-bold text-slate-500 block mb-1">RECOMMENDED DISCLOSURE:</span>
+                                            <p class="text-xs text-slate-600 italic">"This illustration was created using a proprietary AI model trained exclusively on the artist's original work, with significant human direction, refinement, and post-processing."</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-bold text-slate-700 mb-4">License Types</h5>
+                                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                        <table class="w-full text-xs">
+                                            <tbody class="divide-y divide-slate-100">
+                                                <tr>
+                                                    <td class="px-4 py-3 font-medium text-slate-800">Work-for-Hire</td>
+                                                    <td class="px-4 py-3 text-slate-600">Ensure contract doesn't transfer the LoRA—only output.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-4 py-3 font-medium text-slate-800">Exclusive License</td>
+                                                    <td class="px-4 py-3 text-slate-600">Standard for medical illustration. Unaffected by AI.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-4 py-3 font-medium text-slate-800">Non-Exclusive / RF</td>
+                                                    <td class="px-4 py-3 text-slate-600">AI efficiency makes this more viable at scale.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+                                <h5 class="font-bold text-red-800 mb-3">🛡️ Protecting Your LoRA from Client Claims</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-white p-3 rounded-lg border border-red-100">
+                                        <span class="text-red-700 font-bold text-xs block mb-1">1. Contract Language</span>
+                                        <p class="text-xs text-slate-600">"All AI models and tools remain exclusive property of [Artist]."</p>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg border border-red-100">
+                                        <span class="text-red-700 font-bold text-xs block mb-1">2. Separate Deliverables</span>
+                                        <p class="text-xs text-slate-600">Never include <code>.safetensors</code> unless explicitly contracted.</p>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg border border-red-100">
+                                        <span class="text-red-700 font-bold text-xs block mb-1">3. Pre-Existing IP Clause</span>
+                                        <p class="text-xs text-slate-600">State LoRA is "pre-existing IP" developed independently.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medical Regulations Content -->
+                        <div id="legal-content-medical" class="hidden animate-fade-in">
+                            <h4 class="text-xl font-bold text-slate-800 mb-6">Medical & Regulatory Considerations</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                <div>
+                                    <h5 class="font-bold text-slate-700 mb-4">Accuracy Liability</h5>
+                                    <div class="bg-white p-5 rounded-xl border border-slate-200">
+                                        <p class="text-sm text-slate-600 mb-4">Medical illustrations carry inherent accuracy obligations. AI introduces new risk vectors.</p>
+                                        <div class="space-y-3">
+                                            <div class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                                <span class="text-red-800 font-bold text-xs">Hallucination Risk</span>
+                                                <p class="text-xs text-red-700 mt-1">Incorrect anatomy in patient education or clinical training = liability.</p>
+                                            </div>
+                                            <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                                                <span class="text-amber-800 font-bold text-xs">Standard of Care</span>
+                                                <p class="text-xs text-amber-700 mt-1">Courts may establish that "reasonable illustrators" must verify AI outputs.</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 pt-4 border-t border-slate-200">
+                                            <span class="text-xs font-bold text-slate-500">MITIGATION:</span>
+                                            <ul class="text-xs text-slate-600 mt-2 space-y-1">
+                                                <li>✓ Mandatory human review for anatomical accuracy</li>
+                                                <li>✓ Verification checklist signed before delivery</li>
+                                                <li>✓ Limitation of liability clauses in contracts</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-bold text-slate-700 mb-4">FDA & Regulatory Bodies</h5>
+                                    <div class="space-y-3">
+                                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                            <span class="font-bold text-slate-800 text-sm">Medical Device Labeling</span>
+                                            <p class="text-xs text-slate-600 mt-1">FDA requires accuracy. AI diagrams must meet same standards as traditional.</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                            <span class="font-bold text-slate-800 text-sm">Pharmaceutical Marketing</span>
+                                            <p class="text-xs text-slate-600 mt-1">OPDP reviews materials. Ensure AI doesn't misrepresent drug mechanisms.</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                            <span class="font-bold text-slate-800 text-sm">CME / ACCME</span>
+                                            <p class="text-xs text-slate-600 mt-1">Accredited programs may have specific AI content policies. Verify first.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800 text-white p-6 rounded-xl">
+                                <h5 class="font-bold mb-4">Journal Publication Policies (2026)</h5>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="font-bold text-teal-400 block">Nature</span>
+                                        <span class="text-xs text-slate-300">Disclosure required</span>
+                                    </div>
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="font-bold text-teal-400 block">Elsevier</span>
+                                        <span class="text-xs text-slate-300">Methods section</span>
+                                    </div>
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="font-bold text-teal-400 block">JAMA</span>
+                                        <span class="text-xs text-slate-300">Documented + accountable</span>
+                                    </div>
+                                    <div class="bg-slate-700/50 p-3 rounded-lg">
+                                        <span class="font-bold text-teal-400 block">NEJM</span>
+                                        <span class="text-xs text-slate-300">Case-by-case</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 bg-teal-50 p-5 rounded-xl border border-teal-200">
+                                <h5 class="font-bold text-teal-800 mb-3">📋 Documentation Checklist</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                                    <div>
+                                        <span class="font-bold text-teal-700 block mb-2">Training Docs</span>
+                                        <ul class="text-teal-600 space-y-1">
+                                            <li>☐ Image inventory with provenance</li>
+                                            <li>☐ License copies for third-party data</li>
+                                            <li>☐ Training configs & checkpoints</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-teal-700 block mb-2">Generation Docs</span>
+                                        <ul class="text-teal-600 space-y-1">
+                                            <li>☐ Original sketches (timestamped)</li>
+                                            <li>☐ Prompt logs & seeds</li>
+                                            <li>☐ Before/after post-processing</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-teal-700 block mb-2">Delivery Docs</span>
+                                        <ul class="text-teal-600 space-y-1">
+                                            <li>☐ Signed contracts with AI clauses</li>
+                                            <li>☐ Accuracy verification checklist</li>
+                                            <li>☐ Client approval records</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-teal-700 mt-4"><strong>Retention:</strong> Maintain for 6+ years (statute of limitations).</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
+        <p>&copy; 2024 Research Synthesis. Generated for Educational Purposes.</p>
+    </footer>
+
+    <script>
+        // Navigation
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Tabs
+        function switchTab(tabId) {
+            ['lora', 'controlnet', 'software'].forEach(id => {
+                const el = document.getElementById(`content-${id}`);
+                const tab = document.getElementById(`tab-${id}`);
+                if(el) el.classList.add('hidden');
+                if(tab) {
+                    tab.classList.remove('border-teal-600', 'text-teal-700', 'bg-teal-50/50');
+                    tab.classList.add('text-slate-500');
+                }
+            });
+            const content = document.getElementById(`content-${tabId}`);
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if(content) content.classList.remove('hidden');
+            if(activeBtn) {
+                activeBtn.classList.remove('text-slate-500');
+                activeBtn.classList.add('border-teal-600', 'text-teal-700', 'bg-teal-50/50');
+            }
+        }
+
+        // Legal Tabs
+        function switchLegalTab(tabId) {
+            ['ownership', 'training', 'international', 'commercial', 'medical'].forEach(id => {
+                const el = document.getElementById(`legal-content-${id}`);
+                const tab = document.getElementById(`legal-tab-${id}`);
+                if(el) el.classList.add('hidden');
+                if(tab) {
+                    tab.classList.remove('border-amber-500', 'text-amber-700', 'bg-amber-50/50');
+                    tab.classList.add('text-slate-500');
+                }
+            });
+            const content = document.getElementById(`legal-content-${tabId}`);
+            const activeBtn = document.getElementById(`legal-tab-${tabId}`);
+            if(content) content.classList.remove('hidden');
+            if(activeBtn) {
+                activeBtn.classList.remove('text-slate-500');
+                activeBtn.classList.add('border-amber-500', 'text-amber-700', 'bg-amber-50/50');
+            }
+        }
+
+        // Hardware Calculator
+        let currentVram = 12;
+        function updateCalc(vram) {
+            currentVram = vram;
+            document.querySelectorAll('.vram-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white', 'active-vram');
+                if(parseInt(btn.dataset.val) === vram) btn.classList.add('bg-slate-800', 'text-white', 'active-vram');
+            });
+            runCalculation();
+        }
+
+        function runCalculation() {
+            const resultBox = document.getElementById('calc-result');
+            let html = '';
+            let className = '';
+
+            if (currentVram >= 12) {
+                html = `<div class="flex items-start gap-3"><div class="text-2xl">✅</div><div><h4 class="font-bold text-teal-900 text-sm">Viable for Local Training</h4><p class="text-xs text-teal-800 mt-1">With 12GB VRAM + FP8/Adafactor, you can train SDXL locally.</p></div></div>`;
+                className = "p-4 rounded-lg bg-teal-50 border border-teal-200 transition-all duration-300";
+            } else if (currentVram >= 8) {
+                html = `<div class="flex items-start gap-3"><div class="text-2xl">⚠️</div><div><h4 class="font-bold text-amber-900 text-sm">OneTrainer Required</h4><p class="text-xs text-amber-800 mt-1">Use <strong>OneTrainer</strong> with Gradient Checkpointing. Kohya will likely crash.</p></div></div>`;
+                className = "p-4 rounded-lg bg-amber-50 border border-amber-200 transition-all duration-300";
+            } else {
+                html = `<div class="flex items-start gap-3"><div class="text-2xl">❌</div><div><h4 class="font-bold text-red-900 text-sm">Insufficient Memory</h4><p class="text-xs text-red-800 mt-1">Below 8GB, training modern models is not viable. <strong>Use RunPod.</strong></p></div></div>`;
+                className = "p-4 rounded-lg bg-red-50 border border-red-200 transition-all duration-300";
+            }
+            resultBox.innerHTML = html;
+            resultBox.className = className;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            runCalculation();
+        });
+    </script>
+</body>
+</html>

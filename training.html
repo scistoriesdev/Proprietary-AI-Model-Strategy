@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Methodology - AI Model Training Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Proprietary Model Strategy</h1>
+            </a>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="training.html" class="text-teal-600 font-semibold">Training</a>
+                <a href="scientific.html" class="hover:text-teal-600 transition">Scientific Foundation</a>
+                <a href="hardware.html" class="hover:text-teal-600 transition">Hardware</a>
+                <a href="cloud.html" class="hover:text-teal-600 transition">Cloud Strategy</a>
+                <a href="legal.html" class="hover:text-teal-600 transition">Legal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Page Header -->
+        <section class="bg-slate-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Core Technology</span>
+                <h2 class="text-3xl font-bold mt-2">Training Methodology</h2>
+                <p class="text-slate-400 mt-2 max-w-2xl">To achieve "stabilized granular control", you need a specific stack. Tabs below detail the core components.</p>
+            </div>
+        </section>
+
+        <!-- Quick Nav -->
+        <section class="bg-slate-100 border-b border-slate-200 py-3 sticky top-16 z-40">
+            <div class="max-w-6xl mx-auto px-4 flex gap-4 overflow-x-auto text-xs font-medium">
+                <a href="#lora-basics" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">LoRA Basics</a>
+                <a href="#hyperparameters" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Hyperparameters</a>
+                <a href="#workflow" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Workflow</a>
+                <a href="#troubleshooting" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Troubleshooting</a>
+                <a href="#controlnet" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">ControlNet</a>
+                <a href="#software" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Software</a>
+                <a href="#where-to-train" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Where to Train</a>
+            </div>
+        </section>
+
+        <!-- LoRA Basics -->
+        <section id="lora-basics" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Low-Rank Adaptation (LoRA)</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600 mb-3">🔐</div>
+                    <h4 class="font-bold text-slate-800 mb-2">Proprietary</h4>
+                    <p class="text-sm text-slate-600">You own the <code class="bg-slate-100 px-1 rounded">.safetensors</code> file containing your trained style.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600 mb-3">🔄</div>
+                    <h4 class="font-bold text-slate-800 mb-2">Portable</h4>
+                    <p class="text-sm text-slate-600">Works with any SDXL/Flux base model. Switch bases without retraining.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600 mb-3">🧩</div>
+                    <h4 class="font-bold text-slate-800 mb-2">Composable</h4>
+                    <p class="text-sm text-slate-600">Stack multiple LoRAs (Style + Subject) for granular control.</p>
+                </div>
+            </div>
+
+            <!-- Style vs Subject -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
+                    <h4 class="font-bold text-purple-800 mb-3">Style LoRA (The "Studio Look")</h4>
+                    <p class="text-sm text-purple-700 mb-3">Captures aesthetic: "Flat Vector Icon," "3D Cross-Section"</p>
+                    <div class="bg-white p-3 rounded-lg border border-purple-100 text-xs space-y-1">
+                        <div class="flex justify-between"><span>Dataset:</span><span class="font-bold">30-50 images</span></div>
+                        <div class="flex justify-between"><span>Rank:</span><span class="font-bold">16-32 (low)</span></div>
+                        <div class="flex justify-between"><span>Focus:</span><span class="font-bold">Lighting, line weight, shading</span></div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                    <h4 class="font-bold text-blue-800 mb-3">Subject LoRA (The "Morphology")</h4>
+                    <p class="text-sm text-blue-700 mb-3">Captures structure: "Mitochondria," "Ribosome"</p>
+                    <div class="bg-white p-3 rounded-lg border border-blue-100 text-xs space-y-1">
+                        <div class="flex justify-between"><span>Dataset:</span><span class="font-bold">15-20 images</span></div>
+                        <div class="flex justify-between"><span>Rank:</span><span class="font-bold">64-128 (high)</span></div>
+                        <div class="flex justify-between"><span>Focus:</span><span class="font-bold">Cristae folds, membrane details</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hyperparameters -->
+        <section id="hyperparameters" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Complete Hyperparameter Reference</h3>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100"><tr>
+                            <th class="px-4 py-3 text-left font-semibold text-slate-700">Parameter</th>
+                            <th class="px-4 py-3 text-left font-semibold text-purple-700">Style</th>
+                            <th class="px-4 py-3 text-left font-semibold text-blue-700">Subject</th>
+                            <th class="px-4 py-3 text-left font-semibold text-slate-500">Notes</th>
+                        </tr></thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr><td class="px-4 py-2 font-medium">Network Rank</td><td class="px-4 py-2 text-purple-600">16-32</td><td class="px-4 py-2 text-blue-600">64-128</td><td class="px-4 py-2 text-slate-500">Higher = more capacity, more overfit risk</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Learning Rate</td><td class="px-4 py-2 text-purple-600">1e-4 to 5e-4</td><td class="px-4 py-2 text-blue-600">5e-5 to 1e-4</td><td class="px-4 py-2 text-slate-500">Subject needs lower LR</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Epochs</td><td class="px-4 py-2 text-purple-600">10-20</td><td class="px-4 py-2 text-blue-600">15-30</td><td class="px-4 py-2 text-slate-500">More for complex morphology</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Batch Size</td><td class="px-4 py-2 text-purple-600">2-4</td><td class="px-4 py-2 text-blue-600">1-2</td><td class="px-4 py-2 text-slate-500">Use gradient accumulation</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Noise Offset</td><td class="px-4 py-2 text-purple-600">0.05-0.1</td><td class="px-4 py-2 text-blue-600">0.0-0.05</td><td class="px-4 py-2 text-slate-500">Improves contrast</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Caption Dropout</td><td class="px-4 py-2 text-purple-600">0.1</td><td class="px-4 py-2 text-blue-600">0.05</td><td class="px-4 py-2 text-slate-500">Helps generalization</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow -->
+        <section id="workflow" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Training Workflow</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-red-600 mb-2">1. Dataset Preparation</h4>
+                    <ul class="text-xs text-slate-600 space-y-1">
+                        <li>• 15-50 high-res images (min 1024×1024)</li>
+                        <li>• Remove blurry/inconsistent samples</li>
+                        <li>• For icons: solid background (#FFFFFF)</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-amber-600 mb-2">2. Captioning</h4>
+                    <div class="bg-slate-900 text-[10px] text-slate-300 p-2 rounded font-mono">ohwx_style, mitochondria, cross-section, cristae, medical illustration</div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-teal-600 mb-2">3. Training Config</h4>
+                    <ul class="text-xs text-slate-600 space-y-1">
+                        <li>• Use OneTrainer or Kohya_ss</li>
+                        <li>• Enable gradient checkpointing</li>
+                        <li>• Save checkpoints every 5 epochs</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-indigo-600 mb-2">4. Validation (XY Plot)</h4>
+                    <ul class="text-xs text-slate-600 space-y-1">
+                        <li>• Test multiple epochs + weights</li>
+                        <li>• Best is usually 60-80% through training</li>
+                        <li>• Avoid final checkpoint (often overfit)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="py-12 bg-red-50 border-y border-red-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Common Issues & Solutions</h3>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
+                    <table class="w-full text-xs">
+                        <thead class="bg-slate-100"><tr>
+                            <th class="px-4 py-2 text-left font-semibold">Problem</th>
+                            <th class="px-4 py-2 text-left font-semibold">Symptoms</th>
+                            <th class="px-4 py-2 text-left font-semibold">Solution</th>
+                        </tr></thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr><td class="px-4 py-2 font-bold text-red-700">Overfit</td><td class="px-4 py-2">Outputs identical to training</td><td class="px-4 py-2">Reduce epochs, add regularization</td></tr>
+                            <tr><td class="px-4 py-2 font-bold text-amber-700">Underfit</td><td class="px-4 py-2">Style not visible</td><td class="px-4 py-2">Increase epochs, raise LR</td></tr>
+                            <tr><td class="px-4 py-2 font-bold text-purple-700">Color Shift</td><td class="px-4 py-2">Wrong palette</td><td class="px-4 py-2">Add color tags, reduce noise offset</td></tr>
+                            <tr><td class="px-4 py-2 font-bold text-red-800">CUDA OOM</td><td class="px-4 py-2">Crashes mid-run</td><td class="px-4 py-2">Gradient checkpointing, reduce batch</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ControlNet -->
+        <section id="controlnet" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">ControlNet: The Geometry Anchor</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-2">Canny Edge</h4>
+                    <p class="text-sm text-slate-600">Best for line art and diagrams with clear boundaries.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-2">Depth Map</h4>
+                    <p class="text-sm text-slate-600">Ideal for 3D blockout workflows from Blender.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-2">Segmentation</h4>
+                    <p class="text-sm text-slate-600">Color-code regions for precise multi-structure control.</p>
+                </div>
+            </div>
+            <div class="bg-slate-900 rounded-xl p-6 text-white">
+                <h4 class="font-bold mb-4 text-center">3D Blockout Workflow</h4>
+                <div class="flex items-center justify-center gap-4 text-center text-sm">
+                    <div><div class="w-14 h-14 bg-slate-700 rounded-lg mb-2 flex items-center justify-center text-xs">Blender</div>Low-poly</div>
+                    <span class="text-teal-500 text-xl">→</span>
+                    <div><div class="w-14 h-14 bg-slate-800 border-2 border-teal-500 rounded-lg mb-2 flex items-center justify-center text-xs text-teal-400">Control</div>Depth map</div>
+                    <span class="text-teal-500 text-xl">→</span>
+                    <div><div class="w-14 h-14 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg mb-2 flex items-center justify-center text-xs font-bold">Final</div>SDXL output</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software -->
+        <section id="software" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Software Stack</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white p-5 rounded-xl border-2 border-teal-500 relative">
+                        <span class="absolute -top-2 left-4 bg-teal-600 text-white text-xs px-2 py-0.5 rounded-full">Recommended</span>
+                        <h4 class="font-bold text-slate-800 mt-2">OneTrainer</h4>
+                        <p class="text-sm text-slate-600">Memory efficient. Handles 8GB VRAM. Masked training for icons.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800">Kohya_ss</h4>
+                        <p class="text-sm text-slate-600">Industry standard. Feature-rich but needs 12GB+ VRAM.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <h5 class="font-bold text-sm">ComfyUI</h5>
+                        <p class="text-xs text-slate-500">Node-based inference & XY plots</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <h5 class="font-bold text-sm">Florence-2</h5>
+                        <p class="text-xs text-slate-500">Auto-captioning with medical terms</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <h5 class="font-bold text-sm">Inkscape</h5>
+                        <p class="text-xs text-slate-500">Vectorization for web assets</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Where to Train -->
+        <section id="where-to-train" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">Where to Train: Local vs Cloud vs SaaS</h3>
+            <p class="text-slate-600 mb-8">Choose your training environment based on hardware, budget, and security requirements.</p>
+
+            <!-- Comparison Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Local -->
+                <div class="bg-white rounded-xl border-2 border-blue-500 overflow-hidden">
+                    <div class="bg-blue-500 text-white px-4 py-3 font-bold flex items-center gap-2">
+                        <span class="text-xl">💻</span> Local (Your Hardware)
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between"><span class="text-slate-600">Cost:</span><span class="font-bold text-teal-600">Free (after hardware)</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">VRAM Needed:</span><span class="font-bold">8-24GB</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">Security:</span><span class="font-bold text-teal-600">Maximum</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">Speed:</span><span class="font-bold text-amber-600">Slow (2-8hr)</span></div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <p class="text-xs text-slate-600"><strong>Best for:</strong> Iteration, testing, privacy-sensitive IP</p>
+                            <p class="text-xs text-slate-500 mt-2"><strong>Hardware:</strong> RTX 3080/4080+ laptop or desktop</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud IaaS -->
+                <div class="bg-white rounded-xl border-2 border-teal-500 overflow-hidden relative">
+                    <div class="absolute -top-0 right-4 bg-teal-600 text-white text-[10px] px-2 py-0.5 rounded-b-lg font-bold">RECOMMENDED</div>
+                    <div class="bg-teal-500 text-white px-4 py-3 font-bold flex items-center gap-2">
+                        <span class="text-xl">☁️</span> Private Cloud (IaaS)
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between"><span class="text-slate-600">Cost:</span><span class="font-bold">$0.70-2.00/hr</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">VRAM Available:</span><span class="font-bold text-teal-600">24-80GB</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">Security:</span><span class="font-bold text-teal-600">High (SOC 2)</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">Speed:</span><span class="font-bold text-teal-600">Fast (30min-2hr)</span></div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <p class="text-xs text-slate-600"><strong>Best for:</strong> Production training, large datasets, full control</p>
+                            <p class="text-xs text-slate-500 mt-2"><strong>You own:</strong> 100% of weights, full export</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SaaS -->
+                <div class="bg-white rounded-xl border-2 border-purple-500 overflow-hidden">
+                    <div class="bg-purple-500 text-white px-4 py-3 font-bold flex items-center gap-2">
+                        <span class="text-xl">🌐</span> Managed SaaS
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between"><span class="text-slate-600">Cost:</span><span class="font-bold">$2-10/model</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">VRAM Needed:</span><span class="font-bold text-teal-600">None</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">Security:</span><span class="font-bold text-amber-600">Varies</span></div>
+                            <div class="flex justify-between"><span class="text-slate-600">Speed:</span><span class="font-bold text-teal-600">Fast</span></div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <p class="text-xs text-slate-600"><strong>Best for:</strong> Quick experiments, non-technical users</p>
+                            <p class="text-xs text-red-600 mt-2"><strong>Warning:</strong> Check export rights!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Provider Details -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Cloud Providers -->
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 bg-teal-100 rounded flex items-center justify-center text-teal-600 text-sm">☁️</span>
+                        Private Cloud Providers
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-l-teal-500 border border-slate-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-800">RunPod</h5>
+                                    <p class="text-xs text-slate-600 mt-1">SOC 2 Type II compliant. Isolated containers. Best for medical IP.</p>
+                                </div>
+                                <span class="text-xs font-mono bg-teal-100 text-teal-800 px-2 py-1 rounded">$0.70/hr</span>
+                            </div>
+                            <div class="mt-2 flex gap-2">
+                                <span class="text-[10px] bg-teal-50 text-teal-700 px-2 py-0.5 rounded">✓ Full export</span>
+                                <span class="text-[10px] bg-teal-50 text-teal-700 px-2 py-0.5 rounded">✓ Kohya/OneTrainer templates</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-l-slate-400 border border-slate-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-800">Lambda Labs</h5>
+                                    <p class="text-xs text-slate-600 mt-1">Enterprise-grade. Better for full fine-tuning than LoRA.</p>
+                                </div>
+                                <span class="text-xs font-mono bg-slate-100 text-slate-800 px-2 py-1 rounded">$2.00+/hr</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-l-red-500 border border-slate-200 opacity-75">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-500">Vast.ai</h5>
+                                    <p class="text-xs text-slate-500 mt-1">P2P marketplace. Host has physical access. <strong class="text-red-600">Avoid for proprietary IP.</strong></p>
+                                </div>
+                                <span class="text-xs font-mono bg-red-100 text-red-800 px-2 py-1 rounded">RISK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SaaS Providers -->
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 bg-purple-100 rounded flex items-center justify-center text-purple-600 text-sm">🌐</span>
+                        SaaS Training Platforms
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-lg border border-slate-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-800">Fal.ai</h5>
+                                    <p class="text-xs text-slate-600 mt-1">Fast SDXL/Flux training. Direct .safetensors download.</p>
+                                </div>
+                                <span class="text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">✓ Export</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-800">Astria.ai</h5>
+                                    <p class="text-xs text-slate-600 mt-1">B2B focused. Secure time-limited download links.</p>
+                                </div>
+                                <span class="text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">✓ Export</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-800">Scenario.ai</h5>
+                                    <p class="text-xs text-slate-600 mt-1">Game assets focus. Data not used for foundation training.</p>
+                                </div>
+                                <span class="text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">✓ Export</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 opacity-60">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-bold text-slate-500">Leonardo.ai</h5>
+                                    <p class="text-xs text-slate-500 mt-1">Locked ecosystem. Free tier grants them license. <strong class="text-red-600">Avoid.</strong></p>
+                                </div>
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold">✗ No Export</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decision Helper -->
+            <div class="mt-8 bg-slate-900 text-white p-6 rounded-xl">
+                <h4 class="font-bold mb-4">Quick Decision Guide</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-slate-800 p-4 rounded-lg">
+                        <span class="text-blue-400 font-bold block mb-2">Choose Local if...</span>
+                        <ul class="text-slate-300 text-xs space-y-1">
+                            <li>• You have RTX 3080+ GPU</li>
+                            <li>• Maximum data privacy needed</li>
+                            <li>• Frequent iteration/testing</li>
+                            <li>• No ongoing costs preferred</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border border-teal-500">
+                        <span class="text-teal-400 font-bold block mb-2">Choose Cloud (RunPod) if...</span>
+                        <ul class="text-slate-300 text-xs space-y-1">
+                            <li>• Production-quality training</li>
+                            <li>• Large datasets (100+ images)</li>
+                            <li>• Need 24GB+ VRAM</li>
+                            <li>• Want full control + export</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg">
+                        <span class="text-purple-400 font-bold block mb-2">Choose SaaS if...</span>
+                        <ul class="text-slate-300 text-xs space-y-1">
+                            <li>• Quick experiments only</li>
+                            <li>• No technical setup desired</li>
+                            <li>• Export rights confirmed</li>
+                            <li>• Non-sensitive training data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a href="cloud.html" class="text-teal-600 hover:text-teal-700 font-semibold text-sm">See full Cloud Strategy guide →</a>
+            </div>
+        </section>
+
+        <!-- Navigation Footer -->
+        <section class="py-8 max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="index.html" class="text-slate-500 hover:text-slate-700 transition">← Back to Overview</a>
+                <a href="scientific.html" class="text-teal-600 hover:text-teal-700 font-semibold transition">Scientific Foundation →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
+        <p>&copy; 2024 Research Synthesis. Generated for Educational Purposes.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Requirements - AI Model Training Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Proprietary Model Strategy</h1>
+            </a>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="training.html" class="hover:text-teal-600 transition">Training</a>
+                <a href="scientific.html" class="hover:text-teal-600 transition">Scientific Foundation</a>
+                <a href="hardware.html" class="text-teal-600 font-semibold">Hardware</a>
+                <a href="cloud.html" class="hover:text-teal-600 transition">Cloud Strategy</a>
+                <a href="legal.html" class="hover:text-teal-600 transition">Legal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Page Header -->
+        <section class="bg-slate-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Infrastructure</span>
+                <h2 class="text-3xl font-bold mt-2">Hardware Requirements</h2>
+                <p class="text-slate-400 mt-2 max-w-2xl">VRAM is the primary bottleneck for local training. This guide covers GPU selection, memory optimization, and thermal management.</p>
+            </div>
+        </section>
+
+        <!-- Quick Nav -->
+        <section class="bg-slate-100 border-b border-slate-200 py-3 sticky top-16 z-40">
+            <div class="max-w-6xl mx-auto px-4 flex gap-4 overflow-x-auto text-xs font-medium">
+                <a href="#calculator" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Calculator</a>
+                <a href="#gpu-matrix" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">GPU Matrix</a>
+                <a href="#vram-breakdown" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">VRAM Breakdown</a>
+                <a href="#optimization" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Optimization</a>
+                <a href="#thermal" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Thermal Management</a>
+                <a href="#configurations" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Configurations</a>
+            </div>
+        </section>
+
+        <!-- Hardware Calculator -->
+        <section id="calculator" class="py-12 max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Hardware Viability Calculator</h3>
+                    <p class="text-slate-600 mb-8">Can your laptop handle local LoRA training?</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Your GPU VRAM (GB)</label>
+                            <div class="flex gap-2">
+                                <button onclick="updateCalc(6)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition" data-val="6">6GB</button>
+                                <button onclick="updateCalc(8)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition" data-val="8">8GB</button>
+                                <button onclick="updateCalc(12)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition active-vram bg-slate-800 text-white" data-val="12">12GB</button>
+                                <button onclick="updateCalc(16)" class="vram-btn flex-1 py-2 border rounded hover:bg-slate-50 text-sm transition" data-val="16">16GB+</button>
+                            </div>
+                        </div>
+                        <div id="calc-result" class="p-4 rounded-lg bg-teal-50 border border-teal-200 transition-all duration-300"></div>
+                    </div>
+
+                    <!-- VRAM Tiers -->
+                    <div class="mt-8">
+                        <h4 class="font-bold text-slate-800 mb-3">VRAM Tiers</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                                <span class="text-red-600 font-bold text-sm w-16">8GB</span>
+                                <span class="text-xs text-red-700">Danger zone. Requires aggressive optimization. CUDA OOM errors common.</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                                <span class="text-amber-600 font-bold text-sm w-16">12GB</span>
+                                <span class="text-xs text-amber-700">Comfortable training. Supports batch sizes 2-4 for stable gradients.</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-teal-50 rounded-lg border border-teal-200">
+                                <span class="text-teal-600 font-bold text-sm w-16">16GB</span>
+                                <span class="text-xs text-teal-700">Sweet spot. Full SDXL training without quantization if desired.</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                <span class="text-blue-600 font-bold text-sm w-16">24GB+</span>
+                                <span class="text-xs text-blue-700">Professional tier. Flux at full precision, large batches, experimentation.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Optimization Reference -->
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Quick Optimization Reference</h3>
+                    <p class="text-slate-600 mb-8">Essential techniques for constrained hardware</p>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="px-4 py-3 font-semibold text-slate-700">Technique</th>
+                                    <th class="px-4 py-3 font-semibold text-slate-700">Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-800">FP8 Quantization</td>
+                                    <td class="px-4 py-3 text-slate-600 text-xs"><span class="text-red-600 font-bold">Critical.</span> Reduces VRAM 40-50%.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-800">Gradient Checkpointing</td>
+                                    <td class="px-4 py-3 text-slate-600 text-xs"><span class="text-red-600 font-bold">Critical.</span> Saves GBs; slows ~30%.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-800">Adafactor Optimizer</td>
+                                    <td class="px-4 py-3 text-slate-600 text-xs">Recommended. Less memory than AdamW.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-800">Cache Latents</td>
+                                    <td class="px-4 py-3 text-slate-600 text-xs">Required. Pre-encodes images.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium text-slate-800">xFormers/Flash Attention</td>
+                                    <td class="px-4 py-3 text-slate-600 text-xs">Recommended. 20-40% attention savings.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-6 border-l-4 border-teal-500 bg-teal-50 p-4 rounded-r-lg">
+                        <h4 class="text-teal-800 font-bold text-sm">💡 Hybrid Recommendation</h4>
+                        <p class="text-xs text-teal-700 mt-1">Use local hardware for <strong>inference</strong> (fast, free) and cloud GPUs for <strong>training</strong>. See <a href="cloud.html" class="underline font-semibold">Cloud Strategy</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GPU Comparison Matrix -->
+        <section id="gpu-matrix" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Complete GPU Comparison Matrix</h3>
+                <p class="text-slate-600 mb-6">Comprehensive comparison of GPUs commonly used for LoRA training</p>
+                
+                <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">GPU Model</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">VRAM</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">SDXL</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Flux</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Speed</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Cost</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX 3060</td>
+                                <td class="px-4 py-3">12GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600">✓ Possible</span></td>
+                                <td class="px-4 py-3"><span class="text-amber-600">⚠️ FP8</span></td>
+                                <td class="px-4 py-3">Moderate</td>
+                                <td class="px-4 py-3">$300</td>
+                                <td class="px-4 py-3 text-slate-500">Best budget; VRAM compensates slower cores</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX 3070</td>
+                                <td class="px-4 py-3">8GB</td>
+                                <td class="px-4 py-3"><span class="text-amber-600">⚠️ Optimized</span></td>
+                                <td class="px-4 py-3"><span class="text-red-600">❌ Difficult</span></td>
+                                <td class="px-4 py-3">Fast</td>
+                                <td class="px-4 py-3">$350</td>
+                                <td class="px-4 py-3 text-slate-500">VRAM limited; better for inference</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX 3080</td>
+                                <td class="px-4 py-3">10-12GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600">✓ Good</span></td>
+                                <td class="px-4 py-3"><span class="text-amber-600">⚠️ FP8</span></td>
+                                <td class="px-4 py-3">Fast</td>
+                                <td class="px-4 py-3">$450</td>
+                                <td class="px-4 py-3 text-slate-500">Laptop versions vary (8-16GB)</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="px-4 py-3 font-medium">RTX 3090</td>
+                                <td class="px-4 py-3 font-bold">24GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3"><span class="text-teal-600">✓ Good</span></td>
+                                <td class="px-4 py-3">Fast</td>
+                                <td class="px-4 py-3">$800</td>
+                                <td class="px-4 py-3 text-slate-500">Previous gen flagship; still excellent</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX 4060</td>
+                                <td class="px-4 py-3">8GB</td>
+                                <td class="px-4 py-3"><span class="text-amber-600">⚠️ Optimized</span></td>
+                                <td class="px-4 py-3"><span class="text-red-600">❌ Difficult</span></td>
+                                <td class="px-4 py-3">Fast</td>
+                                <td class="px-4 py-3">$300</td>
+                                <td class="px-4 py-3 text-slate-500">Good for inference; limited training</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX 4070</td>
+                                <td class="px-4 py-3">12GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600">✓ Good</span></td>
+                                <td class="px-4 py-3"><span class="text-amber-600">⚠️ FP8</span></td>
+                                <td class="px-4 py-3">Very Fast</td>
+                                <td class="px-4 py-3">$550</td>
+                                <td class="px-4 py-3 text-slate-500">Balanced option for laptop users</td>
+                            </tr>
+                            <tr class="bg-teal-50 border-l-4 border-l-teal-500">
+                                <td class="px-4 py-3 font-bold">RTX 4080</td>
+                                <td class="px-4 py-3 font-bold">16GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3"><span class="text-teal-600">✓ Possible</span></td>
+                                <td class="px-4 py-3">Very Fast</td>
+                                <td class="px-4 py-3">$1000</td>
+                                <td class="px-4 py-3 text-teal-700 font-medium">Recommended for local training</td>
+                            </tr>
+                            <tr class="bg-blue-50 border-l-4 border-l-blue-500">
+                                <td class="px-4 py-3 font-bold">RTX 4090</td>
+                                <td class="px-4 py-3 font-bold">24GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3 font-bold">Fastest</td>
+                                <td class="px-4 py-3">$1600</td>
+                                <td class="px-4 py-3 text-blue-700 font-medium">Gold standard</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX A4000</td>
+                                <td class="px-4 py-3">16GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3"><span class="text-teal-600">✓ Possible</span></td>
+                                <td class="px-4 py-3">Fast</td>
+                                <td class="px-4 py-3">$1000</td>
+                                <td class="px-4 py-3 text-slate-500">Professional; better drivers</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">RTX A5000</td>
+                                <td class="px-4 py-3">24GB</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Excellent</span></td>
+                                <td class="px-4 py-3">Fast</td>
+                                <td class="px-4 py-3">$2500</td>
+                                <td class="px-4 py-3 text-slate-500">Enterprise; ECC memory</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 border-l-4 border-amber-500 bg-amber-50 p-3 rounded-r-lg">
+                    <p class="text-xs text-amber-800"><strong>Laptop vs Desktop:</strong> Mobile GPUs (e.g., "RTX 4070 Laptop GPU") typically have 10-30% lower performance than desktop counterparts. Always verify the specific mobile variant's VRAM—it can differ significantly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VRAM Breakdown -->
+        <section id="vram-breakdown" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">VRAM Breakdown: What Consumes Memory?</h3>
+            <p class="text-slate-600 mb-6">Understanding VRAM allocation helps optimize training configurations</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Component</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">FP16</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">FP8</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td class="px-4 py-3 font-medium">SDXL Base Model</td>
+                                <td class="px-4 py-3">~6.5GB</td>
+                                <td class="px-4 py-3 text-teal-600 font-medium">~3.5GB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Flux.1 Base Model</td>
+                                <td class="px-4 py-3">~12GB</td>
+                                <td class="px-4 py-3 text-teal-600 font-medium">~6GB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">LoRA Weights</td>
+                                <td class="px-4 py-3">50-200MB</td>
+                                <td class="px-4 py-3">50-200MB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Optimizer (AdamW)</td>
+                                <td class="px-4 py-3">~2-4GB</td>
+                                <td class="px-4 py-3">~1-2GB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Optimizer (Adafactor)</td>
+                                <td class="px-4 py-3">~0.5-1GB</td>
+                                <td class="px-4 py-3 text-teal-600 font-medium">~0.5GB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Gradients</td>
+                                <td class="px-4 py-3">~2-4GB</td>
+                                <td class="px-4 py-3">~1-2GB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Activations</td>
+                                <td class="px-4 py-3">2-8GB</td>
+                                <td class="px-4 py-3">1-4GB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Batch (per image)</td>
+                                <td class="px-4 py-3">~0.5GB</td>
+                                <td class="px-4 py-3">~0.5GB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Example: 8GB Card, SDXL Training</h4>
+                    <div class="bg-slate-900 text-white p-5 rounded-xl font-mono text-sm">
+                        <div class="space-y-1">
+                            <div class="flex justify-between"><span class="text-slate-400">FP8 Base Model:</span><span>3.5GB</span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Adafactor:</span><span>0.5GB</span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Gradients (FP8):</span><span>1.0GB</span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Activations (CP):</span><span>1.5GB</span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Batch (1 image):</span><span>0.5GB</span></div>
+                            <div class="border-t border-slate-700 mt-2 pt-2 flex justify-between font-bold">
+                                <span>Total:</span>
+                                <span class="text-teal-400">7.0GB ✓</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3">Fits in 8GB with ~1GB headroom</p>
+                    </div>
+
+                    <div class="mt-4 bg-teal-50 border border-teal-200 p-4 rounded-xl">
+                        <h5 class="font-bold text-teal-800 text-sm mb-2">Key Takeaways</h5>
+                        <ul class="text-xs text-teal-700 space-y-1">
+                            <li>• <strong>FP8</strong> quantization nearly halves base model VRAM</li>
+                            <li>• <strong>Adafactor</strong> uses 4-8x less memory than AdamW</li>
+                            <li>• <strong>Gradient checkpointing</strong> reduces activations significantly</li>
+                            <li>• <strong>Batch size 1</strong> is minimum; use gradient accumulation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Optimization Techniques -->
+        <section id="optimization" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Optimization Techniques</h3>
+                <p class="text-slate-600 mb-6">Mandatory configurations for bypassing physical hardware limits</p>
+
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Technique</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Mechanism</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Impact for Medical Illustration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">FP8 / NF4 Quantization</td>
+                                <td class="px-4 py-3 text-slate-600">Loads base model in 8-bit or 4-bit precision</td>
+                                <td class="px-4 py-3"><span class="text-red-600 font-bold">Critical.</span> Reduces VRAM 40-50%. Quality loss negligible for icons.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Gradient Checkpointing</td>
+                                <td class="px-4 py-3 text-slate-600">Discards activations; re-computes in backward pass</td>
+                                <td class="px-4 py-3"><span class="text-red-600 font-bold">Critical.</span> Saves GBs but slows ~30%. Essential for 1024×1024.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Adafactor Optimizer</td>
+                                <td class="px-4 py-3 text-slate-600">Varying learning rates; less memory state than AdamW</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">Recommended.</span> Highly effective for memory-scarce LoRA training.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Cache Latents</td>
+                                <td class="px-4 py-3 text-slate-600">Pre-encodes images into latent space</td>
+                                <td class="px-4 py-3"><span class="text-amber-600 font-bold">Required.</span> Prevents VAE from using VRAM. Disables random crop.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">xFormers / Flash Attention</td>
+                                <td class="px-4 py-3 text-slate-600">Memory-efficient attention implementation</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">Recommended.</span> 20-40% reduction in attention computation memory.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Block Swapping</td>
+                                <td class="px-4 py-3 text-slate-600">Moves inactive blocks to system RAM</td>
+                                <td class="px-4 py-3"><span class="text-slate-600">Advanced.</span> Enables sub-minimum VRAM but significantly slower.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thermal Management -->
+        <section id="thermal" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">Thermal Management for Laptop Training</h3>
+            <p class="text-slate-600 mb-6">Training takes 2-8 hours at sustained maximum GPU load. Thermal management is critical.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Temperature Thresholds -->
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Temperature Thresholds</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3 p-3 bg-teal-50 rounded-lg border border-teal-200">
+                            <span class="font-mono font-bold text-teal-700 w-16">&lt; 70°C</span>
+                            <div>
+                                <span class="text-teal-800 font-bold text-sm">Optimal</span>
+                                <p class="text-xs text-teal-700">Ideal operating range. No action needed.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-slate-100 rounded-lg border border-slate-200">
+                            <span class="font-mono font-bold text-slate-700 w-16">70-80°C</span>
+                            <div>
+                                <span class="text-slate-800 font-bold text-sm">Normal</span>
+                                <p class="text-xs text-slate-600">Monitor. Ensure adequate ventilation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                            <span class="font-mono font-bold text-amber-700 w-16">80-85°C</span>
+                            <div>
+                                <span class="text-amber-800 font-bold text-sm">Elevated</span>
+                                <p class="text-xs text-amber-700">Consider cooling pad. Reduce ambient temp.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                            <span class="font-mono font-bold text-orange-700 w-16">85-90°C</span>
+                            <div>
+                                <span class="text-orange-800 font-bold text-sm">Warning</span>
+                                <p class="text-xs text-orange-700">Throttling likely. Reduce batch size or resolution.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                            <span class="font-mono font-bold text-red-700 w-16">&gt; 90°C</span>
+                            <div>
+                                <span class="text-red-800 font-bold text-sm">Critical</span>
+                                <p class="text-xs text-red-700">Stop training immediately. Hardware damage risk.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mitigation Strategies -->
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Thermal Mitigation Strategies</h4>
+                    <div class="space-y-3">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <h5 class="font-bold text-sm text-slate-800">1. Laptop Cooling Pad</h5>
+                            <p class="text-xs text-slate-600 mt-1">Essential for sustained training. Look for adjustable fans and metal mesh.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <h5 class="font-bold text-sm text-slate-800">2. Elevate the Laptop</h5>
+                            <p class="text-xs text-slate-600 mt-1">Raise rear 2-3 inches for improved airflow. Works without cooling pad.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <h5 class="font-bold text-sm text-slate-800">3. Ambient Temperature</h5>
+                            <p class="text-xs text-slate-600 mt-1">Train in AC environments. 5°C room reduction = 3-5°C GPU reduction.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <h5 class="font-bold text-sm text-slate-800">4. Power Profile</h5>
+                            <p class="text-xs text-slate-600 mt-1">Use "Balanced" mode in Windows. Set NVIDIA to "Optimal Power". ~5% perf loss, major heat reduction.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <h5 class="font-bold text-sm text-slate-800">5. Undervolting</h5>
+                            <p class="text-xs text-slate-600 mt-1">Advanced: 50-100mV undervolt via MSI Afterburner. 5-10°C reduction, minimal perf impact.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <h5 class="font-bold text-sm text-slate-800">6. Training Schedule</h5>
+                            <p class="text-xs text-slate-600 mt-1">Schedule long runs during cooler hours (night). Implement rest periods.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 border-l-4 border-red-500 bg-red-50 p-3 rounded-r-lg">
+                        <p class="text-xs text-red-800"><strong>⚠️ Hardware Longevity:</strong> Sustained high temps degrade thermal paste, battery capacity, and GPU lifespan. For frequent training, consider desktop or cloud.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Configurations -->
+        <section id="configurations" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Recommended Hardware Configurations</h3>
+                <p class="text-slate-600 mb-6">Based on use case and budget</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Budget -->
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-600 text-white px-4 py-3 font-bold">Budget Local</div>
+                        <div class="p-4">
+                            <div class="text-2xl font-bold text-slate-800 mb-3">$800-1,200</div>
+                            <ul class="text-xs text-slate-600 space-y-2">
+                                <li><strong>GPU:</strong> RTX 3060 12GB</li>
+                                <li><strong>RAM:</strong> 32GB DDR4/DDR5</li>
+                                <li><strong>Storage:</strong> 1TB NVMe SSD</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <p class="text-xs text-teal-700"><strong>✓</strong> SDXL LoRA with FP8</p>
+                                <p class="text-xs text-red-600"><strong>✗</strong> Flux training difficult</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Balanced -->
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-700 text-white px-4 py-3 font-bold">Balanced Local</div>
+                        <div class="p-4">
+                            <div class="text-2xl font-bold text-slate-800 mb-3">$1,500-2,500</div>
+                            <ul class="text-xs text-slate-600 space-y-2">
+                                <li><strong>GPU:</strong> RTX 4070 Super / 4080</li>
+                                <li><strong>RAM:</strong> 64GB DDR5</li>
+                                <li><strong>Storage:</strong> 2TB NVMe SSD</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <p class="text-xs text-teal-700"><strong>✓</strong> Full SDXL training</p>
+                                <p class="text-xs text-teal-700"><strong>✓</strong> Flux with FP8</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional -->
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-800 text-white px-4 py-3 font-bold">Professional Local</div>
+                        <div class="p-4">
+                            <div class="text-2xl font-bold text-slate-800 mb-3">$3,000-5,000</div>
+                            <ul class="text-xs text-slate-600 space-y-2">
+                                <li><strong>GPU:</strong> RTX 4090 24GB</li>
+                                <li><strong>RAM:</strong> 128GB DDR5</li>
+                                <li><strong>Storage:</strong> 4TB NVMe SSD</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <p class="text-xs text-teal-700"><strong>✓</strong> Full Flux training</p>
+                                <p class="text-xs text-teal-700"><strong>✓</strong> Large batch sizes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid -->
+                    <div class="bg-white rounded-xl border-2 border-teal-500 overflow-hidden relative">
+                        <div class="absolute -top-0 right-0 bg-teal-600 text-white text-[10px] px-2 py-0.5 rounded-bl-lg font-bold">RECOMMENDED</div>
+                        <div class="bg-teal-600 text-white px-4 py-3 font-bold">Hybrid Setup</div>
+                        <div class="p-4">
+                            <div class="text-2xl font-bold text-slate-800 mb-3">~$1,500 + cloud</div>
+                            <ul class="text-xs text-slate-600 space-y-2">
+                                <li><strong>Local:</strong> RTX 4070 Laptop</li>
+                                <li><strong>Cloud:</strong> RunPod 4090</li>
+                                <li><strong>Monthly:</strong> $20-50 cloud</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <p class="text-xs text-teal-700"><strong>✓</strong> Best of both worlds</p>
+                                <p class="text-xs text-teal-700"><strong>✓</strong> IP security + burst compute</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="py-8 max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="scientific.html" class="text-slate-500 hover:text-slate-700 transition">← Scientific Foundation</a>
+                <a href="cloud.html" class="text-teal-600 hover:text-teal-700 font-semibold transition">Cloud Strategy →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
+        <p>&copy; 2024 Research Synthesis. Generated for Educational Purposes.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

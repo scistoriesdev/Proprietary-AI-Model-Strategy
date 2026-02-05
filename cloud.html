@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Strategy - AI Model Training Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Proprietary Model Strategy</h1>
+            </a>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="training.html" class="hover:text-teal-600 transition">Training</a>
+                <a href="scientific.html" class="hover:text-teal-600 transition">Scientific Foundation</a>
+                <a href="hardware.html" class="hover:text-teal-600 transition">Hardware</a>
+                <a href="cloud.html" class="text-teal-600 font-semibold">Cloud Strategy</a>
+                <a href="legal.html" class="hover:text-teal-600 transition">Legal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Page Header -->
+        <section class="bg-slate-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Infrastructure</span>
+                <h2 class="text-3xl font-bold mt-2">Cloud Infrastructure Strategy</h2>
+                <p class="text-slate-400 mt-2 max-w-2xl">Complete guide to cloud training: provider comparison, workflow guides, cost analysis, and security best practices.</p>
+            </div>
+        </section>
+
+        <!-- Quick Nav -->
+        <section class="bg-slate-100 border-b border-slate-200 py-3 sticky top-16 z-40">
+            <div class="max-w-6xl mx-auto px-4 flex gap-4 overflow-x-auto text-xs font-medium">
+                <a href="#providers" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Provider Comparison</a>
+                <a href="#runpod-workflow" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">RunPod Workflow</a>
+                <a href="#cost-analysis" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Cost Analysis</a>
+                <a href="#saas" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">SaaS Platforms</a>
+                <a href="#security" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Security</a>
+                <a href="#hybrid" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Hybrid Strategy</a>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section id="providers" class="py-12 max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- 1. Private Cloud (IaaS) -->
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                        Private Cloud (Rent the GPU)
+                    </h4>
+                    <p class="text-xs text-slate-500 mb-4">Best for: 100% Control, Data Encryption, Cheapest Rate.</p>
+                    
+                    <div class="space-y-4">
+                        <!-- RunPod -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-teal-500 card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">RunPod (Secure Cloud)</h5>
+                                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded">Recommended</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2"><strong>SOC 2 Type II Compliant.</strong> You get a root-access container. Data is isolated. No long-term residency.</p>
+                            <div class="mt-3 text-xs text-slate-500 flex justify-between font-mono bg-slate-50 p-2 rounded">
+                                <span>RTX 4090 (24GB)</span>
+                                <span>~$0.70/hr</span>
+                            </div>
+                            <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                                <li>✓ Upload dataset, train, download weights, terminate</li>
+                                <li>✓ No long-term data residency</li>
+                                <li>✓ Kohya_ss & OneTrainer templates available</li>
+                            </ul>
+                        </div>
+
+                        <!-- Vast.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-red-500 opacity-90 card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Vast.ai (P2P Market)</h5>
+                                <span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded">Avoid</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Critical Security Risk.</strong> You are renting from individuals (crypto miners). The host has physical access to your drive. Unsuitable for medical IP.</p>
+                        </div>
+
+                        <!-- Lambda -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-slate-400 card-hover">
+                            <h5 class="font-bold text-slate-800">Lambda Labs</h5>
+                            <p class="text-sm text-slate-600 mt-2">High enterprise standards, but availability is low. Often forces expensive H100 rentals ($2.00+/hr) which is overkill for LoRA.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Managed SaaS -->
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        Managed Services (Web UI)
+                    </h4>
+                    <p class="text-xs text-slate-500 mb-4">Best for: Ease of Use. <span class="text-red-500 font-bold">Critical: Must allow Weight Export.</span></p>
+                    
+                    <div class="space-y-4">
+                        <!-- Fal.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Fal.ai</h5>
+                                <span class="text-green-600 text-xs font-bold">✓ Exports Allowed</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2">Specializes in fast training for Flux/SDXL. Provides direct download URLs for weights immediately upon completion.</p>
+                            <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                                <li>✓ API & Web UI</li>
+                                <li>✓ .safetensors / Diffusers format export</li>
+                                <li>✓ Customer owns fine-tuned weights</li>
+                            </ul>
+                        </div>
+
+                        <!-- Astria.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Astria.ai</h5>
+                                <span class="text-green-600 text-xs font-bold">✓ Exports Allowed</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2">Excellent for "Concept" training. Offers secure, time-limited download links (10 mins) for B2B security.</p>
+                            <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                                <li>✓ Offset noise training (better contrast)</li>
+                                <li>✓ B2B focused IP retention</li>
+                            </ul>
+                        </div>
+
+                        <!-- Scenario.ai -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm card-hover">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-800">Scenario.ai</h5>
+                                <span class="text-green-600 text-xs font-bold">✓ Exports Allowed</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-2">Optimized for game assets (icons, sprites). Explicitly states user data is not used for foundation model training.</p>
+                        </div>
+
+                        <!-- Leonardo -->
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm opacity-75">
+                            <div class="flex justify-between items-start">
+                                <h5 class="font-bold text-slate-500">Leonardo.ai</h5>
+                                <span class="text-red-500 text-xs font-bold">✗ Restricted</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Extracting raw <code>.safetensors</code> is often blocked to keep you in their ecosystem. Free tiers grant them a license to your art. <strong>Avoid for proprietary pipelines.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Provider Comparison Table -->
+            <div class="mt-12">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Complete Cloud Provider Comparison</h3>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Provider</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Architecture</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Security</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">GPU Options</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Cost/Hour</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-700">Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr class="bg-teal-50">
+                                <td class="px-4 py-3 font-bold text-slate-800">RunPod</td>
+                                <td class="px-4 py-3">Containerized</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">SOC 2 Type II</span></td>
+                                <td class="px-4 py-3">RTX 4090, A100, H100</td>
+                                <td class="px-4 py-3 font-mono">$0.70-2.50</td>
+                                <td class="px-4 py-3 text-teal-700 font-medium">LoRA training, medical IP</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Lambda Labs</td>
+                                <td class="px-4 py-3">Traditional CSP</td>
+                                <td class="px-4 py-3">Enterprise</td>
+                                <td class="px-4 py-3">H100, A100</td>
+                                <td class="px-4 py-3 font-mono">$2.00-3.50</td>
+                                <td class="px-4 py-3">Full fine-tuning, research</td>
+                            </tr>
+                            <tr class="bg-red-50">
+                                <td class="px-4 py-3 font-medium text-slate-500">Vast.ai</td>
+                                <td class="px-4 py-3 text-slate-500">P2P Marketplace</td>
+                                <td class="px-4 py-3"><span class="text-red-600 font-bold">⚠️ Low</span></td>
+                                <td class="px-4 py-3 text-slate-500">Various consumer</td>
+                                <td class="px-4 py-3 font-mono text-slate-500">$0.30-0.80</td>
+                                <td class="px-4 py-3 text-red-600">Public experiments only</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Paperspace</td>
+                                <td class="px-4 py-3">Gradient Platform</td>
+                                <td class="px-4 py-3">High</td>
+                                <td class="px-4 py-3">RTX 4000, A100</td>
+                                <td class="px-4 py-3 font-mono">$1.00-2.50</td>
+                                <td class="px-4 py-3">ML workflows, notebooks</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-slate-800">Google Colab Pro</td>
+                                <td class="px-4 py-3">Managed Notebooks</td>
+                                <td class="px-4 py-3">Medium</td>
+                                <td class="px-4 py-3">T4, A100</td>
+                                <td class="px-4 py-3 font-mono">$10-50/mo</td>
+                                <td class="px-4 py-3">Experimentation, learning</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- RunPod Workflow -->
+        <section id="runpod-workflow" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">RunPod Workflow: Step-by-Step Guide</h3>
+                <p class="text-slate-600 mb-8">For medical illustration workflows requiring IP security, RunPod is recommended.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Phase 1 & 2 -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">1</span>
+                                Setup (One-Time)
+                            </h4>
+                            <ol class="text-sm text-slate-600 space-y-2">
+                                <li>1. Create account at runpod.io</li>
+                                <li>2. Add payment method (pay-as-you-go or prepaid)</li>
+                                <li>3. Create SSH key pair for secure access</li>
+                                <li>4. Select "Secure Cloud" datacenter (US/EU)</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">2</span>
+                                Pod Configuration
+                            </h4>
+                            <div class="bg-slate-900 text-white p-4 rounded-lg font-mono text-xs mb-3">
+                                <div class="text-slate-400 mb-2">Template Selection:</div>
+                                <div class="ml-2">├── RunPod PyTorch 2.1 (base)</div>
+                                <div class="ml-2">├── OneTrainer Template</div>
+                                <div class="ml-2">└── Kohya_ss Template</div>
+                                <div class="text-slate-400 mt-3 mb-2">GPU Selection:</div>
+                                <div class="ml-2"><span class="text-teal-400">├── RTX 4090 (24GB)</span> - $0.70/hr</div>
+                                <div class="ml-2">├── RTX A6000 (48GB) - $1.00/hr</div>
+                                <div class="ml-2">└── A100 80GB - $2.50/hr</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 & 4 -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">3</span>
+                                Training Execution
+                            </h4>
+                            <ol class="text-sm text-slate-600 space-y-2">
+                                <li><strong>1. Upload Dataset:</strong> rsync or SFTP to pod</li>
+                                <li><strong>2. Configure:</strong> Edit YAML or use GUI</li>
+                                <li><strong>3. Train:</strong> Monitor via terminal/TensorBoard</li>
+                                <li><strong>4. Checkpoints:</strong> Saved to /workspace/output/</li>
+                                <li><strong>5. Download:</strong> scp or SFTP to retrieve .safetensors</li>
+                                <li><strong>6. Terminate:</strong> <span class="text-red-600 font-bold">Stop billing immediately!</span></li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">4</span>
+                                Cost Optimization
+                            </h4>
+                            <ul class="text-sm text-slate-600 space-y-2">
+                                <li>• <strong>Spot instances:</strong> 50-70% savings (interruption risk)</li>
+                                <li>• <strong>Pre-cache latents</strong> locally before upload</li>
+                                <li>• <strong>Volume storage</strong> to persist base models</li>
+                                <li>• <strong>Off-peak hours</strong> for better availability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cost Analysis -->
+        <section id="cost-analysis" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">Cloud Cost Analysis</h3>
+            <p class="text-slate-600 mb-6">Typical training costs for SDXL LoRA with 50-image dataset</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Per-Training Costs -->
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Cost Per Training Run</h4>
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-semibold">Configuration</th>
+                                    <th class="px-4 py-2 text-left font-semibold">Time</th>
+                                    <th class="px-4 py-2 text-left font-semibold">Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-xs">
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Style LoRA (rank 32)</td>
+                                    <td class="px-4 py-2">45-60 min</td>
+                                    <td class="px-4 py-2 font-mono text-teal-600">$0.50-0.70</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Subject LoRA (rank 64)</td>
+                                    <td class="px-4 py-2">60-90 min</td>
+                                    <td class="px-4 py-2 font-mono text-teal-600">$0.70-1.05</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">High-quality (rank 128)</td>
+                                    <td class="px-4 py-2">90-120 min</td>
+                                    <td class="px-4 py-2 font-mono">$1.05-1.40</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Flux LoRA (rank 64)</td>
+                                    <td class="px-4 py-2">120-180 min</td>
+                                    <td class="px-4 py-2 font-mono">$1.40-2.10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Monthly Budget -->
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Monthly Budget Scenarios</h4>
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-semibold">Usage</th>
+                                    <th class="px-4 py-2 text-left font-semibold">Frequency</th>
+                                    <th class="px-4 py-2 text-left font-semibold">Est. Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-xs">
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Light</td>
+                                    <td class="px-4 py-2">2-4 LoRAs/month</td>
+                                    <td class="px-4 py-2 font-mono text-teal-600">$5-15</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Moderate</td>
+                                    <td class="px-4 py-2">8-12 LoRAs/month</td>
+                                    <td class="px-4 py-2 font-mono">$20-40</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Heavy</td>
+                                    <td class="px-4 py-2">20+ LoRAs/month</td>
+                                    <td class="px-4 py-2 font-mono">$50-100</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-medium">Production</td>
+                                    <td class="px-4 py-2">Daily training</td>
+                                    <td class="px-4 py-2 font-mono">$150-300</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-4 bg-teal-50 border border-teal-200 p-4 rounded-xl">
+                        <h5 class="font-bold text-teal-800 text-sm mb-2">💡 Hardware Cost Parity</h5>
+                        <p class="text-xs text-teal-700">RTX 4090 costs ~$1,600. At $0.70/hour, you can train for <strong>2,285 hours</strong> before hardware cost parity—equivalent to ~1,500 typical LoRA runs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SaaS Platforms -->
+        <section id="saas" class="py-12 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Managed Training Services (SaaS)</h3>
+                <p class="text-slate-600 mb-6">Web UI platforms for users who prefer not to use terminal. <strong class="text-red-600">Critical: Must allow weight export.</strong></p>
+
+                <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto mb-8">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold">Provider</th>
+                                <th class="px-4 py-3 text-left font-semibold">Export</th>
+                                <th class="px-4 py-3 text-left font-semibold">Format</th>
+                                <th class="px-4 py-3 text-left font-semibold">Time</th>
+                                <th class="px-4 py-3 text-left font-semibold">Cost/Model</th>
+                                <th class="px-4 py-3 text-left font-semibold">Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td class="px-4 py-3 font-bold">Fal.ai</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Full</span></td>
+                                <td class="px-4 py-3">.safetensors</td>
+                                <td class="px-4 py-3">15-30 min</td>
+                                <td class="px-4 py-3 font-mono">$2-5</td>
+                                <td class="px-4 py-3">Fast iteration, API integration</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold">Astria.ai</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Full</span></td>
+                                <td class="px-4 py-3">.safetensors</td>
+                                <td class="px-4 py-3">20-40 min</td>
+                                <td class="px-4 py-3 font-mono">$5-10</td>
+                                <td class="px-4 py-3">B2B, advanced features</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold">Scenario.ai</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Full</span></td>
+                                <td class="px-4 py-3">.safetensors</td>
+                                <td class="px-4 py-3">30-60 min</td>
+                                <td class="px-4 py-3 font-mono">$3-8</td>
+                                <td class="px-4 py-3">Game assets, icons</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold">Replicate</td>
+                                <td class="px-4 py-3"><span class="text-teal-600 font-bold">✓ Full</span></td>
+                                <td class="px-4 py-3">Various</td>
+                                <td class="px-4 py-3">20-45 min</td>
+                                <td class="px-4 py-3 font-mono">$3-10</td>
+                                <td class="px-4 py-3">API-first workflows</td>
+                            </tr>
+                            <tr class="bg-red-50">
+                                <td class="px-4 py-3 text-slate-500">Leonardo.ai</td>
+                                <td class="px-4 py-3"><span class="text-red-600 font-bold">❌ Limited</span></td>
+                                <td class="px-4 py-3 text-slate-500">Locked</td>
+                                <td class="px-4 py-3 text-slate-500">Fast</td>
+                                <td class="px-4 py-3 text-slate-500">Subscription</td>
+                                <td class="px-4 py-3 text-red-600">Avoid for proprietary</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Decision Matrix -->
+                <h4 class="font-bold text-slate-800 mb-3">Platform Decision Matrix</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-2xl mb-2">🔒</div>
+                        <h5 class="font-bold text-sm text-slate-800">Max IP Security</h5>
+                        <p class="text-xs text-teal-600 mt-1">RunPod (IaaS)</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-2xl mb-2">⚡</div>
+                        <h5 class="font-bold text-sm text-slate-800">Fast Iteration</h5>
+                        <p class="text-xs text-teal-600 mt-1">Fal.ai</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-2xl mb-2">🎛️</div>
+                        <h5 class="font-bold text-sm text-slate-800">Advanced Features</h5>
+                        <p class="text-xs text-teal-600 mt-1">Astria.ai</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-2xl mb-2">🎨</div>
+                        <h5 class="font-bold text-sm text-slate-800">Icons/Sprites</h5>
+                        <p class="text-xs text-teal-600 mt-1">Scenario.ai</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-2xl mb-2">📚</div>
+                        <h5 class="font-bold text-sm text-slate-800">Learning</h5>
+                        <p class="text-xs text-teal-600 mt-1">Replicate, Colab</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-2xl mb-2">💰</div>
+                        <h5 class="font-bold text-sm text-slate-800">Budget (Public)</h5>
+                        <p class="text-xs text-slate-600 mt-1">Civitai (non-proprietary)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Best Practices -->
+        <section id="security" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">Data Security Best Practices</h3>
+            <p class="text-slate-600 mb-6">When training on proprietary medical illustrations in the cloud</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Encrypt Before Upload</h5>
+                                <p class="text-xs text-slate-600 mt-1">Use GPG or similar to encrypt dataset archives before transfer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Use Secure Cloud Tiers</h5>
+                                <p class="text-xs text-slate-600 mt-1">Never use "Community Cloud" for proprietary IP</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Minimize Residency Time</h5>
+                                <p class="text-xs text-slate-600 mt-1">Upload → Train → Download → Terminate (same session)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Verify Deletion</h5>
+                                <p class="text-xs text-slate-600 mt-1">After termination, storage is wiped; verify no volumes persist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Audit Access Logs</h5>
+                                <p class="text-xs text-slate-600 mt-1">RunPod provides access logs; review for anomalies</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Use Unique Trigger Words</h5>
+                                <p class="text-xs text-slate-600 mt-1">Don't use identifiable terms in captions that could reveal IP</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">7</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">Download All Checkpoints</h5>
+                                <p class="text-xs text-slate-600 mt-1">Don't leave intermediate models on cloud storage</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">8</span>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-800">VPN/SSH Tunneling</h5>
+                                <p class="text-xs text-slate-600 mt-1">Use encrypted connections for all data transfers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hybrid Strategy -->
+        <section id="hybrid" class="py-12 bg-slate-900 text-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-2xl font-bold mb-2">Hybrid Cloud Strategy: The Optimal Architecture</h3>
+                <p class="text-slate-400 mb-8">For medical illustration professionals, combine local and cloud resources</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Local -->
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 class="font-bold text-blue-400 mb-4 flex items-center gap-2">
+                            <span class="text-xl">💻</span> LOCAL (RTX Laptop/Desktop)
+                        </h4>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li>✓ Dataset Preparation</li>
+                            <li>✓ Captioning (Florence-2)</li>
+                            <li>✓ Inference/Generation</li>
+                            <li>✓ XY Plot Validation</li>
+                            <li>✓ ComfyUI Workflows</li>
+                            <li>✓ Quick Iterations</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-slate-700 text-xs">
+                            <div class="flex justify-between"><span class="text-slate-500">Cost:</span><span class="text-teal-400">$0 (after hardware)</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Security:</span><span class="text-teal-400">Maximum</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Speed:</span><span class="text-amber-400">Limited by VRAM</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud -->
+                    <div class="bg-slate-800 p-6 rounded-xl border border-teal-500">
+                        <h4 class="font-bold text-teal-400 mb-4 flex items-center gap-2">
+                            <span class="text-xl">☁️</span> CLOUD (RunPod/Fal.ai)
+                        </h4>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li>✓ Production Training</li>
+                            <li>✓ Large Batch Sizes</li>
+                            <li>✓ High-Resolution (1024+)</li>
+                            <li>✓ Flux Training</li>
+                            <li>✓ Multiple Epochs</li>
+                            <li>✓ Parallel Runs</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-slate-700 text-xs">
+                            <div class="flex justify-between"><span class="text-slate-500">Cost:</span><span>$0.70-2.00/hr</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Security:</span><span class="text-teal-400">High (SOC 2)</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Speed:</span><span class="text-teal-400">Fast</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- When to Use -->
+                <h4 class="font-bold text-white mb-4">When to Use Cloud vs Local</h4>
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-700">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold">Scenario</th>
+                                <th class="px-4 py-3 text-left font-semibold">Recommendation</th>
+                                <th class="px-4 py-3 text-left font-semibold">Rationale</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700 text-xs">
+                            <tr>
+                                <td class="px-4 py-3">Quick test (5-10 images)</td>
+                                <td class="px-4 py-3"><span class="text-blue-400 font-bold">Local</span></td>
+                                <td class="px-4 py-3 text-slate-400">Faster startup, no upload time</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Production LoRA (50+ images)</td>
+                                <td class="px-4 py-3"><span class="text-teal-400 font-bold">Cloud</span></td>
+                                <td class="px-4 py-3 text-slate-400">Better quality from larger batches</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Flux training</td>
+                                <td class="px-4 py-3"><span class="text-teal-400 font-bold">Cloud</span></td>
+                                <td class="px-4 py-3 text-slate-400">Requires 24GB+ VRAM</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Iterating on prompts</td>
+                                <td class="px-4 py-3"><span class="text-blue-400 font-bold">Local</span></td>
+                                <td class="px-4 py-3 text-slate-400">Instant feedback loop</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Training overnight</td>
+                                <td class="px-4 py-3"><span class="text-teal-400 font-bold">Cloud (spot)</span></td>
+                                <td class="px-4 py-3 text-slate-400">Cheap, doesn't tie up local machine</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Confidential medical data</td>
+                                <td class="px-4 py-3"><span class="text-blue-400 font-bold">Local</span> or <span class="text-teal-400 font-bold">Secure Cloud</span></td>
+                                <td class="px-4 py-3 text-slate-400">Maximum IP protection</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="py-8 max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="hardware.html" class="text-slate-500 hover:text-slate-700 transition">← Hardware Requirements</a>
+                <a href="legal.html" class="text-teal-600 hover:text-teal-700 font-semibold transition">Legal Frameworks →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
+        <p>&copy; 2024 Research Synthesis. Generated for Educational Purposes.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
