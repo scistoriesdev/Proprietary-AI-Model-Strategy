@@ -186,6 +186,253 @@ function getVersion() {
 }
 
 // ============================================
+// Autocomplete Search
+// ============================================
+
+const searchIndex = [
+  // Training page
+  { title: 'LoRA Training', keywords: 'lora low-rank adaptation fine-tuning training model weights', url: 'training.html', section: 'Training' },
+  { title: 'Style LoRA', keywords: 'style artistic look studio visual aesthetic', url: 'training.html#style-lora', section: 'Training' },
+  { title: 'Subject LoRA', keywords: 'subject organelle morphology biology anatomy', url: 'training.html#subject-lora', section: 'Training' },
+  { title: 'ControlNet', keywords: 'controlnet geometry structure spatial layout composition', url: 'training.html#controlnet', section: 'Training' },
+  { title: 'Regional Prompting', keywords: 'regional prompting attention masking composition', url: 'training.html#regional', section: 'Training' },
+  { title: 'Hyperparameters', keywords: 'hyperparameters learning rate batch size epochs rank alpha', url: 'training.html#hyperparameters', section: 'Training' },
+  { title: 'Training Workflow', keywords: 'workflow dataset captioning onetrainer kohya', url: 'training.html#workflow', section: 'Training' },
+  
+  // Scientific page
+  { title: 'Base Models', keywords: 'sdxl flux stable diffusion base model foundation', url: 'scientific.html', section: 'Scientific' },
+  { title: 'SDXL Architecture', keywords: 'sdxl stable diffusion xl architecture text encoder', url: 'scientific.html#sdxl', section: 'Scientific' },
+  { title: 'Flux.1 Architecture', keywords: 'flux flow matching mmdit transformer', url: 'scientific.html#flux', section: 'Scientific' },
+  { title: '3D Blockout', keywords: '3d blockout blender zbrush depth normal map', url: 'scientific.html#3d-blockout', section: 'Scientific' },
+  { title: 'XY Plot Validation', keywords: 'xy plot validation testing checkpoint evaluation', url: 'scientific.html#xy-plot', section: 'Scientific' },
+  { title: 'Color Theory', keywords: 'color theory palette biological visualization accessibility', url: 'scientific.html#color', section: 'Scientific' },
+  { title: 'Anatomical Accuracy', keywords: 'anatomical accuracy mitochondria nucleus cell membrane', url: 'scientific.html#accuracy', section: 'Scientific' },
+  
+  // Hardware page
+  { title: 'GPU Requirements', keywords: 'gpu vram rtx nvidia graphics card hardware', url: 'hardware.html', section: 'Hardware' },
+  { title: 'VRAM Thresholds', keywords: 'vram memory 8gb 12gb 16gb 24gb threshold', url: 'hardware.html#vram', section: 'Hardware' },
+  { title: 'GPU Comparison', keywords: 'gpu comparison rtx 3060 3070 3080 4060 4070 4080 4090', url: 'hardware.html#comparison', section: 'Hardware' },
+  { title: 'Memory Optimization', keywords: 'memory optimization fp8 gradient checkpointing adafactor', url: 'hardware.html#optimization', section: 'Hardware' },
+  { title: 'Thermal Management', keywords: 'thermal temperature cooling laptop heat throttling', url: 'hardware.html#thermal', section: 'Hardware' },
+  { title: 'OneTrainer vs Kohya', keywords: 'onetrainer kohya software training tool', url: 'hardware.html#software', section: 'Hardware' },
+  
+  // Cloud page
+  { title: 'Cloud Infrastructure', keywords: 'cloud infrastructure runpod lambda vast gpu rental', url: 'cloud.html', section: 'Cloud' },
+  { title: 'RunPod', keywords: 'runpod secure cloud gpu rental container docker', url: 'cloud.html#runpod', section: 'Cloud' },
+  { title: 'Lambda Labs', keywords: 'lambda labs cloud provider h100 a100', url: 'cloud.html#lambda', section: 'Cloud' },
+  { title: 'Vast.ai', keywords: 'vast ai p2p marketplace gpu rental security', url: 'cloud.html#vast', section: 'Cloud' },
+  { title: 'SaaS Training', keywords: 'saas fal astria scenario managed training service', url: 'cloud.html#saas', section: 'Cloud' },
+  { title: 'Hybrid Workflow', keywords: 'hybrid workflow local cloud burst compute', url: 'cloud.html#hybrid', section: 'Cloud' },
+  { title: 'Data Security', keywords: 'data security encryption privacy ip protection', url: 'cloud.html#security', section: 'Cloud' },
+  
+  // Legal page
+  { title: 'IP Ownership', keywords: 'ip intellectual property ownership rights model weights', url: 'legal.html', section: 'Legal' },
+  { title: 'Copyright', keywords: 'copyright ai generated human authorship usco', url: 'legal.html#copyright', section: 'Legal' },
+  { title: 'Training Data Rights', keywords: 'training data fair use licensing public domain', url: 'legal.html#training-data', section: 'Legal' },
+  { title: 'International Law', keywords: 'international law gdpr eu uk jurisdiction', url: 'legal.html#international', section: 'Legal' },
+  { title: 'Commercial Licensing', keywords: 'commercial licensing work for hire royalty disclosure', url: 'legal.html#licensing', section: 'Legal' },
+  { title: 'Medical Regulations', keywords: 'medical regulations fda cme hipaa publication', url: 'legal.html#medical', section: 'Legal' },
+  { title: 'Liability', keywords: 'liability insurance indemnification accuracy errors', url: 'legal.html#liability', section: 'Legal' },
+  
+  // README
+  { title: 'Full Documentation', keywords: 'readme documentation full guide reference', url: 'readme.html', section: 'README' },
+  { title: 'Table of Contents', keywords: 'table of contents toc navigation', url: 'readme.html#table-of-contents', section: 'README' },
+];
+
+let searchOpen = false;
+let selectedIndex = -1;
+let filteredResults = [];
+
+function initSearch() {
+  const searchContainer = document.getElementById('search-container');
+  if (!searchContainer) return;
+  
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  
+  // Input handler with debounce
+  let debounceTimer;
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const query = e.target.value.trim().toLowerCase();
+      if (query.length < 2) {
+        searchResults.classList.add('hidden');
+        filteredResults = [];
+        return;
+      }
+      performSearch(query);
+    }, 150);
+  });
+  
+  // Keyboard navigation
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, filteredResults.length - 1);
+      updateSelectedResult();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, -1);
+      updateSelectedResult();
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      navigateToResult(filteredResults[selectedIndex]);
+    } else if (e.key === 'Escape') {
+      closeSearch();
+    }
+  });
+  
+  // Focus handler
+  searchInput.addEventListener('focus', () => {
+    if (searchInput.value.length >= 2) {
+      performSearch(searchInput.value.trim().toLowerCase());
+    }
+  });
+  
+  // Click outside to close
+  document.addEventListener('click', (e) => {
+    if (!searchContainer.contains(e.target)) {
+      closeSearch();
+    }
+  });
+}
+
+function performSearch(query) {
+  const searchResults = document.getElementById('search-results');
+  
+  // Score and filter results
+  filteredResults = searchIndex
+    .map(item => {
+      let score = 0;
+      const titleLower = item.title.toLowerCase();
+      const keywordsLower = item.keywords.toLowerCase();
+      
+      // Exact title match (highest score)
+      if (titleLower === query) score += 100;
+      // Title starts with query
+      else if (titleLower.startsWith(query)) score += 50;
+      // Title contains query
+      else if (titleLower.includes(query)) score += 30;
+      // Keywords contain query
+      if (keywordsLower.includes(query)) score += 20;
+      
+      // Partial word matches in keywords
+      const queryWords = query.split(' ');
+      queryWords.forEach(word => {
+        if (word.length >= 2 && keywordsLower.includes(word)) score += 10;
+      });
+      
+      return { ...item, score };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8);
+  
+  if (filteredResults.length === 0) {
+    searchResults.innerHTML = `
+      <div class="px-4 py-3 text-sm text-slate-500">No results found for "${query}"</div>
+    `;
+    searchResults.classList.remove('hidden');
+    return;
+  }
+  
+  selectedIndex = -1;
+  renderResults();
+  searchResults.classList.remove('hidden');
+}
+
+function renderResults() {
+  const searchResults = document.getElementById('search-results');
+  
+  searchResults.innerHTML = filteredResults.map((item, index) => `
+    <a href="${item.url}" 
+       class="search-result flex items-center gap-3 px-4 py-2 hover:bg-slate-50 cursor-pointer ${index === selectedIndex ? 'bg-teal-50' : ''}"
+       data-index="${index}">
+      <span class="text-xs font-medium px-2 py-0.5 rounded ${getSectionColor(item.section)}">${item.section}</span>
+      <span class="text-sm text-slate-700">${highlightMatch(item.title)}</span>
+    </a>
+  `).join('');
+  
+  // Add click handlers
+  searchResults.querySelectorAll('.search-result').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const index = parseInt(el.dataset.index);
+      navigateToResult(filteredResults[index]);
+    });
+  });
+}
+
+function getSectionColor(section) {
+  const colors = {
+    'Training': 'bg-teal-100 text-teal-700',
+    'Scientific': 'bg-purple-100 text-purple-700',
+    'Hardware': 'bg-blue-100 text-blue-700',
+    'Cloud': 'bg-indigo-100 text-indigo-700',
+    'Legal': 'bg-amber-100 text-amber-700',
+    'README': 'bg-slate-100 text-slate-700'
+  };
+  return colors[section] || 'bg-slate-100 text-slate-700';
+}
+
+function highlightMatch(text) {
+  const searchInput = document.getElementById('search-input');
+  const query = searchInput.value.trim();
+  if (!query) return text;
+  
+  const regex = new RegExp(`(${query})`, 'gi');
+  return text.replace(regex, '<mark class="bg-teal-200 rounded px-0.5">$1</mark>');
+}
+
+function updateSelectedResult() {
+  const results = document.querySelectorAll('.search-result');
+  results.forEach((el, index) => {
+    if (index === selectedIndex) {
+      el.classList.add('bg-teal-50');
+      el.scrollIntoView({ block: 'nearest' });
+    } else {
+      el.classList.remove('bg-teal-50');
+    }
+  });
+}
+
+function navigateToResult(item) {
+  window.location.href = item.url;
+}
+
+function closeSearch() {
+  const searchResults = document.getElementById('search-results');
+  if (searchResults) {
+    searchResults.classList.add('hidden');
+  }
+  selectedIndex = -1;
+}
+
+function toggleSearch() {
+  const searchContainer = document.getElementById('search-container');
+  const searchInput = document.getElementById('search-input');
+  
+  if (searchContainer.classList.contains('hidden')) {
+    searchContainer.classList.remove('hidden');
+    searchInput.focus();
+  } else {
+    searchContainer.classList.add('hidden');
+    closeSearch();
+  }
+}
+
+// Keyboard shortcut (Ctrl/Cmd + K)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    toggleSearch();
+  }
+});
+
+// Initialize search on DOM ready
+document.addEventListener('DOMContentLoaded', initSearch);
+
+// ============================================
 // Navigation
 function scrollToSection(id) {
     const el = document.getElementById(id);

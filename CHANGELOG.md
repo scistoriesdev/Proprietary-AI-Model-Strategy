@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-05
+
+### Added
+
+- **Autocomplete search** - Global search with keyboard navigation across all pages
+- **Search index** - Pre-built index covering Training, Scientific, Hardware, Cloud, Legal, and README sections
+- **Keyboard shortcut** - Press `Ctrl/Cmd + K` to open search from anywhere
+- **Search features**:
+  - Debounced input for performance
+  - Relevance-based scoring algorithm
+  - Section badges with color coding
+  - Match highlighting in results
+  - Arrow key navigation
+  - Click outside to close
+
+### Changed
+
+- **Header navigation** - Added search input to all page headers
+
+---
+
 ## [1.2.0] - 2026-02-05
 
 ### Added
