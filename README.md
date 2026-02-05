@@ -35,9 +35,15 @@
   - [6.8 Documentation Best Practices for Legal Protection](#68-documentation-best-practices-for-legal-protection)
 - [7. Operational Workflow: The ComfyUI Standard](#7-operational-workflow-the-comfyui-standard)
   - [7.1 The "Bio-Architect" Pipeline](#71-the-bio-architect-pipeline)
-- [8. Conclusion and Strategic Recommendation](#8-conclusion-and-strategic-recommendation)
-- [9. Appendix: Technical Reference Tables](#9-appendix-technical-reference-tables)
-- [10. Essential Resources & Tools](#10-essential-resources--tools)
+- [8. Platform-Specific Setup Guides](#8-platform-specific-setup-guides)
+  - [8.1 Windows Setup (Local Training)](#81-windows-setup-local-training)
+  - [8.2 Linux Setup (Local Training)](#82-linux-setup-local-training)
+  - [8.3 macOS Setup (Apple Silicon)](#83-macos-setup-apple-silicon)
+  - [8.4 Cloud Setup (RunPod)](#84-cloud-setup-runpod)
+  - [8.5 Cross-Platform Workflow Summary](#85-cross-platform-workflow-summary)
+- [9. Conclusion and Strategic Recommendation](#9-conclusion-and-strategic-recommendation)
+- [10. Appendix: Technical Reference Tables](#10-appendix-technical-reference-tables)
+- [11. Essential Resources & Tools](#11-essential-resources--tools)
 - [Works Cited](#works-cited)
 
 ---
@@ -1260,7 +1266,476 @@ The following is a blueprint for the user's daily workflow, adhering to the "Hyb
 6. Generate (KSampler): The laptop GPU generates the image, constrained by the sketch and textured by the LoRAs.
 7. Refinement: Use an "Inpaint" node to fix any minor hallucinations in specific organelles.
 
-## 8. Conclusion and Strategic Recommendation
+## 8. Platform-Specific Setup Guides
+
+This section provides step-by-step installation and configuration guides for setting up LoRA training environments on Windows, Linux, macOS, and cloud platforms.
+
+### 8.1 Windows Setup (Local Training)
+
+Windows is the most common platform for local AI training due to excellent NVIDIA driver support and GUI tool availability.
+
+#### 8.1.1 Prerequisites
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| **OS** | Windows 10 21H2+ | Windows 11 23H2+ |
+| **GPU** | RTX 3060 12GB | RTX 4070+ 12GB |
+| **RAM** | 16GB | 32GB+ |
+| **Storage** | 100GB SSD | 500GB+ NVMe |
+| **Python** | 3.10.x | 3.10.11 |
+
+#### 8.1.2 NVIDIA Driver & CUDA Setup
+
+```powershell
+# 1. Download latest Game Ready or Studio Driver from nvidia.com
+# 2. Install with "Clean Installation" option
+
+# Verify installation
+nvidia-smi
+
+# Expected output shows driver version and CUDA version
+# Driver: 550.xx+ recommended
+# CUDA: 12.1+ recommended
+```
+
+#### 8.1.3 Python Environment Setup
+
+```powershell
+# Install Python 3.10.11 from python.org (NOT Microsoft Store)
+# Check "Add to PATH" during installation
+
+# Verify Python
+python --version  # Should show 3.10.x
+
+# Create virtual environment
+python -m venv C:\AI\training-env
+C:\AI\training-env\Scripts\activate
+
+# Upgrade pip
+python -m pip install --upgrade pip
+```
+
+#### 8.1.4 OneTrainer Installation (Recommended for Windows)
+
+```powershell
+# Clone OneTrainer
+cd C:\AI
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer
+
+# Run the installer script
+.\install.bat
+
+# Launch OneTrainer
+.\start-ui.bat
+```
+
+**OneTrainer Windows Configuration:**
+- Set cache directory to fast NVMe: `C:\AI\cache`
+- Enable "Use System RAM for Caching" if GPU VRAM < 16GB
+- Set CUDA memory allocation: `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`
+
+#### 8.1.5 Kohya_ss Installation (Alternative)
+
+```powershell
+# Clone kohya_ss
+cd C:\AI
+git clone https://github.com/bmaltais/kohya_ss.git
+cd kohya_ss
+
+# Run setup (creates venv automatically)
+.\setup.bat
+
+# Launch GUI
+.\gui.bat
+```
+
+#### 8.1.6 ComfyUI Installation (Inference)
+
+```powershell
+# Clone ComfyUI
+cd C:\AI
+git clone https://github.com/comfyanonymous/ComfyUI.git
+cd ComfyUI
+
+# Install dependencies
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
+
+# First run (downloads models to C:\AI\ComfyUI\models)
+python main.py
+```
+
+#### 8.1.7 Windows-Specific Optimizations
+
+```powershell
+# Set environment variables (run as Administrator)
+setx PYTORCH_CUDA_ALLOC_CONF "expandable_segments:True"
+setx CUDA_VISIBLE_DEVICES "0"
+
+# Disable Windows Game Mode for training stability
+# Settings > Gaming > Game Mode > Off
+
+# Set Power Plan to High Performance
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+# Disable hardware-accelerated GPU scheduling during training
+# Settings > System > Display > Graphics > Change default graphics settings
+```
+
+### 8.2 Linux Setup (Local Training)
+
+Linux offers superior memory management and is the native environment for most AI tools.
+
+#### 8.2.1 Prerequisites
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| **OS** | Ubuntu 22.04 LTS | Ubuntu 22.04/24.04 LTS |
+| **Kernel** | 5.15+ | 6.5+ (for latest NVIDIA support) |
+| **GPU** | RTX 3060 12GB | RTX 4070+ 12GB |
+| **RAM** | 16GB | 32GB+ |
+| **Storage** | 100GB SSD | 500GB+ NVMe |
+
+#### 8.2.2 NVIDIA Driver Installation
+
+```bash
+# Ubuntu - Add NVIDIA PPA and install
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-driver-550  # Or latest version
+
+# Reboot
+sudo reboot
+
+# Verify installation
+nvidia-smi
+```
+
+#### 8.2.3 CUDA Toolkit Installation
+
+```bash
+# Download CUDA 12.1+ from developer.nvidia.com
+wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run
+
+# Install (driver already installed, so deselect driver)
+sudo sh cuda_12.4.0_550.54.14_linux.run
+
+# Add to PATH (~/.bashrc)
+echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# Verify
+nvcc --version
+```
+
+#### 8.2.4 Python Environment Setup
+
+```bash
+# Install Python 3.10 and venv
+sudo apt install python3.10 python3.10-venv python3-pip
+
+# Create virtual environment
+python3.10 -m venv ~/ai-training
+source ~/ai-training/bin/activate
+
+# Upgrade pip
+pip install --upgrade pip
+```
+
+#### 8.2.5 OneTrainer Installation
+
+```bash
+# Clone and setup
+cd ~
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install PyTorch with CUDA
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Launch
+python scripts/train_ui.py
+```
+
+#### 8.2.6 Kohya sd-scripts (CLI)
+
+```bash
+# Clone sd-scripts
+cd ~
+git clone https://github.com/kohya-ss/sd-scripts.git
+cd sd-scripts
+
+# Install
+pip install -r requirements.txt
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Accelerate config
+accelerate config
+# Select: This machine, No distributed, No DeepSpeed, FP16
+```
+
+#### 8.2.7 Linux-Specific Optimizations
+
+```bash
+# Increase file descriptor limits
+echo "* soft nofile 65536" | sudo tee -a /etc/security/limits.conf
+echo "* hard nofile 65536" | sudo tee -a /etc/security/limits.conf
+
+# Set GPU persistence mode (prevents driver unload)
+sudo nvidia-smi -pm 1
+
+# Disable GPU power management (for training stability)
+sudo nvidia-smi -pl 300  # Set to your GPU's TDP
+
+# Memory overcommit for large models
+echo 1 | sudo tee /proc/sys/vm/overcommit_memory
+
+# Environment variables (~/.bashrc)
+export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
+export CUDA_VISIBLE_DEVICES=0
+```
+
+### 8.3 macOS Setup (Apple Silicon)
+
+Apple Silicon Macs (M1/M2/M3) can perform inference and limited training using Metal Performance Shaders (MPS).
+
+#### 8.3.1 Limitations
+
+| Capability | Status | Notes |
+|------------|--------|-------|
+| **Inference** | ✅ Excellent | M2 Pro/Max comparable to RTX 3060 |
+| **SDXL LoRA Training** | ⚠️ Limited | Slow but functional on M2 Max+ |
+| **Flux Training** | ❌ Not Recommended | Memory architecture limitations |
+| **ComfyUI** | ✅ Full Support | Native MPS acceleration |
+
+#### 8.3.2 Prerequisites
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| **Chip** | M1 Pro | M2 Max / M3 Max |
+| **Unified Memory** | 16GB | 32GB+ |
+| **macOS** | Ventura 13.0+ | Sonoma 14.0+ |
+| **Xcode CLI** | Required | Latest |
+
+#### 8.3.3 Environment Setup
+
+```bash
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Python via pyenv (recommended for version control)
+brew install pyenv
+pyenv install 3.10.11
+pyenv global 3.10.11
+
+# Create virtual environment
+python -m venv ~/ai-training
+source ~/ai-training/bin/activate
+
+# Install PyTorch with MPS support
+pip install torch torchvision torchaudio
+```
+
+#### 8.3.4 ComfyUI on macOS
+
+```bash
+# Clone ComfyUI
+cd ~
+git clone https://github.com/comfyanonymous/ComfyUI.git
+cd ComfyUI
+
+# Install requirements
+pip install -r requirements.txt
+
+# Launch with MPS
+python main.py --force-fp16
+```
+
+#### 8.3.5 OneTrainer on macOS (Experimental)
+
+```bash
+# Clone OneTrainer
+cd ~
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer
+
+# Install with MPS support
+pip install -r requirements.txt
+
+# Note: Training is significantly slower than NVIDIA GPUs
+# Recommended only for small datasets (< 20 images)
+# Use cloud for production training
+```
+
+#### 8.3.6 macOS-Specific Settings
+
+```bash
+# Environment variables (~/.zshrc)
+export PYTORCH_ENABLE_MPS_FALLBACK=1
+export PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0
+
+# For memory-intensive operations
+sudo sysctl -w kern.maxproc=2048
+sudo sysctl -w kern.maxprocperuid=1024
+```
+
+### 8.4 Cloud Setup (RunPod)
+
+RunPod provides on-demand GPU access ideal for production LoRA training.
+
+#### 8.4.1 Account Setup
+
+1. Create account at [runpod.io](https://www.runpod.io/)
+2. Add payment method (prepaid credit recommended for cost control)
+3. Enable 2FA for security
+4. Set spending limit in Account Settings
+
+#### 8.4.2 Pod Configuration
+
+**Recommended Templates:**
+
+| Use Case | Template | GPU | VRAM | Cost/hr |
+|----------|----------|-----|------|---------|
+| **SDXL LoRA** | RunPod PyTorch 2.1 | RTX 4090 | 24GB | ~$0.70 |
+| **Flux LoRA** | RunPod PyTorch 2.1 | RTX 4090 | 24GB | ~$0.70 |
+| **Large Batch** | RunPod PyTorch 2.1 | A100 | 80GB | ~$1.50 |
+
+**Pod Settings:**
+```
+Container Disk: 20GB (temporary workspace)
+Volume Disk: 50-100GB (persistent storage for models)
+Expose HTTP Ports: 8888,6006 (Jupyter, TensorBoard)
+```
+
+#### 8.4.3 Initial Pod Setup Script
+
+```bash
+# Run after pod starts
+
+# Update system
+apt update && apt upgrade -y
+
+# Install essential tools
+apt install -y git wget curl htop nvtop tmux
+
+# Clone training tools
+cd /workspace
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer
+pip install -r requirements.txt
+
+# Or Kohya sd-scripts
+cd /workspace
+git clone https://github.com/kohya-ss/sd-scripts.git
+cd sd-scripts
+pip install -r requirements.txt
+accelerate config
+```
+
+#### 8.4.4 Dataset Upload Methods
+
+**Method 1: SFTP (Recommended for large datasets)**
+```bash
+# Get pod SSH info from RunPod dashboard
+# Use FileZilla or command line:
+sftp -P <PORT> root@<POD_IP>
+put -r /local/path/to/dataset /workspace/dataset
+```
+
+**Method 2: Cloud Sync (Google Drive)**
+```bash
+# Install rclone
+curl https://rclone.org/install.sh | bash
+rclone config  # Configure Google Drive
+
+# Sync dataset
+rclone copy gdrive:datasets/my_dataset /workspace/dataset
+```
+
+**Method 3: Hugging Face Hub**
+```bash
+# Install huggingface_hub
+pip install huggingface_hub
+
+# Download dataset
+huggingface-cli download your-username/your-dataset --local-dir /workspace/dataset
+```
+
+#### 8.4.5 RunPod Training Workflow
+
+```bash
+# 1. Start training in tmux (persists if connection drops)
+tmux new -s training
+
+# 2. Navigate to training directory
+cd /workspace/OneTrainer
+
+# 3. Launch OneTrainer UI
+python scripts/train_ui.py --listen 0.0.0.0
+
+# 4. Access via browser: https://<POD_ID>-7860.proxy.runpod.net
+
+# 5. Configure training:
+#    - Base Model: /workspace/models/sd_xl_base_1.0.safetensors
+#    - Dataset: /workspace/dataset
+#    - Output: /workspace/output
+
+# 6. Monitor with TensorBoard (separate terminal)
+tmux new -s tensorboard
+tensorboard --logdir /workspace/output --bind_all
+# Access: https://<POD_ID>-6006.proxy.runpod.net
+
+# 7. Download completed models
+# Use SFTP or sync to cloud storage
+
+# 8. IMPORTANT: Terminate pod after downloading to stop charges
+```
+
+#### 8.4.6 RunPod Cost Optimization
+
+```bash
+# Use spot instances for non-critical training (up to 80% cheaper)
+# Set auto-terminate: Settings > Auto-terminate after idle
+
+# Pre-download base models to persistent volume (saves download time)
+cd /workspace/models
+wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
+
+# Use FP8 models when possible to fit in smaller GPUs
+# RTX 4090 + FP8 = A100-level performance at 50% cost
+```
+
+#### 8.4.7 Security Best Practices for Cloud Training
+
+1. **Never store API keys in pod** - Use environment variables
+2. **Encrypt sensitive datasets** before upload
+3. **Use Secure Cloud tier** for proprietary IP (SOC 2 compliant)
+4. **Delete volumes** after project completion
+5. **Download and verify** all outputs before termination
+
+### 8.5 Cross-Platform Workflow Summary
+
+| Task | Windows | Linux | macOS | RunPod |
+|------|---------|-------|-------|--------|
+| **Dataset Prep** | ✅ Best | ✅ Best | ✅ Good | ⚠️ Slow upload |
+| **Captioning** | ✅ Florence-2 | ✅ Florence-2 | ⚠️ Limited | ✅ Best |
+| **SDXL Training** | ✅ Good | ✅ Best | ⚠️ Slow | ✅ Best |
+| **Flux Training** | ⚠️ FP8 only | ⚠️ FP8 only | ❌ No | ✅ Best |
+| **Inference** | ✅ Best | ✅ Best | ✅ Good | ⚠️ Latency |
+| **Cost** | One-time HW | One-time HW | One-time HW | Pay-per-use |
+
+**Recommended Hybrid Setup:**
+- **Local (Windows/Linux)**: Dataset preparation, captioning, inference, iteration
+- **Cloud (RunPod)**: Production training, large batches, Flux training
+
+---
+
+## 9. Conclusion and Strategic Recommendation
 
 For a user specializing in cellular biology and medical illustration, the path to "stabilized granular control" lies in rejecting the convenient but restrictive "walled gardens" of commercial AI generators. Instead, a **Hybrid, Modular Architecture** is required.
 
@@ -1275,7 +1750,7 @@ By following this framework, the user can establish a proprietary AI studio that
 
 ---
 
-## 9. Appendix: Technical Reference Tables
+## 10. Appendix: Technical Reference Tables
 
 ### Table 1: GPU Hardware & Training Feasibility
 
@@ -1307,11 +1782,11 @@ By following this framework, the user can establish a proprietary AI studio that
 
 ---
 
-## 10. Essential Resources & Tools
+## 11. Essential Resources & Tools
 
 The following curated resources provide direct access to the tools, platforms, and communities essential for implementing the hybrid training approach described in this document.
 
-### 10.1 Base Models & Model Hubs
+### 11.1 Base Models & Model Hubs
 
 | Resource | Description | URL |
 |----------|-------------|-----|
@@ -1322,7 +1797,7 @@ The following curated resources provide direct access to the tools, platforms, a
 | **Hugging Face Hub** | Official model weights & datasets | https://huggingface.co/models |
 | **ControlNet Collection** | Depth, canny, pose models | https://huggingface.co/lllyasviel/sd_control_collection |
 
-### 10.2 Training Software
+### 11.2 Training Software
 
 | Resource | Description | URL |
 |----------|-------------|-----|
@@ -1332,7 +1807,7 @@ The following curated resources provide direct access to the tools, platforms, a
 | **AI Toolkit (Ostris)** | Flux LoRA training toolkit | https://github.com/ostris/ai-toolkit |
 | **Diffusers** | Hugging Face diffusion library | https://github.com/huggingface/diffusers |
 
-### 10.3 Inference & Generation Tools
+### 11.3 Inference & Generation Tools
 
 | Resource | Description | URL |
 |----------|-------------|-----|
@@ -1342,7 +1817,7 @@ The following curated resources provide direct access to the tools, platforms, a
 | **SwarmUI** | Modern UI with ComfyUI backend | https://github.com/mcmonkeyprojects/SwarmUI |
 | **InvokeAI** | Professional canvas interface | https://github.com/invoke-ai/InvokeAI |
 
-### 10.4 Cloud GPU Providers
+### 11.4 Cloud GPU Providers
 
 | Provider | Best For | URL |
 |----------|----------|-----|
@@ -1353,7 +1828,7 @@ The following curated resources provide direct access to the tools, platforms, a
 | **Google Cloud GPU** | GCP GPU & TPU instances | https://cloud.google.com/gpu |
 | **AWS EC2 GPU** | P4/P5 GPU instances | https://aws.amazon.com/ec2/instance-types/p4/ |
 
-### 10.5 SaaS Training Platforms
+### 11.5 SaaS Training Platforms
 
 | Platform | Description | URL |
 |----------|-------------|-----|
@@ -1364,7 +1839,7 @@ The following curated resources provide direct access to the tools, platforms, a
 | **Modal** | Serverless Python GPU compute | https://modal.com/ |
 | **Together AI** | Inference & fine-tuning API | https://www.together.ai/ |
 
-### 10.6 3D & Preprocessing Tools
+### 11.6 3D & Preprocessing Tools
 
 | Tool | Description | URL |
 |------|-------------|-----|
@@ -1374,7 +1849,7 @@ The following curated resources provide direct access to the tools, platforms, a
 | **Rembg** | AI background removal | https://github.com/danielgatis/rembg |
 | **WD14 Tagger** | Auto-tagging for datasets | https://github.com/toriato/stable-diffusion-webui-wd14-tagger |
 
-### 10.7 Documentation & Communities
+### 11.7 Documentation & Learning
 
 | Resource | Description | URL |
 |----------|-------------|-----|

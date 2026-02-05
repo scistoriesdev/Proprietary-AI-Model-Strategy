@@ -75,6 +75,7 @@
                 <a href="#where-to-train" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Where to Train</a>
                 <a href="#training-art" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Training Art</a>
                 <a href="#public-domain" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Public Domain</a>
+                <a href="#platform-setup" class="text-slate-600 hover:text-teal-600 whitespace-nowrap">Platform Setup</a>
             </div>
         </section>
 
@@ -671,6 +672,258 @@
                 </div>
             </div>
         </section>
+
+        <!-- Platform Setup Guides -->
+        <section id="platform-setup" class="py-12 max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Platform-Specific Setup Guides</h3>
+            <p class="text-slate-600 mb-8">Step-by-step installation for Windows, Linux, macOS, and cloud platforms.</p>
+
+            <!-- Platform Tabs -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <!-- Tab Headers -->
+                <div class="flex border-b border-slate-200 bg-slate-50">
+                    <button onclick="showPlatform('windows')" id="tab-windows" class="platform-tab px-6 py-3 text-sm font-medium text-teal-600 border-b-2 border-teal-600">🪟 Windows</button>
+                    <button onclick="showPlatform('linux')" id="tab-linux" class="platform-tab px-6 py-3 text-sm font-medium text-slate-500 hover:text-slate-700">🐧 Linux</button>
+                    <button onclick="showPlatform('macos')" id="tab-macos" class="platform-tab px-6 py-3 text-sm font-medium text-slate-500 hover:text-slate-700">🍎 macOS</button>
+                    <button onclick="showPlatform('runpod')" id="tab-runpod" class="platform-tab px-6 py-3 text-sm font-medium text-slate-500 hover:text-slate-700">☁️ RunPod</button>
+                </div>
+
+                <!-- Windows Content -->
+                <div id="platform-windows" class="platform-content p-6">
+                    <h4 class="font-bold text-slate-800 mb-4">Windows Setup (Local Training)</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-slate-700 mb-2">Prerequisites</h5>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• <strong>OS:</strong> Windows 10 21H2+ or Windows 11</li>
+                                <li>• <strong>GPU:</strong> RTX 3060 12GB+ (RTX 4070+ recommended)</li>
+                                <li>• <strong>RAM:</strong> 16GB minimum, 32GB+ recommended</li>
+                                <li>• <strong>Python:</strong> 3.10.11 from python.org</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># OneTrainer Installation (Recommended)</p>
+                            <pre class="text-sm font-mono">cd C:\AI
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer
+.\install.bat
+.\start-ui.bat</pre>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># Kohya_ss Installation (Alternative)</p>
+                            <pre class="text-sm font-mono">cd C:\AI
+git clone https://github.com/bmaltais/kohya_ss.git
+cd kohya_ss
+.\setup.bat
+.\gui.bat</pre>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                            <h5 class="font-semibold text-blue-800 mb-2">⚡ Windows Optimizations</h5>
+                            <ul class="text-sm text-blue-700 space-y-1">
+                                <li>• Set Power Plan to <strong>High Performance</strong></li>
+                                <li>• Disable <strong>Game Mode</strong> during training</li>
+                                <li>• Set env: <code class="bg-blue-100 px-1 rounded">PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linux Content -->
+                <div id="platform-linux" class="platform-content p-6 hidden">
+                    <h4 class="font-bold text-slate-800 mb-4">Linux Setup (Local Training)</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-slate-700 mb-2">Prerequisites</h5>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• <strong>OS:</strong> Ubuntu 22.04/24.04 LTS</li>
+                                <li>• <strong>Kernel:</strong> 5.15+ (6.5+ for latest NVIDIA)</li>
+                                <li>• <strong>GPU:</strong> RTX 3060 12GB+</li>
+                                <li>• <strong>CUDA:</strong> 12.1+ via developer.nvidia.com</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># NVIDIA Driver Installation</p>
+                            <pre class="text-sm font-mono">sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-driver-550
+sudo reboot
+nvidia-smi  # Verify</pre>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># OneTrainer Installation</p>
+                            <pre class="text-sm font-mono">python3.10 -m venv ~/ai-training
+source ~/ai-training/bin/activate
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer
+pip install -r requirements.txt
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+python scripts/train_ui.py</pre>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <h5 class="font-semibold text-green-800 mb-2">🚀 Linux Optimizations</h5>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li>• Enable GPU persistence: <code class="bg-green-100 px-1 rounded">sudo nvidia-smi -pm 1</code></li>
+                                <li>• Increase file limits in <code class="bg-green-100 px-1 rounded">/etc/security/limits.conf</code></li>
+                                <li>• Best memory management of all platforms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- macOS Content -->
+                <div id="platform-macos" class="platform-content p-6 hidden">
+                    <h4 class="font-bold text-slate-800 mb-4">macOS Setup (Apple Silicon)</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg">
+                            <h5 class="font-semibold text-amber-800 mb-2">⚠️ Limitations</h5>
+                            <ul class="text-sm text-amber-700 space-y-1">
+                                <li>• <strong>Inference:</strong> ✅ Excellent on M2/M3</li>
+                                <li>• <strong>SDXL Training:</strong> ⚠️ Slow but functional on M2 Max+</li>
+                                <li>• <strong>Flux Training:</strong> ❌ Not recommended</li>
+                                <li>• <strong>Recommendation:</strong> Use for inference, cloud for training</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-slate-700 mb-2">Prerequisites</h5>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• <strong>Chip:</strong> M1 Pro minimum, M2 Max+ recommended</li>
+                                <li>• <strong>Memory:</strong> 16GB minimum, 32GB+ recommended</li>
+                                <li>• <strong>macOS:</strong> Ventura 13.0+ or Sonoma 14.0+</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># ComfyUI on macOS (Inference)</p>
+                            <pre class="text-sm font-mono">brew install pyenv
+pyenv install 3.10.11
+python -m venv ~/ai-training
+source ~/ai-training/bin/activate
+git clone https://github.com/comfyanonymous/ComfyUI.git
+cd ComfyUI
+pip install -r requirements.txt
+python main.py --force-fp16</pre>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-slate-700 mb-2">Environment Variables (~/.zshrc)</h5>
+                            <code class="text-sm bg-slate-200 px-2 py-1 rounded block">export PYTORCH_ENABLE_MPS_FALLBACK=1</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RunPod Content -->
+                <div id="platform-runpod" class="platform-content p-6 hidden">
+                    <h4 class="font-bold text-slate-800 mb-4">Cloud Setup (RunPod)</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-teal-50 border border-teal-200 p-4 rounded-lg">
+                            <h5 class="font-semibold text-teal-800 mb-2">✅ Recommended for Production Training</h5>
+                            <ul class="text-sm text-teal-700 space-y-1">
+                                <li>• RTX 4090 24GB: ~$0.70/hr (SDXL & Flux LoRA)</li>
+                                <li>• A100 80GB: ~$1.50/hr (Large batches)</li>
+                                <li>• SOC 2 compliant Secure Cloud tier available</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-slate-700 mb-2">Pod Configuration</h5>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• <strong>Template:</strong> RunPod PyTorch 2.1</li>
+                                <li>• <strong>Container Disk:</strong> 20GB</li>
+                                <li>• <strong>Volume Disk:</strong> 50-100GB (persistent)</li>
+                                <li>• <strong>Expose Ports:</strong> 7860, 6006 (UI, TensorBoard)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># Initial Pod Setup</p>
+                            <pre class="text-sm font-mono">apt update && apt install -y git wget tmux nvtop
+cd /workspace
+git clone https://github.com/Nerogar/OneTrainer.git
+cd OneTrainer && pip install -r requirements.txt
+
+# Start in tmux (persists if disconnected)
+tmux new -s training
+python scripts/train_ui.py --listen 0.0.0.0</pre>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto">
+                            <p class="text-xs text-slate-400 mb-2"># Dataset Upload (SFTP)</p>
+                            <pre class="text-sm font-mono"># From local terminal:
+sftp -P &lt;PORT&gt; root@&lt;POD_IP&gt;
+put -r /local/dataset /workspace/dataset</pre>
+                        </div>
+
+                        <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                            <h5 class="font-semibold text-red-800 mb-2">🔐 Security Best Practices</h5>
+                            <ul class="text-sm text-red-700 space-y-1">
+                                <li>• Encrypt sensitive datasets before upload</li>
+                                <li>• Use Secure Cloud tier for proprietary IP</li>
+                                <li>• <strong>Always terminate pod</strong> after downloading models</li>
+                                <li>• Delete volumes after project completion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross-Platform Summary -->
+            <div class="mt-8 bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="bg-slate-100 px-4 py-3 font-semibold text-slate-700">Cross-Platform Comparison</div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50"><tr>
+                            <th class="px-4 py-2 text-left font-semibold text-slate-700">Task</th>
+                            <th class="px-4 py-2 text-center font-semibold text-slate-700">Windows</th>
+                            <th class="px-4 py-2 text-center font-semibold text-slate-700">Linux</th>
+                            <th class="px-4 py-2 text-center font-semibold text-slate-700">macOS</th>
+                            <th class="px-4 py-2 text-center font-semibold text-slate-700">RunPod</th>
+                        </tr></thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr><td class="px-4 py-2 font-medium">Dataset Prep</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td><td class="px-4 py-2 text-center text-green-600">✅ Good</td><td class="px-4 py-2 text-center text-amber-600">⚠️ Slow</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">SDXL Training</td><td class="px-4 py-2 text-center text-green-600">✅ Good</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td><td class="px-4 py-2 text-center text-amber-600">⚠️ Slow</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Flux Training</td><td class="px-4 py-2 text-center text-amber-600">⚠️ FP8</td><td class="px-4 py-2 text-center text-amber-600">⚠️ FP8</td><td class="px-4 py-2 text-center text-red-600">❌ No</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Inference</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td><td class="px-4 py-2 text-center text-green-600">✅ Best</td><td class="px-4 py-2 text-center text-green-600">✅ Good</td><td class="px-4 py-2 text-center text-amber-600">⚠️ Latency</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Cost</td><td class="px-4 py-2 text-center text-slate-600">One-time</td><td class="px-4 py-2 text-center text-slate-600">One-time</td><td class="px-4 py-2 text-center text-slate-600">One-time</td><td class="px-4 py-2 text-center text-slate-600">Pay/use</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-teal-50 border border-teal-200 rounded-lg p-4">
+                <h4 class="font-bold text-teal-800 mb-2">💡 Recommended Hybrid Setup</h4>
+                <p class="text-sm text-teal-700"><strong>Local (Windows/Linux):</strong> Dataset preparation, captioning, inference, iteration</p>
+                <p class="text-sm text-teal-700"><strong>Cloud (RunPod):</strong> Production training, large batches, Flux training</p>
+            </div>
+        </section>
+
+        <script>
+            function showPlatform(platform) {
+                // Hide all content
+                document.querySelectorAll('.platform-content').forEach(el => el.classList.add('hidden'));
+                // Reset all tabs
+                document.querySelectorAll('.platform-tab').forEach(el => {
+                    el.classList.remove('text-teal-600', 'border-b-2', 'border-teal-600');
+                    el.classList.add('text-slate-500');
+                });
+                // Show selected content
+                document.getElementById('platform-' + platform).classList.remove('hidden');
+                // Highlight selected tab
+                const tab = document.getElementById('tab-' + platform);
+                tab.classList.remove('text-slate-500');
+                tab.classList.add('text-teal-600', 'border-b-2', 'border-teal-600');
+            }
+        </script>
 
         <!-- Navigation Footer -->
         <section class="py-8 max-w-6xl mx-auto px-4">

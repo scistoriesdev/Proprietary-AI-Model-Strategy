@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-02-05
+
+### Added
+
+- **Platform-Specific Setup Guides** - Complete installation and configuration instructions:
+  - **Windows**: OneTrainer, Kohya_ss, ComfyUI installation with PowerShell commands
+  - **Linux (Ubuntu)**: NVIDIA drivers, CUDA toolkit, Python environment setup
+  - **macOS (Apple Silicon)**: MPS support, limitations, ComfyUI configuration
+  - **RunPod Cloud**: Pod configuration, dataset upload methods, training workflow
+- **Cross-platform comparison table** - Best use cases for each platform
+- **Platform-specific optimizations** - Environment variables, performance tuning
+- **Security best practices** for cloud training
+
+### Changed
+
+- **README Section 8** - New comprehensive platform setup documentation
+- **training.html** - Added tabbed interface for platform guides with code snippets
+- **Section numbering** - Reorganized to accommodate new Section 8 (Conclusion → 9, Appendix → 10, Resources → 11)
+
+---
+
 ## [1.5.0] - 2026-02-05
 
 ### Added
