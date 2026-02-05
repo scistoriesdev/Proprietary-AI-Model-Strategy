@@ -1,5 +1,44 @@
 # Stabilized Granular Control in Generative AI for Cellular Biology and Medical Illustration: A Technical & Strategic Framework
 
+## Table of Contents
+
+- [1. Executive Summary](#1-executive-summary)
+- [2. The Paradigm of Controlled Generation in Scientific Visualization](#2-the-paradigm-of-controlled-generation-in-scientific-visualization)
+  - [2.1 The Necessity of Stabilized Granular Control](#21-the-necessity-of-stabilized-granular-control)
+  - [2.2 The Risk of Hallucination in Medical Contexts](#22-the-risk-of-hallucination-in-medical-contexts)
+  - [2.3 Base Model Selection for Scientific Visualization](#23-base-model-selection-for-scientific-visualization)
+  - [2.4 The 3D Blockout Methodology](#24-the-3d-blockout-methodology)
+  - [2.5 Scientific Validation Methodology](#25-scientific-validation-methodology)
+  - [2.6 Color Theory for Biological Visualization](#26-color-theory-for-biological-visualization)
+- [3. Infrastructure Architecture: The Hybrid Compute Model](#3-infrastructure-architecture-the-hybrid-compute-model)
+  - [3.1 Local Constraints: The Physics of RTX Laptop Training](#31-local-constraints-the-physics-of-rtx-laptop-training)
+  - [3.2 Private Cloud Infrastructure: The Burst Compute Advantage](#32-private-cloud-infrastructure-the-burst-compute-advantage)
+  - [3.3 Managed Training Services (SaaS) with Export Capabilities](#33-managed-training-services-saas-with-export-capabilities)
+  - [3.4 Hybrid Cloud Strategy: The Optimal Architecture](#34-hybrid-cloud-strategy-the-optimal-architecture)
+- [4. Algorithmic Foundations of Granular Control](#4-algorithmic-foundations-of-granular-control)
+  - [4.1 Low-Rank Adaptation (LoRA): Separating Style from Subject](#41-low-rank-adaptation-lora-separating-style-from-subject)
+  - [4.2 ControlNet: The Geometry Anchor](#42-controlnet-the-geometry-anchor)
+  - [4.3 Regional Prompting (Attention Masking)](#43-regional-prompting-attention-masking)
+- [5. Data Engineering for Biological Fidelity](#5-data-engineering-for-biological-fidelity)
+  - [5.1 Dataset Sourcing and Curation](#51-dataset-sourcing-and-curation)
+  - [5.2 The Scientific Captioning Pipeline](#52-the-scientific-captioning-pipeline)
+- [6. Legal Frameworks and Intellectual Property Sovereignty](#6-legal-frameworks-and-intellectual-property-sovereignty)
+  - [6.1 Ownership of Model Weights (The LoRA)](#61-ownership-of-model-weights-the-lora)
+  - [6.2 Copyright of AI-Assisted Outputs](#62-copyright-of-ai-assisted-outputs)
+  - [6.3 Training Data: Fair Use and Licensing Considerations](#63-training-data-fair-use-and-licensing-considerations)
+  - [6.4 International Jurisdiction and Data Sovereignty](#64-international-jurisdiction-and-data-sovereignty)
+  - [6.5 Commercial Licensing and Client Deliverables](#65-commercial-licensing-and-client-deliverables)
+  - [6.6 Liability, Indemnification, and Insurance](#66-liability-indemnification-and-insurance)
+  - [6.7 Regulatory Considerations for Medical Content](#67-regulatory-considerations-for-medical-content)
+  - [6.8 Documentation Best Practices for Legal Protection](#68-documentation-best-practices-for-legal-protection)
+- [7. Operational Workflow: The ComfyUI Standard](#7-operational-workflow-the-comfyui-standard)
+  - [7.1 The "Bio-Architect" Pipeline](#71-the-bio-architect-pipeline)
+- [8. Conclusion and Strategic Recommendation](#8-conclusion-and-strategic-recommendation)
+- [9. Appendix: Technical Reference Tables](#9-appendix-technical-reference-tables)
+- [Works Cited](#works-cited)
+
+---
+
 ## 1. Executive Summary
 
 The intersection of generative artificial intelligence and scientific visualization represents a transformative frontier for medical illustration, yet it presents a fundamental paradox: the stochastic nature of diffusion models, while potent for artistic exploration, is historically antithetical to the rigor required in cellular biology. In a domain where the morphology of a mitochondrion or the spatial folding of the endoplasmic reticulum must adhere to functional reality rather than hallucinatory aesthetics, standard "prompt-and-pray" workflows are insufficient. For the professional medical illustrator operating within a proprietary environment, the objective is not merely to generate imagery but to achieve "stabilized granular control"—the capacity to rigidly dictate layout, texture, and anatomical fidelity with high precision—while ensuring full intellectual property (IP) sovereignty over both the trained models and the resulting assets.
