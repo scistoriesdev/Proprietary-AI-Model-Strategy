@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ICONS_DIR = path.join(__dirname, '..', 'icons');
+const ROOT_DIR = path.join(__dirname, '..');
 const SVG_SOURCE = path.join(ICONS_DIR, 'icon.svg');
 const SVG_MASKABLE = path.join(ICONS_DIR, 'icon-maskable.svg');
 
@@ -18,11 +19,59 @@ const SVG_MASKABLE = path.join(ICONS_DIR, 'icon-maskable.svg');
 const ICON_SIZES = [72, 96, 128, 144, 152, 192, 384, 512];
 const MASKABLE_SIZES = [192, 512];
 
+// Favicon sizes (multi-resolution ICO)
+const FAVICON_SIZES = [16, 32, 48];
+
 // Screenshot sizes
 const SCREENSHOTS = [
   { name: 'screenshot-wide.png', width: 1280, height: 720 },
   { name: 'screenshot-narrow.png', width: 720, height: 1280 }
 ];
+
+// Generate favicon.ico with multiple resolutions
+async function generateFavicon(svgBuffer) {
+  const pngToIco = require('png-to-ico');
+  
+  // Generate PNG files for each favicon size
+  const pngBuffers = await Promise.all(
+    FAVICON_SIZES.map(async (size) => {
+      return sharp(svgBuffer)
+        .resize(size, size)
+        .png()
+        .toBuffer();
+    })
+  );
+  
+  // Convert PNGs to ICO
+  const icoBuffer = await pngToIco(pngBuffers);
+  
+  // Write to root directory (standard favicon location)
+  fs.writeFileSync(path.join(ROOT_DIR, 'favicon.ico'), icoBuffer);
+  
+  // Also write to icons directory
+  fs.writeFileSync(path.join(ICONS_DIR, 'favicon.ico'), icoBuffer);
+}
+
+// Fallback: Generate favicon as PNG if png-to-ico not available
+async function generateFaviconFallback(svgBuffer) {
+  // Generate individual PNG favicons
+  for (const size of FAVICON_SIZES) {
+    const outputPath = path.join(ICONS_DIR, `favicon-${size}x${size}.png`);
+    await sharp(svgBuffer)
+      .resize(size, size)
+      .png()
+      .toFile(outputPath);
+  }
+  
+  // Copy 32x32 as main favicon.ico (browsers accept PNG with .ico extension)
+  const favicon32 = await sharp(svgBuffer)
+    .resize(32, 32)
+    .png()
+    .toBuffer();
+  
+  fs.writeFileSync(path.join(ROOT_DIR, 'favicon.ico'), favicon32);
+  fs.writeFileSync(path.join(ICONS_DIR, 'favicon.ico'), favicon32);
+}
 
 async function generateIcons() {
   console.log('🎨 Generating PWA icons from SVG...\n');
@@ -115,6 +164,17 @@ async function generateIcons() {
       .png()
       .toFile(outputPath);
     console.log(`  ✓ ${screenshot.name}`);
+  }
+
+  // Generate favicon.ico (multi-resolution)
+  console.log('\n🔖 Generating favicon.ico...');
+  try {
+    await generateFavicon(svgBuffer);
+    console.log('  ✓ favicon.ico (16x16, 32x32, 48x48) - ICO format');
+  } catch (err) {
+    console.log('  ⚠️  png-to-ico not available, using PNG fallback...');
+    await generateFaviconFallback(svgBuffer);
+    console.log('  ✓ favicon.ico (32x32 PNG format)');
   }
 
   console.log('\n✅ All icons generated successfully!');
