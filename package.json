@@ -1,0 +1,32 @@
+{
+  "name": "proprietary-ai-model-strategy",
+  "version": "1.0.0",
+  "description": "PWA for AI Model Training Strategy - Medical Illustration & Assets",
+  "main": "index.html",
+  "scripts": {
+    "build:icons": "node scripts/generate-icons.js",
+    "build:icons:sharp": "node scripts/generate-icons-sharp.js",
+    "serve": "npx serve . -l 3000",
+    "build": "npm run build:icons",
+    "deploy": "npm run build && gh-pages -d ."
+  },
+  "keywords": [
+    "pwa",
+    "ai",
+    "medical-illustration",
+    "lora",
+    "stable-diffusion"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "sharp": "^0.33.2"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Model Training Strategy: Medical Illustration & Assets</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="A technical guide to training proprietary LoRAs for medical illustration using local RTX hardware or private cloud clusters.">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AI Strategy">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="AI Strategy">
+    <meta name="msapplication-TileColor" content="#0f172a">
+    <meta name="msapplication-config" content="icons/browserconfig.xml">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="icons/icon.svg" color="#0d9488">
+    
+    <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -17,12 +39,16 @@
                 <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
                 <h1 class="text-xl font-bold text-slate-800 tracking-tight">Proprietary Model Strategy</h1>
             </a>
-            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600 items-center">
                 <a href="training.html" class="hover:text-teal-600 transition">Training</a>
                 <a href="scientific.html" class="hover:text-teal-600 transition">Scientific Foundation</a>
                 <a href="hardware.html" class="hover:text-teal-600 transition">Hardware</a>
                 <a href="cloud.html" class="hover:text-teal-600 transition">Cloud Strategy</a>
                 <a href="legal.html" class="hover:text-teal-600 transition">Legal</a>
+                <button id="install-btn" onclick="installPWA()" class="hidden bg-teal-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-teal-700 transition flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Install
+                </button>
             </nav>
         </div>
     </header>
