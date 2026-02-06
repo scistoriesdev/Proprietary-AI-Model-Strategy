@@ -33,6 +33,11 @@
   - [6.6 Liability, Indemnification, and Insurance](#66-liability-indemnification-and-insurance)
   - [6.7 Regulatory Considerations for Medical Content](#67-regulatory-considerations-for-medical-content)
   - [6.8 Documentation Best Practices for Legal Protection](#68-documentation-best-practices-for-legal-protection)
+  - [6.9 Base Model License Implications](#69-base-model-license-implications)
+  - [6.10 AI Contract Templates and Clauses](#610-ai-contract-templates-and-clauses)
+  - [6.11 Relevant Case Law and Legal Precedents](#611-relevant-case-law-and-legal-precedents)
+  - [6.12 Ethical Guidelines Beyond Legal Requirements](#612-ethical-guidelines-beyond-legal-requirements)
+  - [6.13 Insurance Considerations for AI Workflows](#613-insurance-considerations-for-ai-workflows)
 - [7. Operational Workflow: The ComfyUI Standard](#7-operational-workflow-the-comfyui-standard)
   - [7.1 The "Bio-Architect" Pipeline](#71-the-bio-architect-pipeline)
 - [8. Platform-Specific Setup Guides](#8-platform-specific-setup-guides)
@@ -1222,6 +1227,279 @@ To maximize legal defensibility of AI-assisted work, maintain comprehensive reco
 - [ ] Version history of all revisions
 
 > **Retention Period**: Maintain documentation for at least 6 years (statute of limitations for contract claims in most US jurisdictions) or longer if required by industry regulations.
+
+### 6.9 Base Model License Implications
+
+When training LoRAs on open-source base models, understanding the underlying license is critical for commercial use.
+
+#### 6.9.1 Stability AI Models (SDXL)
+
+| Model | License | Commercial Use | LoRA Training | Key Restrictions |
+|-------|---------|----------------|---------------|------------------|
+| **SDXL 1.0 Base** | CreativeML Open RAIL++-M | ✅ Allowed | ✅ Allowed | Cannot use to harm, deceive, or generate illegal content |
+| **SDXL Refiner** | CreativeML Open RAIL++-M | ✅ Allowed | ✅ Allowed | Same as base |
+| **SD 1.5/2.1** | CreativeML Open RAIL-M | ✅ Allowed | ✅ Allowed | Attribution appreciated but not required |
+
+**RAIL License Key Points**:
+- You **can** sell images generated using these models
+- You **can** train and sell LoRAs based on these models
+- You **cannot** claim the base model as your own creation
+- You **must** include the license with any model redistribution
+- You **cannot** use for explicitly harmful purposes (defined in license)
+
+#### 6.9.2 Black Forest Labs Models (Flux)
+
+| Model | License | Commercial Use | LoRA Training | Key Restrictions |
+|-------|---------|----------------|---------------|------------------|
+| **Flux.1 Dev** | Flux.1-dev Non-Commercial | ❌ Research only | ✅ For research | Outputs cannot be sold |
+| **Flux.1 Pro** | Commercial API | ✅ Via API only | ❌ Not available | Must use their API |
+| **Flux.1 Schnell** | Apache 2.0 | ✅ Allowed | ✅ Allowed | Fully permissive |
+
+**Critical Warning for Flux.1 Dev**:
+> The Flux.1-dev model is licensed for **non-commercial research only**. To use Flux commercially, you must either:
+> 1. Use **Flux.1 Schnell** (Apache 2.0, fully commercial)
+> 2. Use the **Flux.1 Pro API** through Black Forest Labs
+> 3. Obtain a separate commercial license from Black Forest Labs
+
+#### 6.9.3 LoRA Ownership vs. Base Model License
+
+A common misconception is that training a LoRA "inherits" the base model's license restrictions. The legal reality is nuanced:
+
+- **Your LoRA weights are your property**: The specific numerical values in your `.safetensors` file are derived from your training data and process.
+- **The LoRA requires the base model to function**: Users must have legitimate access to the base model to use your LoRA.
+- **Distribution considerations**: If you distribute your LoRA, you're not distributing the base model, so base model license terms about "redistribution" don't directly apply to the LoRA itself.
+- **Output licensing**: The license of outputs generated using your LoRA + base model follows the base model's output terms (generally permissive for SDXL/Schnell).
+
+**Best Practice**: Include a brief license statement with any LoRA you distribute:
+> "This LoRA was trained for use with [Base Model]. Users must comply with the [Base Model License]. The LoRA weights themselves are © [Your Name] [Year], licensed under [Your Chosen License]."
+
+### 6.10 AI Contract Templates and Clauses
+
+The following contract language can be adapted for client agreements involving AI-assisted medical illustration.
+
+#### 6.10.1 Scope of Services Clause (AI-Inclusive)
+
+```
+SCOPE OF SERVICES
+
+Artist shall provide medical illustration services as described in Exhibit A. 
+Artist may utilize proprietary AI-assisted tools and workflows in the creation 
+of deliverables, including but not limited to:
+
+(a) AI models trained exclusively on Artist's original work;
+(b) Industry-standard generative AI software (e.g., Stable Diffusion, ComfyUI);
+(c) AI-powered enhancement and refinement tools.
+
+All deliverables shall be subject to Artist's professional review and validation 
+for anatomical accuracy prior to delivery. The use of AI tools does not diminish 
+Artist's professional responsibility for the accuracy and quality of deliverables.
+```
+
+#### 6.10.2 Intellectual Property Clause (LoRA Protection)
+
+```
+INTELLECTUAL PROPERTY
+
+(a) Deliverables: Upon full payment, Client shall own all right, title, and 
+    interest in the final deliverables as specified in Exhibit A.
+
+(b) Pre-Existing IP: Artist retains all right, title, and interest in:
+    (i)   AI models, including trained neural network weights ("LoRAs");
+    (ii)  Training datasets, methodologies, and configurations;
+    (iii) Proprietary workflows, templates, and automation tools;
+    (iv)  Any materials developed prior to or independent of this Agreement.
+
+(c) License Back: To the extent any Pre-Existing IP is incorporated into 
+    Deliverables, Artist grants Client a perpetual, non-exclusive license 
+    to use such Pre-Existing IP solely as embodied in the Deliverables.
+
+(d) No Transfer of Tools: This Agreement does not transfer ownership of, 
+    or grant any license to, Artist's AI models, training data, or 
+    production tools. Client shall not reverse-engineer, extract, or 
+    attempt to replicate Artist's AI systems from the Deliverables.
+```
+
+#### 6.10.3 AI Disclosure Clause (Transparent)
+
+```
+AI DISCLOSURE
+
+Artist utilizes AI-assisted workflows in the production of medical illustrations. 
+Specifically:
+
+(a) AI models are trained exclusively on Artist's original copyrighted work;
+(b) All outputs undergo professional human review and refinement;
+(c) Anatomical accuracy is verified against authoritative medical references;
+(d) Final deliverables represent a collaboration between AI tools and human expertise.
+
+Client acknowledges this disclosure and agrees that AI-assisted production 
+does not diminish the value, quality, or Artist's professional accountability 
+for the deliverables.
+```
+
+#### 6.10.4 Accuracy and Liability Clause (Medical Context)
+
+```
+ACCURACY AND LIABILITY
+
+(a) Professional Standard: Artist shall exercise the degree of skill and care 
+    ordinarily employed by professional medical illustrators in the performance 
+    of similar services.
+
+(b) Verification Process: All anatomical depictions shall be verified against 
+    authoritative medical references prior to delivery. Artist shall maintain 
+    documentation of verification procedures.
+
+(c) Limitation of Liability: Artist's total liability under this Agreement 
+    shall not exceed the fees paid for the specific deliverable(s) at issue. 
+    Artist shall not be liable for indirect, incidental, or consequential 
+    damages, including but not limited to claims arising from:
+    (i)  Client's modification of deliverables;
+    (ii) Use of deliverables beyond the scope specified in Exhibit A;
+    (iii) Reliance on illustrations for clinical decision-making without 
+          independent medical verification.
+
+(d) Indemnification: Each party shall indemnify the other against third-party 
+    claims arising from that party's breach of this Agreement or negligence.
+```
+
+#### 6.10.5 Confidentiality Clause (Protecting Training Data)
+
+```
+CONFIDENTIALITY
+
+(a) Mutual Confidentiality: Each party agrees to maintain in confidence all 
+    Confidential Information received from the other party.
+
+(b) Artist's Confidential Information includes, without limitation:
+    (i)   AI model weights, architectures, and training configurations;
+    (ii)  Training datasets and curation methodologies;
+    (iii) Proprietary workflows, prompts, and production techniques;
+    (iv)  Pricing structures and client lists.
+
+(c) Non-Disclosure Period: Confidentiality obligations shall survive 
+    termination of this Agreement for a period of five (5) years.
+
+(d) Exceptions: Confidentiality obligations do not apply to information that:
+    (i)  Is or becomes publicly available through no fault of receiving party;
+    (ii) Was rightfully known prior to disclosure;
+    (iii) Is required to be disclosed by law or court order.
+```
+
+### 6.11 Relevant Case Law and Legal Precedents
+
+Understanding key legal cases helps contextualize the risks and protections for AI-assisted illustration.
+
+#### 6.11.1 Copyright Cases
+
+| Case | Year | Key Issue | Outcome | Relevance |
+|------|------|-----------|---------|-----------|
+| **Thaler v. Perlmutter** | 2023 | AI-generated art copyright | AI cannot be author | Human input required for copyright |
+| **Zarya of the Dawn** (Kashtanova) | 2023 | AI-assisted comic book | Partial protection | Text + arrangement copyrightable; AI images alone not |
+| **Théâtre D'opéra Spatial** (Allen) | 2023 | AI art competition winner | Registration denied | Insufficient human authorship claimed |
+| **Getty Images v. Stability AI** | Pending | Training on copyrighted images | TBD | May establish training data liability |
+| **Andersen v. Stability AI** | Pending | Artist class action | TBD | Tests "style" vs. "copying" distinction |
+
+**Key Takeaways**:
+- Pure AI output without human creative control is not copyrightable
+- Human selection, arrangement, and modification can establish copyright
+- Training data liability remains an open question
+- Document your human creative contributions extensively
+
+#### 6.11.2 Trade Secret Cases Relevant to AI
+
+| Case | Key Issue | Relevance to AI/LoRA |
+|------|-----------|---------------------|
+| **Waymo v. Uber** (2017) | Trade secret theft of self-driving AI | Established AI models as protectable trade secrets |
+| **Epic v. Google** (2023) | Algorithm as trade secret | Confirmed ML model weights can be trade secrets |
+| **hiQ v. LinkedIn** (2022) | Data scraping legality | Public data scraping may be legal, but ToS violations aren't |
+
+#### 6.11.3 Regulatory Actions
+
+| Action | Year | Impact |
+|--------|------|--------|
+| **USCO AI Registration Guidance** | 2023 | Established disclosure requirements for AI-assisted works |
+| **EU AI Act** | 2024 | Requires transparency, watermarking for generative AI |
+| **FTC AI Enforcement** | 2023+ | Actions against deceptive AI practices |
+| **USPTO AI Inventorship Guidance** | 2024 | AI cannot be inventor, but AI-assisted inventions patentable |
+
+### 6.12 Ethical Guidelines Beyond Legal Requirements
+
+Legal compliance is the floor, not the ceiling. Professional medical illustrators should consider ethical obligations that exceed legal minimums.
+
+#### 6.12.1 Transparency Standards
+
+| Audience | Recommended Disclosure Level |
+|----------|------------------------------|
+| **Scientific Publishers** | Full disclosure of AI tools, human verification process |
+| **Medical Educators** | Disclosure of AI assistance, emphasis on accuracy verification |
+| **Commercial Clients** | Per contract terms; recommend transparency |
+| **Patient Education** | Clear if AI-generated; emphasize professional review |
+| **Portfolio/Marketing** | Honest representation of your role in creation |
+
+#### 6.12.2 Accuracy Obligations
+
+Beyond legal liability, medical illustrators have ethical obligations:
+
+1. **Primum Non Nocere**: Medical illustrations can influence patient understanding and clinical decisions. Errors can cause harm.
+2. **Scientific Integrity**: Illustrations in scientific publications must accurately represent data and findings.
+3. **Educational Responsibility**: Training materials shape future healthcare providers' understanding.
+
+**Ethical Verification Checklist**:
+- [ ] Anatomical structures are correctly positioned and proportioned
+- [ ] Physiological processes are accurately depicted
+- [ ] Color coding follows established medical conventions
+- [ ] Scale and perspective are not misleading
+- [ ] Pathological features are distinguishable from normal anatomy
+- [ ] Labels and annotations are accurate
+
+#### 6.12.3 Professional Standards Organizations
+
+| Organization | Relevance | Guidance |
+|--------------|-----------|----------|
+| **Association of Medical Illustrators (AMI)** | Primary professional body | Developing AI ethics guidelines |
+| **Guild of Natural Science Illustrators (GNSI)** | Scientific illustration | Standards for accuracy and attribution |
+| **BioCommunications Association (BCA)** | Biomedical media | Media production standards |
+
+#### 6.12.4 The "Would I Sign It?" Test
+
+A practical ethical guideline for AI-assisted work:
+
+> Before delivering any AI-assisted illustration, ask: "Would I be comfortable signing this work with my name, knowing exactly how it was created?"
+
+If the answer is yes—if you're proud of the result and confident in its accuracy—the work meets your professional standard regardless of the tools used.
+
+If the answer is no—if you're relying on AI to mask skill gaps or rushing delivery without proper review—reconsider before delivery.
+
+### 6.13 Insurance Considerations for AI Workflows
+
+#### 6.13.1 Professional Liability (E&O) Insurance
+
+Contact your insurer to confirm coverage for AI-assisted workflows. Key questions:
+
+1. Does my policy cover errors in AI-generated content?
+2. Are there exclusions for "computer-generated" or "automated" work?
+3. What documentation is required to support a claim?
+4. Are there premium implications for AI tool usage?
+
+**Sample Policy Endorsement Language to Request**:
+> "Coverage extends to professional services performed using industry-standard AI-assisted tools, provided the insured maintains professional oversight and verification of all deliverables."
+
+#### 6.13.2 Cyber Liability Considerations
+
+If storing training data or models in the cloud:
+
+- **Data Breach Coverage**: Protects if proprietary training data is compromised
+- **Business Interruption**: Covers losses if cloud provider outage halts production
+- **Ransomware**: Covers extortion if model weights are held hostage
+
+#### 6.13.3 Intellectual Property Insurance
+
+For high-value LoRAs or significant commercial operations:
+
+- **IP Defense Coverage**: Covers legal costs if you're accused of infringement
+- **IP Pursuit Coverage**: Covers costs of enforcing your rights against infringers
+- **First-Party IP Coverage**: Covers losses if your IP is stolen or misappropriated
 
 ## 7. Operational Workflow: The ComfyUI Standard
 

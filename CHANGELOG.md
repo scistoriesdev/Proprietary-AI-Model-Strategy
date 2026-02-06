@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-02-05
+
+### Added
+
+- **Expanded Legal Section** - Comprehensive coverage of AI legal frameworks:
+  - **Base Model License Implications** - SDXL (RAIL), Flux (Non-Commercial vs Apache 2.0), LoRA ownership clarification
+  - **AI Contract Templates** - Ready-to-use clauses for scope, IP protection, disclosure, liability, confidentiality
+  - **Case Law & Precedents** - Thaler v. Perlmutter, Zarya of the Dawn, Getty v. Stability AI, trade secret cases
+  - **Ethical Guidelines** - Transparency standards by audience, accuracy obligations, professional organizations (AMI, GNSI, BCA)
+  - **Insurance Considerations** - E&O coverage, cyber liability, IP insurance, emerging AI exclusions
+- **New Legal Tabs in HTML** - 10 tabs: Ownership, Training Data, Model Licenses, Contracts, Case Law, Jurisdiction, Commercial, Medical, Ethics, Insurance
+- **Updated Search Index** - 4 new legal entries with content snippets
+
+### Changed
+
+- **README Table of Contents** - Added sections 6.9-6.13 for new legal content
+- **legal.html** - Restructured with expanded tabbed interface
+
+---
+
 ## [1.6.1] - 2026-02-05
 
 ### Added
