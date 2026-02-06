@@ -191,67 +191,130 @@ function getVersion() {
 
 const searchIndex = [
   // Training page
-  { title: 'LoRA Training', keywords: 'lora low-rank adaptation fine-tuning training model weights', url: 'training.html', section: 'Training' },
-  { title: 'Style LoRA', keywords: 'style artistic look studio visual aesthetic', url: 'training.html#style-lora', section: 'Training' },
-  { title: 'Subject LoRA', keywords: 'subject organelle morphology biology anatomy', url: 'training.html#subject-lora', section: 'Training' },
-  { title: 'ControlNet', keywords: 'controlnet geometry structure spatial layout composition', url: 'training.html#controlnet', section: 'Training' },
-  { title: 'Regional Prompting', keywords: 'regional prompting attention masking composition', url: 'training.html#regional', section: 'Training' },
-  { title: 'Hyperparameters', keywords: 'hyperparameters learning rate batch size epochs rank alpha', url: 'training.html#hyperparameters', section: 'Training' },
-  { title: 'Training Workflow', keywords: 'workflow dataset captioning onetrainer kohya', url: 'training.html#workflow', section: 'Training' },
+  { title: 'LoRA Training', keywords: 'lora low-rank adaptation fine-tuning training model weights', url: 'training.html', section: 'Training',
+    content: 'Low-Rank Adaptation trains small adapter weights instead of full model. Produces safetensors files typically 10-200MB. You own the LoRA weights as they contain your unique training data patterns.' },
+  { title: 'Style LoRA', keywords: 'style artistic look studio visual aesthetic', url: 'training.html#style-lora', section: 'Training',
+    content: 'Captures rendering aesthetics like flat vector, watercolor, or realistic 3D look. Train on 30-100 images with consistent artistic style. Use trigger word like mystyle to activate.' },
+  { title: 'Subject LoRA', keywords: 'subject organelle morphology biology anatomy', url: 'training.html#subject-lora', section: 'Training',
+    content: 'Teaches specific biological structures like mitochondria, nucleus, or cell membrane. Requires anatomically accurate reference images with proper morphology.' },
+  { title: 'ControlNet', keywords: 'controlnet geometry structure spatial layout composition', url: 'training.html#controlnet', section: 'Training',
+    content: 'Guides generation with depth maps, canny edges, or normal maps. Use ControlNet Union for flexibility. Essential for maintaining anatomical structure and composition.' },
+  { title: 'Regional Prompting', keywords: 'regional prompting attention masking composition', url: 'training.html#regional', section: 'Training',
+    content: 'Assign different prompts to masked regions. Paint nucleus area and assign specific prompt while cytoplasm gets different prompt. Use attention couple nodes in ComfyUI.' },
+  { title: 'Hyperparameters', keywords: 'hyperparameters learning rate batch size epochs rank alpha network dim', url: 'training.html#hyperparameters', section: 'Training',
+    content: 'Learning rate typically 1e-4 to 5e-4. Network rank 16-128, higher for complex subjects. Alpha usually equals rank. Batch size 1-4 depending on VRAM. Train 1000-3000 steps for SDXL LoRA.' },
+  { title: 'Training Workflow', keywords: 'workflow dataset captioning onetrainer kohya', url: 'training.html#workflow', section: 'Training',
+    content: 'Prepare dataset 20-100 images. Caption using Florence-2 or manual tags. Configure hyperparameters. Monitor loss curves in TensorBoard. Export safetensors when loss stabilizes.' },
+  { title: 'Training Art Styles', keywords: 'flat vector isometric realistic cross-section microscopy watercolor', url: 'training.html#training-art', section: 'Training',
+    content: 'Flat vector for icons and diagrams. Isometric 3D for technical illustration. Realistic render for publication quality. Cross-section for internal anatomy. SEM microscopy style for electron microscope look.' },
+  { title: 'Public Domain Sources', keywords: 'grays anatomy biodiversity heritage wellcome collection creative commons', url: 'training.html#public-domain', section: 'Training',
+    content: 'Grays Anatomy 1918 edition public domain. Biodiversity Heritage Library has historical illustrations. Wellcome Collection CC-BY. OpenStax biology textbooks CC-BY. NASA images public domain.' },
+  { title: 'Platform Setup Windows', keywords: 'windows powershell nvidia cuda python venv', url: 'training.html#platform-setup', section: 'Training',
+    content: 'Install Python 3.10 from python.org. Create venv at C:\\AI\\training-env. Clone OneTrainer and run install.bat. Set PYTORCH_CUDA_ALLOC_CONF for memory optimization. Disable Game Mode.' },
+  { title: 'Platform Setup Linux', keywords: 'linux ubuntu nvidia driver cuda ppa', url: 'training.html#platform-setup', section: 'Training',
+    content: 'Ubuntu 22.04 LTS recommended. Install nvidia-driver-550 from PPA. Download CUDA 12.1+ toolkit. Set persistence mode with nvidia-smi -pm 1. Configure file descriptor limits.' },
+  { title: 'Platform Setup macOS', keywords: 'macos apple silicon m1 m2 m3 mps metal', url: 'training.html#platform-setup', section: 'Training',
+    content: 'Apple Silicon M1/M2/M3 uses Metal MPS backend. Good for inference, limited for training. Install via Homebrew and pyenv. Set PYTORCH_ENABLE_MPS_FALLBACK=1. Use cloud for production training.' },
+  { title: 'Platform Setup RunPod', keywords: 'runpod cloud gpu pod container volume sftp', url: 'training.html#platform-setup', section: 'Training',
+    content: 'RTX 4090 at $0.70/hr or A100 at $1.50/hr. Create pod with PyTorch 2.1 template. Upload dataset via SFTP or rclone. Use tmux to persist training session. Always terminate pod after downloading.' },
   
   // Scientific page
-  { title: 'Base Models', keywords: 'sdxl flux stable diffusion base model foundation', url: 'scientific.html', section: 'Scientific' },
-  { title: 'SDXL Architecture', keywords: 'sdxl stable diffusion xl architecture text encoder', url: 'scientific.html#sdxl', section: 'Scientific' },
-  { title: 'Flux.1 Architecture', keywords: 'flux flow matching mmdit transformer', url: 'scientific.html#flux', section: 'Scientific' },
-  { title: '3D Blockout', keywords: '3d blockout blender zbrush depth normal map', url: 'scientific.html#3d-blockout', section: 'Scientific' },
-  { title: 'XY Plot Validation', keywords: 'xy plot validation testing checkpoint evaluation', url: 'scientific.html#xy-plot', section: 'Scientific' },
-  { title: 'Color Theory', keywords: 'color theory palette biological visualization accessibility', url: 'scientific.html#color', section: 'Scientific' },
-  { title: 'Anatomical Accuracy', keywords: 'anatomical accuracy mitochondria nucleus cell membrane', url: 'scientific.html#accuracy', section: 'Scientific' },
+  { title: 'Base Models', keywords: 'sdxl flux stable diffusion base model foundation', url: 'scientific.html', section: 'Scientific',
+    content: 'SDXL 1.0 generates 1024x1024 images with two text encoders. Flux.1 uses flow matching and MMDiT transformer architecture. Choose based on required output quality and training complexity.' },
+  { title: 'SDXL Architecture', keywords: 'sdxl stable diffusion xl architecture text encoder unet', url: 'scientific.html#sdxl', section: 'Scientific',
+    content: 'Stable Diffusion XL has 2.6B parameter UNet with dual text encoders CLIP ViT-L and OpenCLIP ViT-bigG. Native 1024x1024 resolution. Refiner model available for enhanced details.' },
+  { title: 'Flux.1 Architecture', keywords: 'flux flow matching mmdit transformer rectified flow', url: 'scientific.html#flux', section: 'Scientific',
+    content: 'Flux uses Multimodal Diffusion Transformer MMDiT with 12B parameters. Flow matching provides straighter sampling paths. T5-XXL text encoder for better prompt following. Dev version for commercial use.' },
+  { title: '3D Blockout', keywords: '3d blockout blender zbrush depth normal map reference', url: 'scientific.html#3d-blockout', section: 'Scientific',
+    content: 'Create rough 3D geometry in Blender or ZBrush. Render depth and normal passes. Use as ControlNet input to guide generation. Ensures consistent spatial structure across outputs.' },
+  { title: 'XY Plot Validation', keywords: 'xy plot validation testing checkpoint evaluation weight comparison', url: 'scientific.html#xy-plot', section: 'Scientific',
+    content: 'Generate grid comparing different LoRA weights or checkpoints. Test weight values 0.5 to 1.0 on X axis, different prompts on Y. Identify optimal weight before production use.' },
+  { title: 'Color Theory', keywords: 'color theory palette biological visualization accessibility colorblind', url: 'scientific.html#color', section: 'Scientific',
+    content: 'Use consistent organelle color coding. Nucleus typically blue, mitochondria red or orange, ER purple or pink. Consider colorblind accessibility with viridis or cividis palettes.' },
+  { title: 'Anatomical Accuracy', keywords: 'anatomical accuracy mitochondria nucleus cell membrane cristae', url: 'scientific.html#accuracy', section: 'Scientific',
+    content: 'Mitochondria must show cristae inner membrane folds. Nucleus needs nuclear envelope with pores. Golgi requires stacked cisternae. Validate against electron microscopy references.' },
   
   // Hardware page
-  { title: 'GPU Requirements', keywords: 'gpu vram rtx nvidia graphics card hardware', url: 'hardware.html', section: 'Hardware' },
-  { title: 'VRAM Thresholds', keywords: 'vram memory 8gb 12gb 16gb 24gb threshold', url: 'hardware.html#vram', section: 'Hardware' },
-  { title: 'GPU Comparison', keywords: 'gpu comparison rtx 3060 3070 3080 4060 4070 4080 4090', url: 'hardware.html#comparison', section: 'Hardware' },
-  { title: 'Memory Optimization', keywords: 'memory optimization fp8 gradient checkpointing adafactor', url: 'hardware.html#optimization', section: 'Hardware' },
-  { title: 'Thermal Management', keywords: 'thermal temperature cooling laptop heat throttling', url: 'hardware.html#thermal', section: 'Hardware' },
-  { title: 'OneTrainer vs Kohya', keywords: 'onetrainer kohya software training tool', url: 'hardware.html#software', section: 'Hardware' },
+  { title: 'GPU Requirements', keywords: 'gpu vram rtx nvidia graphics card hardware cuda cores', url: 'hardware.html', section: 'Hardware',
+    content: 'NVIDIA RTX GPUs required for CUDA support. Minimum 8GB VRAM with heavy optimization. 12GB comfortable for SDXL. 16GB+ ideal for Flux. Cloud GPUs available for larger models.' },
+  { title: 'VRAM Thresholds', keywords: 'vram memory 8gb 12gb 16gb 24gb threshold oom out of memory', url: 'hardware.html#vram', section: 'Hardware',
+    content: '8GB requires FP8 quantization and batch size 1. 12GB enables standard SDXL training. 16GB allows larger batch sizes and Flux FP8. 24GB A100 80GB for full precision large batches.' },
+  { title: 'GPU Comparison', keywords: 'gpu comparison rtx 3060 3070 3080 4060 4070 4080 4090 benchmark', url: 'hardware.html#comparison', section: 'Hardware',
+    content: 'RTX 3060 12GB entry level local training. RTX 4070 12GB good performance per watt. RTX 4090 24GB flagship consumer best for local. A100 80GB cloud optimal for production.' },
+  { title: 'Memory Optimization', keywords: 'memory optimization fp8 bf16 gradient checkpointing adafactor 8bit adam', url: 'hardware.html#optimization', section: 'Hardware',
+    content: 'FP8 quantization halves memory usage with minimal quality loss. Gradient checkpointing trades compute for memory. Adafactor optimizer uses less memory than Adam. 8-bit Adam available in bitsandbytes.' },
+  { title: 'Thermal Management', keywords: 'thermal temperature cooling laptop heat throttling fan curve', url: 'hardware.html#thermal', section: 'Hardware',
+    content: 'Keep GPU below 83C during training. Use laptop cooling pad for mobile workstations. Set custom fan curves with MSI Afterburner. Monitor with nvidia-smi or nvtop. Training throttles above thermal limits.' },
+  { title: 'OneTrainer vs Kohya', keywords: 'onetrainer kohya software training tool gui comparison', url: 'hardware.html#software', section: 'Hardware',
+    content: 'OneTrainer better for low VRAM with aggressive optimization. Kohya more features and community presets. OneTrainer has modern GUI. Kohya requires more manual configuration. Both produce same output format.' },
   
   // Cloud page
-  { title: 'Cloud Infrastructure', keywords: 'cloud infrastructure runpod lambda vast gpu rental', url: 'cloud.html', section: 'Cloud' },
-  { title: 'RunPod', keywords: 'runpod secure cloud gpu rental container docker', url: 'cloud.html#runpod', section: 'Cloud' },
-  { title: 'Lambda Labs', keywords: 'lambda labs cloud provider h100 a100', url: 'cloud.html#lambda', section: 'Cloud' },
-  { title: 'Vast.ai', keywords: 'vast ai p2p marketplace gpu rental security', url: 'cloud.html#vast', section: 'Cloud' },
-  { title: 'SaaS Training', keywords: 'saas fal astria scenario managed training service', url: 'cloud.html#saas', section: 'Cloud' },
-  { title: 'Hybrid Workflow', keywords: 'hybrid workflow local cloud burst compute', url: 'cloud.html#hybrid', section: 'Cloud' },
-  { title: 'Data Security', keywords: 'data security encryption privacy ip protection', url: 'cloud.html#security', section: 'Cloud' },
+  { title: 'Cloud Infrastructure', keywords: 'cloud infrastructure runpod lambda vast gpu rental provider', url: 'cloud.html', section: 'Cloud',
+    content: 'Rent GPUs by the hour for training. Avoid large upfront hardware costs. Scale up for production training then terminate. Keep proprietary data secure with encrypted transfers.' },
+  { title: 'RunPod', keywords: 'runpod secure cloud gpu rental container docker soc2', url: 'cloud.html#runpod', section: 'Cloud',
+    content: 'RunPod recommended for secure training. SOC 2 compliant Secure Cloud tier available. RTX 4090 at $0.70/hr, A100 at $1.50/hr. Persistent volumes for model storage. SFTP and web terminal access.' },
+  { title: 'Lambda Labs', keywords: 'lambda labs cloud provider h100 a100 enterprise', url: 'cloud.html#lambda', section: 'Cloud',
+    content: 'Enterprise-grade H100 and A100 instances. Higher cost but reliable availability. Good for teams needing consistent access. API and dashboard management.' },
+  { title: 'Vast.ai', keywords: 'vast ai p2p marketplace gpu rental budget community', url: 'cloud.html#vast', section: 'Cloud',
+    content: 'Peer-to-peer GPU marketplace with lowest prices. Variable reliability and security. Best for non-sensitive experimentation. Verify machine specs before use. Not recommended for proprietary IP.' },
+  { title: 'SaaS Training', keywords: 'saas fal astria scenario managed training service api', url: 'cloud.html#saas', section: 'Cloud',
+    content: 'Managed training services handle infrastructure. fal.ai for serverless inference. Astria for fine-tuning API. Scenario for game assets. Replicate for model hosting. Trade control for convenience.' },
+  { title: 'Hybrid Workflow', keywords: 'hybrid workflow local cloud burst compute split', url: 'cloud.html#hybrid', section: 'Cloud',
+    content: 'Prepare datasets locally. Upload to cloud for training. Download trained LoRA. Run inference locally. Minimizes cloud costs while leveraging cloud compute for heavy training.' },
+  { title: 'Data Security', keywords: 'data security encryption privacy ip protection proprietary', url: 'cloud.html#security', section: 'Cloud',
+    content: 'Encrypt datasets before cloud upload. Use secure cloud tiers for proprietary work. Delete volumes after project completion. Never store API keys in pod. Verify provider security certifications.' },
   
   // Legal page
-  { title: 'IP Ownership', keywords: 'ip intellectual property ownership rights model weights', url: 'legal.html', section: 'Legal' },
-  { title: 'Copyright', keywords: 'copyright ai generated human authorship usco', url: 'legal.html#copyright', section: 'Legal' },
-  { title: 'Training Data Rights', keywords: 'training data fair use licensing public domain', url: 'legal.html#training-data', section: 'Legal' },
-  { title: 'International Law', keywords: 'international law gdpr eu uk jurisdiction', url: 'legal.html#international', section: 'Legal' },
-  { title: 'Commercial Licensing', keywords: 'commercial licensing work for hire royalty disclosure', url: 'legal.html#licensing', section: 'Legal' },
-  { title: 'Medical Regulations', keywords: 'medical regulations fda cme hipaa publication', url: 'legal.html#medical', section: 'Legal' },
-  { title: 'Liability', keywords: 'liability insurance indemnification accuracy errors', url: 'legal.html#liability', section: 'Legal' },
+  { title: 'IP Ownership', keywords: 'ip intellectual property ownership rights model weights safetensors', url: 'legal.html', section: 'Legal',
+    content: 'LoRA weights are your property as derivative work. Safetensors files contain unique patterns from your training. Document training process to establish ownership. Keep weights as trade secrets.' },
+  { title: 'Copyright', keywords: 'copyright ai generated human authorship usco registration', url: 'legal.html#copyright', section: 'Legal',
+    content: 'Human creative input required for copyright. Document your artistic decisions and curation. USCO requires disclosure of AI involvement. Pure AI output may not be copyrightable.' },
+  { title: 'Training Data Rights', keywords: 'training data fair use licensing public domain cc0', url: 'legal.html#training-data', section: 'Legal',
+    content: 'Use public domain or properly licensed training data. Fair use is unsettled for AI training. CC0 and public domain safest for commercial. Document all data sources in manifest.' },
+  { title: 'International Law', keywords: 'international law gdpr eu uk jurisdiction data protection', url: 'legal.html#international', section: 'Legal',
+    content: 'GDPR applies to EU personal data in training sets. Different jurisdictions have varying AI regulations. UK and EU diverging on AI copyright. Consider data residency requirements.' },
+  { title: 'Commercial Licensing', keywords: 'commercial licensing work for hire royalty disclosure client', url: 'legal.html#licensing', section: 'Legal',
+    content: 'Define AI tool usage in client contracts. Specify whether AI-assisted outputs are work for hire. Disclose AI involvement per contract terms. Consider royalty implications for AI-enhanced work.' },
+  { title: 'Medical Regulations', keywords: 'medical regulations fda cme hipaa publication disclaimer', url: 'legal.html#medical', section: 'Legal',
+    content: 'Medical illustrations may require FDA review for device marketing. CME content has accuracy requirements. HIPAA applies if using patient data. Include appropriate disclaimers on AI-generated medical content.' },
+  { title: 'Liability', keywords: 'liability insurance indemnification accuracy errors omissions', url: 'legal.html#liability', section: 'Legal',
+    content: 'Professional liability insurance recommended. Include accuracy disclaimers for AI-assisted work. Client contracts should address AI-related errors. Consider E&O insurance for medical illustration.' },
   
   // README
-  { title: 'Full Documentation', keywords: 'readme documentation full guide reference', url: 'readme.html', section: 'README' },
-  { title: 'Table of Contents', keywords: 'table of contents toc navigation', url: 'readme.html#table-of-contents', section: 'README' },
+  { title: 'Full Documentation', keywords: 'readme documentation full guide reference complete', url: 'readme.html', section: 'README',
+    content: 'Complete technical framework for proprietary AI model training. Covers infrastructure, methodology, legal frameworks, and operational workflows for medical illustration and cellular biology.' },
+  { title: 'Table of Contents', keywords: 'table of contents toc navigation sections', url: 'readme.html#table-of-contents', section: 'README',
+    content: 'Navigate to Executive Summary, Paradigm of Control, Infrastructure Architecture, Algorithmic Foundations, Data Engineering, Legal Frameworks, Operational Workflow, and Appendix.' },
+  { title: 'Bio-Architect Pipeline', keywords: 'bio-architect pipeline comfyui workflow generation', url: 'readme.html', section: 'README',
+    content: 'Complete ComfyUI workflow for biological illustration. Load base model and LoRA stack. Apply ControlNet with 3D blockout. Use regional prompting for organelle-specific prompts. Generate and refine.' },
   
   // Resources
-  { title: 'Resources & Tools', keywords: 'resources links tools external', url: 'resources.html', section: 'Resources' },
-  { title: 'SDXL Model', keywords: 'sdxl stable diffusion xl base model huggingface', url: 'resources.html', section: 'Resources' },
-  { title: 'Flux Models', keywords: 'flux flow matching black forest labs schnell dev', url: 'resources.html', section: 'Resources' },
-  { title: 'ComfyUI', keywords: 'comfyui nodes workflow graph interface', url: 'resources.html', section: 'Resources' },
-  { title: 'Automatic1111', keywords: 'automatic1111 a1111 webui gradio interface', url: 'resources.html', section: 'Resources' },
-  { title: 'OneTrainer', keywords: 'onetrainer lora training gui software', url: 'resources.html', section: 'Resources' },
-  { title: 'Kohya', keywords: 'kohya ss sd-scripts training lora dreambooth', url: 'resources.html', section: 'Resources' },
-  { title: 'CivitAI', keywords: 'civitai community models lora checkpoints download', url: 'resources.html', section: 'Resources' },
-  { title: 'Hugging Face', keywords: 'huggingface hub models datasets diffusers', url: 'resources.html', section: 'Resources' },
-  { title: 'Cloud Providers', keywords: 'runpod lambda vast paperspace cloud gpu rental', url: 'resources.html', section: 'Resources' },
-  { title: 'SaaS Platforms', keywords: 'fal astria scenario replicate modal together saas', url: 'resources.html', section: 'Resources' },
-  { title: 'Blender', keywords: 'blender 3d modeling rendering free open source', url: 'resources.html', section: 'Resources' },
-  { title: 'ZBrush', keywords: 'zbrush sculpting organic anatomy 3d', url: 'resources.html', section: 'Resources' },
+  { title: 'Resources & Tools', keywords: 'resources links tools external software', url: 'resources.html', section: 'Resources',
+    content: 'Curated links to all essential tools for hybrid AI training approach. Base models, training software, inference tools, cloud providers, and learning resources.' },
+  { title: 'SDXL Model', keywords: 'sdxl stable diffusion xl base model huggingface stabilityai', url: 'resources.html', section: 'Resources',
+    content: 'Download SDXL 1.0 base from Hugging Face stabilityai repository. Includes base model and refiner. Use safetensors format for security. 6.5GB download.' },
+  { title: 'Flux Models', keywords: 'flux flow matching black forest labs schnell dev fp8', url: 'resources.html', section: 'Resources',
+    content: 'Flux.1 Dev for commercial use, Schnell for fast 4-step generation. Available on Hugging Face from black-forest-labs. FP8 quantized versions reduce VRAM requirements.' },
+  { title: 'ComfyUI', keywords: 'comfyui nodes workflow graph interface visual programming', url: 'resources.html', section: 'Resources',
+    content: 'Node-based workflow interface for Stable Diffusion. Visual graph programming for complex pipelines. Extensive custom node ecosystem. Save and share workflows as JSON.' },
+  { title: 'Automatic1111', keywords: 'automatic1111 a1111 webui gradio interface extensions', url: 'resources.html', section: 'Resources',
+    content: 'Popular Gradio-based web interface. Extension ecosystem for additional features. Simple interface for basic generation. Built-in training capabilities via extensions.' },
+  { title: 'OneTrainer', keywords: 'onetrainer lora training gui software windows', url: 'resources.html', section: 'Resources',
+    content: 'Modern GUI for LoRA training. Excellent VRAM optimization. Windows installer available. Real-time preview during training. Supports SDXL and Flux.' },
+  { title: 'Kohya', keywords: 'kohya ss sd-scripts training lora dreambooth textual inversion', url: 'resources.html', section: 'Resources',
+    content: 'Feature-rich training scripts. Large community preset library. Supports LoRA, DreamBooth, and textual inversion. Both CLI and GUI available via kohya_ss.' },
+  { title: 'CivitAI', keywords: 'civitai community models lora checkpoints download share', url: 'resources.html', section: 'Resources',
+    content: 'Community hub for sharing models and LoRAs. Browse thousands of checkpoints. Download community-trained LoRAs for reference. Upload your own models.' },
+  { title: 'Hugging Face', keywords: 'huggingface hub models datasets diffusers transformers', url: 'resources.html', section: 'Resources',
+    content: 'Official model weights repository. Diffusers library for Python integration. Datasets for training. Model cards with usage documentation.' },
+  { title: 'Cloud Providers', keywords: 'runpod lambda vast paperspace cloud gpu rental pricing', url: 'resources.html', section: 'Resources',
+    content: 'RunPod from $0.70/hr for RTX 4090. Lambda Labs for enterprise H100. Vast.ai budget marketplace. Paperspace for notebooks and VMs. Compare pricing and availability.' },
+  { title: 'SaaS Platforms', keywords: 'fal astria scenario replicate modal together serverless', url: 'resources.html', section: 'Resources',
+    content: 'fal.ai serverless inference. Astria fine-tuning API. Scenario game asset training. Replicate model hosting. Modal serverless Python. Together AI inference API.' },
+  { title: 'Blender', keywords: 'blender 3d modeling rendering free open source blockout', url: 'resources.html', section: 'Resources',
+    content: 'Free open-source 3D software. Create blockout geometry for ControlNet. Render depth and normal passes. Large community and tutorials available.' },
+  { title: 'ZBrush', keywords: 'zbrush sculpting organic anatomy 3d professional', url: 'resources.html', section: 'Resources',
+    content: 'Professional sculpting software. Ideal for organic biological forms. Create detailed anatomy references. Export to other 3D applications.' },
 ];
 
 let searchOpen = false;
@@ -320,8 +383,10 @@ function performSearch(query) {
   filteredResults = searchIndex
     .map(item => {
       let score = 0;
+      let matchedContent = null;
       const titleLower = item.title.toLowerCase();
       const keywordsLower = item.keywords.toLowerCase();
+      const contentLower = (item.content || '').toLowerCase();
       
       // Exact title match (highest score)
       if (titleLower === query) score += 100;
@@ -332,17 +397,33 @@ function performSearch(query) {
       // Keywords contain query
       if (keywordsLower.includes(query)) score += 20;
       
+      // Content contains query (new!)
+      if (contentLower.includes(query)) {
+        score += 15;
+        // Extract snippet around match
+        const matchIndex = contentLower.indexOf(query);
+        const snippetStart = Math.max(0, matchIndex - 30);
+        const snippetEnd = Math.min(item.content.length, matchIndex + query.length + 60);
+        matchedContent = (snippetStart > 0 ? '...' : '') + 
+                         item.content.substring(snippetStart, snippetEnd) + 
+                         (snippetEnd < item.content.length ? '...' : '');
+      }
+      
       // Partial word matches in keywords
       const queryWords = query.split(' ');
       queryWords.forEach(word => {
-        if (word.length >= 2 && keywordsLower.includes(word)) score += 10;
+        if (word.length >= 2) {
+          if (keywordsLower.includes(word)) score += 10;
+          // Also check content for partial matches
+          if (contentLower.includes(word)) score += 5;
+        }
       });
       
-      return { ...item, score };
+      return { ...item, score, matchedContent };
     })
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 8);
+    .slice(0, 10);
   
   if (filteredResults.length === 0) {
     searchResults.innerHTML = `
@@ -362,10 +443,13 @@ function renderResults() {
   
   searchResults.innerHTML = filteredResults.map((item, index) => `
     <a href="${item.url}" 
-       class="search-result flex items-center gap-3 px-4 py-2 hover:bg-slate-50 cursor-pointer ${index === selectedIndex ? 'bg-teal-50' : ''}"
+       class="search-result block px-4 py-2 hover:bg-slate-50 cursor-pointer ${index === selectedIndex ? 'bg-teal-50' : ''}"
        data-index="${index}">
-      <span class="text-xs font-medium px-2 py-0.5 rounded ${getSectionColor(item.section)}">${item.section}</span>
-      <span class="text-sm text-slate-700">${highlightMatch(item.title)}</span>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-medium px-2 py-0.5 rounded ${getSectionColor(item.section)}">${item.section}</span>
+        <span class="text-sm text-slate-700 font-medium">${highlightMatch(item.title)}</span>
+      </div>
+      ${item.matchedContent ? `<div class="text-xs text-slate-500 mt-1 ml-1 line-clamp-1">${highlightMatch(item.matchedContent)}</div>` : ''}
     </a>
   `).join('');
   

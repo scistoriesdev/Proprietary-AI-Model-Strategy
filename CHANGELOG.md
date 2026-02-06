@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-02-05
+
+### Added
+
+- **Enhanced Search with Content Matching** - Search now matches within section content, not just titles
+  - Content snippets from each section added to search index
+  - Matching content displayed as preview in search results
+  - Improved scoring: title match > keyword match > content match
+  - Results increased from 8 to 10 for broader discovery
+
+---
+
 ## [1.6.0] - 2026-02-05
 
 ### Added
