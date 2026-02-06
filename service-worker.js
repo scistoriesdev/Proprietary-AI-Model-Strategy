@@ -1,7 +1,7 @@
 // Service Worker for Proprietary AI Model Strategy PWA
 // =====================================================
 // Increment VERSION to force update push to all clients
-const VERSION = '1.7.8';
+const VERSION = '1.7.9';
 const CACHE_NAME = `ai-strategy-v${VERSION}`;
 const OFFLINE_URL = '/index.html';
 
