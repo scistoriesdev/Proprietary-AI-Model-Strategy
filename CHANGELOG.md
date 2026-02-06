@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.2] - 2026-02-05
+
+### Fixed
+
+- **PWA GitHub Pages Deployment** - Fixed absolute paths causing "GitHub error page" on installed app:
+  - Changed `start_url` and `scope` from `/` to `./` in manifest.json
+  - Changed all shortcut URLs to relative paths
+  - Fixed service-worker.js precache paths from `/file.html` to `./file.html`
+  - Fixed service worker registration path in app.js
+  - Added missing `resources.html` to precache list
+
+---
+
 ## [1.8.1] - 2026-02-05
 
 ### Added

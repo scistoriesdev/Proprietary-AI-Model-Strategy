@@ -13,7 +13,7 @@ const UPDATE_CHECK_INTERVAL = 5 * 60 * 1000;
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      swRegistration = await navigator.serviceWorker.register('/service-worker.js');
+      swRegistration = await navigator.serviceWorker.register('./service-worker.js');
       console.log('[PWA] Service Worker registered:', swRegistration.scope);
       
       // Check for updates on registration

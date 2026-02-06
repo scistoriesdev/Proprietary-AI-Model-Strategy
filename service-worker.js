@@ -1,25 +1,26 @@
 // Service Worker for Proprietary AI Model Strategy PWA
 // =====================================================
 // Increment VERSION to force update push to all clients
-const VERSION = '1.8.1';
+const VERSION = '1.8.2';
 const CACHE_NAME = `ai-strategy-v${VERSION}`;
-const OFFLINE_URL = '/index.html';
+const OFFLINE_URL = './index.html';
 
 // Assets to cache on install
 const PRECACHE_ASSETS = [
-  '/',
-  '/index.html',
-  '/training.html',
-  '/scientific.html',
-  '/hardware.html',
-  '/cloud.html',
-  '/legal.html',
-  '/readme.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  './',
+  './index.html',
+  './training.html',
+  './scientific.html',
+  './hardware.html',
+  './cloud.html',
+  './legal.html',
+  './readme.html',
+  './resources.html',
+  './styles.css',
+  './app.js',
+  './manifest.json',
+  './icons/icon-192x192.png',
+  './icons/icon-512x512.png'
 ];
 
 // Check for updates interval (in milliseconds)
