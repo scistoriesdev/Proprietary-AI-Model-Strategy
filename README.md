@@ -1205,14 +1205,35 @@ Continuing Medical Education (CME) providers accredited by ACCME may have polici
 
 #### 6.7.3 Publication Standards
 
-Major medical journals are implementing AI policies:
+Major medical journals have implemented specific policies for AI-generated or AI-assisted content in scientific figures and illustrations:
 
-| Publisher | Policy (as of 2026) |
-|-----------|---------------------|
-| **Nature Portfolio** | Disclosure required. AI cannot be listed as author. |
-| **Elsevier** | Disclosure required in methods section. |
-| **JAMA Network** | AI use must be documented. Human accountability required. |
-| **NEJM** | Case-by-case review. Generally requires disclosure. |
+| Publisher/Journal | AI Figure Policy | Policy Link |
+|-------------------|------------------|-------------|
+| **Nature Portfolio** | Must disclose AI use; AI cannot be author; humans accountable | [Read Policy](https://www.nature.com/nature-portfolio/editorial-policies/ai) |
+| **Elsevier** | Declare in Methods; AI not listed as author; verify accuracy | [Read Policy](https://www.elsevier.com/about/policies-and-standards/the-use-of-generative-ai-and-ai-assisted-technologies-in-writing-for-elsevier) |
+| **JAMA Network** | Full disclosure required; authors responsible for AI output accuracy | [Read Policy](https://jamanetwork.com/journals/jama/pages/instructions-for-authors#SecUseofAI) |
+| **NEJM** | Case-by-case review; disclose all AI assistance in cover letter | [Read Policy](https://www.nejm.org/author-center/new-manuscripts) |
+| **The Lancet** | Transparency statement required; humans retain full responsibility | [Read Policy](https://www.thelancet.com/pb/assets/raw/Lancet/authors/tl-info-for-authors.pdf) |
+| **Science (AAAS)** | No AI-generated images without disclosure; human verification mandatory | [Read Policy](https://www.science.org/content/page/science-journals-editorial-policies) |
+| **Cell Press** | Disclose in figure legends; AI tools must be cited | [Read Policy](https://www.cell.com/cell/authors) |
+| **Springer Nature** | Methods disclosure; authors accountable for content integrity | [Read Policy](https://www.springernature.com/gp/authors/research-data-policy/artificial-intelligence) |
+| **Wiley** | Transparent disclosure; AI cannot be credited as author | [Read Policy](https://authorservices.wiley.com/ethics-guidelines/index.html) |
+| **PLOS** | Declare in Methods or Acknowledgments; verify scientific accuracy | [Read Policy](https://plos.org/resource/how-to-use-generative-ai-tools/) |
+| **BMJ** | Full transparency; AI assistance declared in submission | [Read Policy](https://www.bmj.com/about-bmj/resources-authors) |
+| **Radiology (RSNA)** | Specific guidance for AI in medical imaging figures | [Read Policy](https://pubs.rsna.org/page/radiology/author-instructions) |
+
+#### 6.7.4 Common Requirements Across Journals
+
+Most medical and scientific publishers share these core requirements:
+
+- **Disclosure**: AI use must be declared in Methods, figure legends, or cover letter
+- **Authorship**: AI tools cannot be listed as authors
+- **Accountability**: Human authors are responsible for AI-generated content accuracy
+- **Verification**: Scientific/anatomical accuracy must be human-verified
+- **Citation**: Name specific AI tools used (e.g., "Figure created using Stable Diffusion SDXL with custom-trained LoRA")
+- **Integrity**: No fabrication or misrepresentation of data through AI imagery
+
+> **Best Practice**: Always check the specific journal's author guidelines before submission, as policies evolve rapidly. When in doubt, disclose AI assistance transparently.
 
 ### 6.8 Documentation Best Practices for Legal Protection
 

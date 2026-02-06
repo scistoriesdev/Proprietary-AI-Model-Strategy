@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.7] - 2026-02-05
+
+### Added
+
+- **Medical Journal AI Policies** - Expanded legal section with 12 major medical/scientific publisher policies:
+  - Nature Portfolio, Elsevier, JAMA Network, NEJM, The Lancet, Science (AAAS)
+  - Cell Press, Springer Nature, Wiley, PLOS, BMJ, Radiology (RSNA)
+  - Direct links to official policy pages for each publisher
+  - Common requirements summary (disclosure, authorship, accountability, verification)
+- Updated both `legal.html` (interactive table) and `README.md` (section 6.7.3-6.7.4)
+
+---
+
 ## [1.7.6] - 2026-02-05
 
 ### Fixed
