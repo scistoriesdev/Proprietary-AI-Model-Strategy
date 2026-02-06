@@ -49,6 +49,19 @@
 - [9. Conclusion and Strategic Recommendation](#9-conclusion-and-strategic-recommendation)
 - [10. Appendix: Technical Reference Tables](#10-appendix-technical-reference-tables)
 - [11. Essential Resources & Tools](#11-essential-resources--tools)
+  - [11.1 Base Models & Model Hubs](#111-base-models--model-hubs)
+  - [11.2 Training Software](#112-training-software)
+  - [11.3 Inference & Generation Tools](#113-inference--generation-tools)
+  - [11.4 Cloud GPU Providers](#114-cloud-gpu-providers)
+  - [11.5 SaaS Training Platforms](#115-saas-training-platforms)
+  - [11.6 3D & Preprocessing Tools](#116-3d--preprocessing-tools)
+  - [11.7 Documentation & Learning](#117-documentation--learning)
+  - [11.8 Medical & Scientific Image Sources](#118-medical--scientific-image-sources)
+  - [11.9 ComfyUI Custom Nodes](#119-comfyui-custom-nodes)
+  - [11.10 Dataset & Captioning Tools](#1110-dataset--captioning-tools)
+  - [11.11 Professional Organizations](#1111-professional-organizations)
+  - [11.12 Hardware & Performance](#1112-hardware--performance)
+  - [11.13 Communities](#1113-communities)
 - [Works Cited](#works-cited)
 
 ---
@@ -2134,8 +2147,73 @@ The following curated resources provide direct access to the tools, platforms, a
 | **Diffusers LoRA Guide** | Official HF documentation | https://huggingface.co/docs/diffusers/training/lora |
 | **Stable Diffusion Art** | Comprehensive tutorials | https://stable-diffusion-art.com/ |
 | **ComfyUI Examples** | Official workflow examples | https://comfyanonymous.github.io/ComfyUI_examples/ |
+| **LoRA Paper** | Original research paper | https://arxiv.org/abs/2106.09685 |
+
+### 11.8 Medical & Scientific Image Sources
+
+| Source | Description | License | URL |
+|--------|-------------|---------|-----|
+| **Gray's Anatomy (1918)** | Classic anatomical illustrations | Public Domain | https://archive.org/details/anatomyofhumanbo1918gray |
+| **Biodiversity Heritage Library** | Historical scientific illustrations | Public Domain | https://www.biodiversitylibrary.org/ |
+| **Wellcome Collection** | Medical history images | CC0 | https://wellcomecollection.org/images |
+| **Image Data Resource** | High-quality microscopy | CC-BY | https://idr.openmicroscopy.org/ |
+| **Cell Image Library** | Peer-reviewed cell images | CC licenses | http://cellimagelibrary.org/ |
+| **Protein Data Bank** | Molecular structures | Public Domain | https://www.rcsb.org/ |
+| **EMDB** | Electron microscopy maps | CC0 | https://www.ebi.ac.uk/emdb/ |
+| **Allen Cell Explorer** | 3D cell visualization | CC-BY-NC | https://allencell.org/ |
+| **NCI Visuals Online** | Cancer illustrations | Public Domain | https://visualsonline.cancer.gov/ |
+
+### 11.9 ComfyUI Custom Nodes
+
+| Node Pack | Description | URL |
+|-----------|-------------|-----|
+| **ComfyUI Manager** | Essential node package manager | https://github.com/ltdrdata/ComfyUI-Manager |
+| **ControlNet Aux** | Preprocessors for ControlNet | https://github.com/Fannovel16/comfyui_controlnet_aux |
+| **IP-Adapter Plus** | Image prompt adapter nodes | https://github.com/cubiq/ComfyUI_IPAdapter_plus |
+| **Video Helper Suite** | Video input/output nodes | https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite |
+| **WAS Node Suite** | 100+ utility nodes | https://github.com/WASasquatch/was-node-suite-comfyui |
+| **Custom Scripts** | UI enhancements & utilities | https://github.com/pythongosssss/ComfyUI-Custom-Scripts |
+
+### 11.10 Dataset & Captioning Tools
+
+| Tool | Description | URL |
+|------|-------------|-----|
+| **CLIP Interrogator** | Generate prompts from images | https://github.com/pharmapsychotic/clip-interrogator |
+| **WD14 Tagger** | Auto-tagging for datasets | https://github.com/toriato/stable-diffusion-webui-wd14-tagger |
+| **WD14 Standalone** | Standalone tagger application | https://github.com/derrian-distro/wd14-tagger-standalone |
+| **Boorern** | Batch image tagging tool | https://github.com/Akegarasu/boorern |
+| **BIRME** | Bulk image resize & crop | https://www.birme.net/ |
+
+### 11.11 Professional Organizations
+
+| Organization | Description | URL |
+|--------------|-------------|-----|
+| **AMI** | Association of Medical Illustrators | https://ami.org/ |
+| **GNSI** | Guild of Natural Science Illustrators | https://www.gnsi.org/ |
+| **BCA** | BioCommunications Association | https://www.bca.org/ |
+| **US Copyright Office** | Registration & AI guidance | https://www.copyright.gov/ |
+| **Creative Commons** | License information & tools | https://creativecommons.org/ |
+
+### 11.12 Hardware & Performance
+
+| Resource | Description | URL |
+|----------|-------------|-----|
+| **NVIDIA GeForce** | Consumer GPU specs & drivers | https://www.nvidia.com/en-us/geforce/ |
+| **CUDA Toolkit** | GPU compute platform | https://developer.nvidia.com/cuda-toolkit |
+| **PyTorch Install** | Framework installation guide | https://pytorch.org/get-started/locally/ |
+| **bitsandbytes** | 8-bit optimizer for low VRAM | https://github.com/TimDettmers/bitsandbytes |
+| **xFormers** | Memory-efficient attention | https://github.com/facebookresearch/xformers |
+| **GPU Database** | Complete GPU specifications | https://www.techpowerup.com/gpu-specs/ |
+
+### 11.13 Communities
+
+| Community | Description | URL |
+|-----------|-------------|-----|
 | **r/StableDiffusion** | Main Reddit community | https://www.reddit.com/r/StableDiffusion/ |
 | **r/ComfyUI** | ComfyUI subreddit | https://www.reddit.com/r/comfyui/ |
+| **SD Discord** | Stable Diffusion Discord server | https://discord.gg/stablediffusion |
+| **ComfyUI Discord** | Official ComfyUI Discord | https://discord.gg/comfyui |
+| **HF Spaces** | Community demos & apps | https://huggingface.co/spaces |
 | **OpenArt Workflows** | Shared ComfyUI workflows | https://openart.ai/workflows |
 
 ---

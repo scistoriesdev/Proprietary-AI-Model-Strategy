@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.5] - 2026-02-05
+
+### Added
+
+- **README Resources Expansion** - Added 6 new resource sections (11.8-11.13) to README.md:
+  - Medical & Scientific Image Sources (with license info)
+  - ComfyUI Custom Nodes
+  - Dataset & Captioning Tools
+  - Professional Organizations
+  - Hardware & Performance
+  - Communities
+- **Updated README Table of Contents** - All 13 resource subsections now listed
+
+---
+
+## [1.7.4] - 2026-02-05
+
+### Added
+
+- **Resources Card on Overview** - Added Resources & Tools card to index.html navigation grid
+- **Expanded Resources Page** - Added 6 new categories with 40+ new resource links:
+  - 🔬 **Medical & Scientific Image Sources** - Gray's Anatomy, Wellcome Collection, Cell Image Library, Protein Data Bank, etc.
+  - 🧩 **ComfyUI Custom Nodes** - Manager, ControlNet Aux, IP-Adapter, WAS Suite, etc.
+  - 🏷️ **Dataset & Captioning Tools** - CLIP Interrogator, WD14 Tagger, BIRME, etc.
+  - 🏛️ **Professional Organizations** - AMI, GNSI, BCA, US Copyright Office, Creative Commons
+  - 💾 **Hardware & Performance** - NVIDIA, CUDA, PyTorch, bitsandbytes, xFormers
+  - 👥 **Communities** - Added Discord servers for SD and ComfyUI
+
+---
+
 ## [1.7.3] - 2026-02-05
 
 ### Fixed
