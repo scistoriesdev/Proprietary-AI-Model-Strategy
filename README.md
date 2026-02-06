@@ -1424,38 +1424,62 @@ CONFIDENTIALITY
 
 Understanding key legal cases helps contextualize the risks and protections for AI-assisted illustration.
 
-#### 6.11.1 Copyright Cases
+#### 6.11.1 AI Authorship & Copyright Registration Cases
 
-| Case | Year | Key Issue | Outcome | Relevance |
-|------|------|-----------|---------|-----------|
-| **Thaler v. Perlmutter** | 2023 | AI-generated art copyright | AI cannot be author | Human input required for copyright |
-| **Zarya of the Dawn** (Kashtanova) | 2023 | AI-assisted comic book | Partial protection | Text + arrangement copyrightable; AI images alone not |
-| **Théâtre D'opéra Spatial** (Allen) | 2023 | AI art competition winner | Registration denied | Insufficient human authorship claimed |
-| **Getty Images v. Stability AI** | Pending | Training on copyrighted images | TBD | May establish training data liability |
-| **Andersen v. Stability AI** | Pending | Artist class action | TBD | Tests "style" vs. "copying" distinction |
+| Case | Year | Key Issue | Outcome | Source |
+|------|------|-----------|---------|--------|
+| **Thaler v. Perlmutter** | 2023 | AI "DABUS" listed as sole author | AI cannot be author | [Court Filing](https://www.courtlistener.com/docket/63356475/thaler-v-perlmutter/) |
+| **Zarya of the Dawn** (Kashtanova) | 2023 | Midjourney comic book images | Text ✓ Images ✗ | [USCO Decision](https://www.copyright.gov/docs/zarya-of-the-dawn.pdf) |
+| **Théâtre D'opéra Spatial** (Allen) | 2023 | AI art fair winner denied registration | Registration denied | [USCO Ruling](https://www.copyright.gov/rulings-filings/review-board/docs/Theatre-Dopera-Spatial.pdf) |
+| **Feist v. Rural Telephone** | 1991 | Foundational: originality required for © | Key precedent | [Supreme Court](https://supreme.justia.com/cases/federal/us/499/340/) |
 
-**Key Takeaways**:
-- Pure AI output without human creative control is not copyrightable
-- Human selection, arrangement, and modification can establish copyright
-- Training data liability remains an open question
-- Document your human creative contributions extensively
+#### 6.11.2 Training Data & Fair Use Litigation (Pending)
 
-#### 6.11.2 Trade Secret Cases Relevant to AI
+These cases are actively litigating—outcomes will significantly shape AI copyright law.
 
-| Case | Key Issue | Relevance to AI/LoRA |
-|------|-----------|---------------------|
-| **Waymo v. Uber** (2017) | Trade secret theft of self-driving AI | Established AI models as protectable trade secrets |
-| **Epic v. Google** (2023) | Algorithm as trade secret | Confirmed ML model weights can be trade secrets |
-| **hiQ v. LinkedIn** (2022) | Data scraping legality | Public data scraping may be legal, but ToS violations aren't |
+| Case | Filed | Plaintiffs | Key Claims | Source |
+|------|-------|------------|------------|--------|
+| **Getty Images v. Stability AI** | 2023 | Getty Images | 12M images scraped without license | [Court Filing](https://www.courtlistener.com/docket/66788385/getty-images-us-inc-v-stability-ai-inc/) |
+| **Andersen v. Stability AI et al.** | 2023 | Artists class action | Style mimicry, unlicensed training | [Court Filing](https://www.courtlistener.com/docket/66732129/andersen-v-stability-ai-ltd/) |
+| **NY Times v. OpenAI & Microsoft** | 2023 | NY Times | LLM trained on copyrighted articles | [Complaint PDF](https://nytco-assets.nytimes.com/2023/12/NYT_Complaint_Dec2023.pdf) |
+| **Authors Guild v. OpenAI** | 2023 | 17 authors (Grisham, etc.) | Books used for training without consent | [Press Release](https://authorsguild.org/news/ag-and-authors-file-class-action-suit-against-openai/) |
+| **Tremblay v. OpenAI** | 2023 | Authors (Silverman, etc.) | Training on pirated book datasets | [Court Filing](https://www.courtlistener.com/docket/67569326/tremblay-v-openai-inc/) |
+| **Concord Music v. Anthropic** | 2023 | Music publishers | Lyrics reproduced from training | [Court Filing](https://www.courtlistener.com/docket/67898519/concord-music-group-inc-v-anthropic-pbc/) |
 
-#### 6.11.3 Regulatory Actions
+#### 6.11.3 Fair Use Precedents (Pre-AI)
 
-| Action | Year | Impact |
-|--------|------|--------|
-| **USCO AI Registration Guidance** | 2023 | Established disclosure requirements for AI-assisted works |
-| **EU AI Act** | 2024 | Requires transparency, watermarking for generative AI |
-| **FTC AI Enforcement** | 2023+ | Actions against deceptive AI practices |
-| **USPTO AI Inventorship Guidance** | 2024 | AI cannot be inventor, but AI-assisted inventions patentable |
+| Case | Year | Relevance to AI | Outcome | Source |
+|------|------|-----------------|---------|--------|
+| **Authors Guild v. Google** | 2015 | Book digitization for search = transformative | Fair use ✓ | [2nd Circuit](https://law.justia.com/cases/federal/appellate-courts/ca2/13-4829/13-4829-2015-10-16.html) |
+| **Kelly v. Arriba Soft** | 2003 | Thumbnails in search = transformative | Fair use ✓ | [9th Circuit](https://law.justia.com/cases/federal/appellate-courts/F3/336/811/576683/) |
+| **Warhol v. Goldsmith** | 2023 | Limits "transformative" defense | Not fair use | [Supreme Court](https://www.supremecourt.gov/opinions/22pdf/21-869_87ad.pdf) |
+| **Perfect 10 v. Amazon** | 2007 | Image indexing for different purpose | Fair use ✓ | [9th Circuit](https://law.justia.com/cases/federal/appellate-courts/F3/508/1146/568936/) |
+
+#### 6.11.4 Trade Secret & Data Scraping Cases
+
+| Case | Year | Key Issue | Source |
+|------|------|-----------|--------|
+| **Waymo v. Uber** | 2017 | AI/ML models protectable as trade secrets | [Court Filing](https://www.courtlistener.com/docket/6170306/waymo-llc-v-uber-technologies-inc/) |
+| **hiQ v. LinkedIn** | 2022 | Public data scraping not CFAA violation, but ToS still apply | [9th Circuit](https://cdn.ca9.uscourts.gov/datastore/opinions/2022/04/18/17-16783.pdf) |
+| **Van Buren v. United States** | 2021 | Narrowed CFAA scope; relevant to scraping legality | [Supreme Court](https://www.supremecourt.gov/opinions/20pdf/19-783_k53l.pdf) |
+
+#### 6.11.5 Regulatory Guidance
+
+| Action | Year | Impact | Source |
+|--------|------|--------|--------|
+| **USCO AI Registration Guidance** | 2023 | Requires disclosure; human authorship test | [Official Guidance](https://www.copyright.gov/ai/ai_policy_guidance.pdf) |
+| **EU AI Act** | 2024 | Transparency, watermarking, training data disclosure | [EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689) |
+| **USPTO AI Inventorship Guidance** | 2024 | AI cannot be inventor; human contribution required | [USPTO Notice](https://www.uspto.gov/subscription-center/2024/uspto-issues-guidance-ai-assisted-inventions) |
+| **White House AI Executive Order** | 2023 | Safety standards, watermarking, federal AI guidelines | [Executive Order](https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/) |
+
+#### 6.11.6 Key Takeaways for Medical Illustrators
+
+- Pure AI output without human creative control is **not copyrightable** (Thaler, Allen)
+- Human selection, arrangement, and modification **can** establish copyright (Kashtanova text)
+- Training data liability remains an **open question**—pending cases will set precedent
+- **Warhol v. Goldsmith** narrows "transformative" defense—may affect AI fair use claims
+- **Document** your human creative contributions extensively for copyright claims
+- Use only **properly licensed** training data to avoid litigation exposure
 
 ### 6.12 Ethical Guidelines Beyond Legal Requirements
 

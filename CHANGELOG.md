@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-02-05
+
+### Added
+
+- **Expanded Case Law Section** - Comprehensive legal precedents with direct links:
+  - **AI Authorship Cases**: Thaler v. Perlmutter, Zarya of the Dawn, Allen (Théâtre D'opéra Spatial), Feist v. Rural
+  - **Pending Training Data Litigation**: Getty v. Stability AI, Andersen v. Stability AI, NY Times v. OpenAI, Authors Guild v. OpenAI, Tremblay v. OpenAI, Concord Music v. Anthropic
+  - **Fair Use Precedents**: Authors Guild v. Google, Kelly v. Arriba Soft, Warhol v. Goldsmith, Perfect 10 v. Amazon
+  - **Trade Secret Cases**: Waymo v. Uber, hiQ v. LinkedIn, Van Buren v. United States
+  - **Regulatory Guidance**: USCO, EU AI Act, USPTO, White House Executive Order
+  - All cases include direct links to court filings, decisions, or official sources
+- Updated both `legal.html` and `README.md` (section 6.11)
+
+---
+
 ## [1.7.9] - 2026-02-05
 
 ### Fixed
