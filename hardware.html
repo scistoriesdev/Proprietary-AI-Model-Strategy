@@ -25,10 +25,15 @@
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
-                <h1 class="text-xl font-bold text-slate-800 tracking-tight">SciStories Proprietary Model Strategy</h1>
+                <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">AI</div>
+                <h1 class="text-lg md:text-xl font-bold text-slate-800 tracking-tight hidden sm:block">SciStories Proprietary Model Strategy</h1>
+                <h1 class="text-lg font-bold text-slate-800 tracking-tight sm:hidden">AI Strategy</h1>
             </a>
-            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition" aria-label="Toggle navigation menu">
+                <svg id="menu-icon" class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg id="close-icon" class="w-6 h-6 text-slate-600 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600 items-center">
                 <a href="training.html" class="hover:text-teal-600 transition">Training</a>
                 <a href="scientific.html" class="hover:text-teal-600 transition">Scientific</a>
                 <a href="hardware.html" class="text-teal-600 font-semibold">Hardware</a>
@@ -36,18 +41,34 @@
                 <a href="legal.html" class="hover:text-teal-600 transition">Legal</a>
                 <a href="resources.html" class="hover:text-teal-600 transition">Resources</a>
                 <a href="readme.html" class="hover:text-teal-600 transition">README</a>
-                
-                <!-- Search -->
                 <div id="search-container" class="relative">
                     <div class="flex items-center gap-2 bg-slate-100 rounded-lg px-3 py-1.5">
-                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                        <input type="text" id="search-input" placeholder="Search... (⌘K)" 
-                               class="bg-transparent text-sm w-32 focus:w-48 transition-all outline-none text-slate-700 placeholder-slate-400">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="search-input" placeholder="Search... (⌘K)" class="bg-transparent text-sm w-32 focus:w-48 transition-all outline-none text-slate-700 placeholder-slate-400">
                     </div>
                     <div id="search-results" class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-slate-200 max-h-96 overflow-y-auto z-50"></div>
                 </div>
+            </nav>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 shadow-lg">
+            <div class="p-4 border-b border-slate-100">
+                <div id="mobile-search-container" class="relative">
+                    <div class="flex items-center gap-2 bg-slate-100 rounded-lg px-3 py-2">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="mobile-search-input" placeholder="Search documentation..." class="bg-transparent text-base w-full outline-none text-slate-700 placeholder-slate-400">
+                    </div>
+                    <div id="mobile-search-results" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-slate-200 max-h-64 overflow-y-auto z-50"></div>
+                </div>
+            </div>
+            <nav class="py-2">
+                <a href="index.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">Overview</a>
+                <a href="training.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">Training</a>
+                <a href="scientific.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">Scientific</a>
+                <a href="hardware.html" class="block px-4 py-3 text-base font-medium text-teal-600 bg-teal-50 border-l-4 border-teal-600">Hardware</a>
+                <a href="cloud.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">Cloud</a>
+                <a href="legal.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">Legal</a>
+                <a href="resources.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">Resources</a>
+                <a href="readme.html" class="block px-4 py-3 text-base font-medium text-slate-600 hover:bg-slate-50 hover:text-teal-600 transition">README</a>
             </nav>
         </div>
     </header>

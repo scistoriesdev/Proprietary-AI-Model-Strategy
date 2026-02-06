@@ -627,4 +627,135 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('calc-result')) {
         runCalculation();
     }
+    
+    // Initialize mobile search
+    initMobileSearch();
 });
+
+// ============================================
+// Mobile Navigation
+// ============================================
+
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.remove('hidden');
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+    } else {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        // Close mobile search results when closing menu
+        const mobileSearchResults = document.getElementById('mobile-search-results');
+        if (mobileSearchResults) mobileSearchResults.classList.add('hidden');
+    }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    
+    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    }
+});
+
+// ============================================
+// Mobile Search
+// ============================================
+
+function initMobileSearch() {
+    const mobileSearchInput = document.getElementById('mobile-search-input');
+    const mobileSearchResults = document.getElementById('mobile-search-results');
+    const mobileSearchContainer = document.getElementById('mobile-search-container');
+    
+    if (!mobileSearchInput || !mobileSearchResults) return;
+    
+    let debounceTimer;
+    
+    mobileSearchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const query = e.target.value.trim().toLowerCase();
+            if (query.length < 2) {
+                mobileSearchResults.classList.add('hidden');
+                return;
+            }
+            performMobileSearch(query);
+        }, 150);
+    });
+    
+    // Close results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (mobileSearchContainer && !mobileSearchContainer.contains(e.target)) {
+            mobileSearchResults.classList.add('hidden');
+        }
+    });
+}
+
+function performMobileSearch(query) {
+    const mobileSearchResults = document.getElementById('mobile-search-results');
+    
+    // Use existing searchIndex
+    const results = searchIndex
+        .map(item => {
+            let score = 0;
+            const titleLower = item.title.toLowerCase();
+            const keywordsLower = item.keywords.toLowerCase();
+            const contentLower = (item.content || '').toLowerCase();
+            
+            if (titleLower === query) score += 100;
+            else if (titleLower.startsWith(query)) score += 50;
+            else if (titleLower.includes(query)) score += 30;
+            if (keywordsLower.includes(query)) score += 20;
+            if (contentLower.includes(query)) score += 15;
+            
+            return { ...item, score };
+        })
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 8);
+    
+    if (results.length === 0) {
+        mobileSearchResults.innerHTML = `<div class="px-4 py-3 text-sm text-slate-500">No results found</div>`;
+        mobileSearchResults.classList.remove('hidden');
+        return;
+    }
+    
+    mobileSearchResults.innerHTML = results.map(item => `
+        <a href="${item.url}" class="block px-4 py-3 hover:bg-slate-50 border-b border-slate-100 last:border-0">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded ${getSectionColor(item.section)}">${item.section}</span>
+                <span class="text-sm text-slate-700 font-medium">${item.title}</span>
+            </div>
+        </a>
+    `).join('');
+    
+    mobileSearchResults.classList.remove('hidden');
+}
+
+// Show mobile install button when available
+function showInstallButton() {
+    const btn = document.getElementById('install-btn');
+    if (btn) btn.classList.remove('hidden');
+    
+    // Also show mobile install container
+    const mobileInstall = document.getElementById('mobile-install-container');
+    if (mobileInstall) mobileInstall.classList.remove('hidden');
+}
+
+function hideInstallButton() {
+    const btn = document.getElementById('install-btn');
+    if (btn) btn.classList.add('hidden');
+    
+    // Also hide mobile install container
+    const mobileInstall = document.getElementById('mobile-install-container');
+    if (mobileInstall) mobileInstall.classList.add('hidden');
+}

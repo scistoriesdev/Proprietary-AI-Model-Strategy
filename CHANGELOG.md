@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.1] - 2026-02-05
+
+### Added
+
+- **Mobile Responsive Navigation** - Full mobile support across all pages:
+  - Hamburger menu button with open/close animation
+  - Slide-down mobile navigation drawer
+  - Mobile search functionality with full search index
+  - Touch-friendly navigation links with active page highlighting
+  - Responsive header title (shortened on small screens)
+  - Updated all 8 HTML pages: index, training, scientific, hardware, cloud, legal, resources, readme
+
+---
+
 ## [1.8.0] - 2026-02-05
 
 ### Added
