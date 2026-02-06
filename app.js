@@ -569,21 +569,22 @@ function switchTab(tabId) {
 
 // Legal Tabs
 function switchLegalTab(tabId) {
-    ['ownership', 'training', 'international', 'commercial', 'medical'].forEach(id => {
+    const allTabs = ['ownership', 'training', 'licenses', 'contracts', 'caselaw', 'international', 'commercial', 'medical', 'ethics', 'insurance'];
+    allTabs.forEach(id => {
         const el = document.getElementById(`legal-content-${id}`);
         const tab = document.getElementById(`legal-tab-${id}`);
         if(el) el.classList.add('hidden');
         if(tab) {
-            tab.classList.remove('border-amber-500', 'text-amber-700', 'bg-amber-50/50');
-            tab.classList.add('text-slate-500');
+            tab.classList.remove('border-b-2', 'border-amber-500', 'text-amber-700', 'bg-amber-50/50', 'font-semibold');
+            tab.classList.add('text-slate-500', 'font-medium');
         }
     });
     const content = document.getElementById(`legal-content-${tabId}`);
     const activeBtn = document.getElementById(`legal-tab-${tabId}`);
     if(content) content.classList.remove('hidden');
     if(activeBtn) {
-        activeBtn.classList.remove('text-slate-500');
-        activeBtn.classList.add('border-amber-500', 'text-amber-700', 'bg-amber-50/50');
+        activeBtn.classList.remove('text-slate-500', 'font-medium');
+        activeBtn.classList.add('border-b-2', 'border-amber-500', 'text-amber-700', 'bg-amber-50/50', 'font-semibold');
     }
 }
 
